@@ -4,7 +4,7 @@ fetch.Promise = require('bluebird');
 var _ = require('lodash');
 
 module.exports = function(server, db) {
-	var trim = /^\/|\/$/g;
+    var trim = /^\/|\/$/g;
 
     server.put(apiPrefix + '/views_table_changeAll', function(req, res, next) {
         var state = req.body.state;
@@ -28,7 +28,7 @@ module.exports = function(server, db) {
                     where: {
                         studentId: id
                     }
-                }),
+                })
             ]).then(function(arr){
                     count++;
                     if(count === ids.length)
@@ -64,7 +64,7 @@ module.exports = function(server, db) {
                 where: {
                     studentId: req.params.studentId
                 }
-            }),
+            })
         ]).then(function(arr){
                 res.json({result: true});
             })
