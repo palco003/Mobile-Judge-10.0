@@ -2,15 +2,15 @@ Ext.define('MobileJudge.view.settings.Terms', {
 	extend: 'Ext.form.Panel',
 	alias: 'widget.terms',
 
-	requires: [
-		'Ext.form.field.ComboBox',
-		'Ext.form.field.Checkbox',
-		'Ext.form.field.Date',
-		'Ext.form.field.Number',
-		'Ext.form.field.Text',
-		'Ext.form.field.Time',
-		'Ext.toolbar.Toolbar'
-	],
+	//requires: [
+	//	'Ext.field.ComboBox',
+	//	'Ext.field.Checkbox',
+	//	'Ext.field.Date',
+	//	'Ext.field.Number',
+	//	'Ext.field.Text',
+	//	'Ext.field.Time',
+	//	'Ext.Toolbar'
+	//],
 
 	title: 'Terms',
 	reference: 'termForm',
@@ -207,19 +207,6 @@ Ext.define('MobileJudge.view.settings.Terms', {
 					}
 				},
 				{
-                                        xtype: 'combobox',
-                                        queryMode: 'local',
-                                        editable: false,
-                                        emptyText: 'Select a Template',
-                                        displayField: 'name',
-                                        valueField: 'id',
-                                        fieldLabel: 'Confirm Registration',
-                                        bind: {
-                                                store: 'templates4Term',
-                                                value: '{selectedTerm.acceptanceConfirmation}'
-                                        }
-                                },
-				{
 					xtype: 'combobox',
 					queryMode: 'local',
 					editable: false,
@@ -232,19 +219,6 @@ Ext.define('MobileJudge.view.settings.Terms', {
 						value: '{selectedTerm.rejectInviteTemplate}'
 					}
 				},
-				{
-                                        xtype: 'combobox',
-                                        queryMode: 'local',
-                                        editable: false,
-                                        emptyText: 'Select a Template',
-                                        displayField: 'name',
-                                        valueField: 'id',
-                                        fieldLabel: 'Reject Template',
-                                        bind: {
-                                                store: 'templates4Term',
-                                                value: '{selectedTerm.acceptInviteTemplate}'
-                                        }
-                                },
 				{
 					xtype: 'combobox',
 					queryMode: 'local',
