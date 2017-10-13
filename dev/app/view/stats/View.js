@@ -1,5 +1,5 @@
 // View
-Ext.define('KitchenSink.view.charts.column3d.Basic', {
+Ext.define('MobileJudge.view.stats.View', {
     extend: 'Ext.Panel',
     xtype: 'column-basic-3d',
     requires: ['Ext.chart.theme.Muted'],

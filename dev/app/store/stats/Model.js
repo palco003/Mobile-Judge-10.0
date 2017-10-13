@@ -1,5 +1,5 @@
 // Store
-Ext.define('KitchenSink.store.EconomySectors', {
+Ext.define('MobileJudge.store.stats.Model', {
     extend: 'Ext.data.Store',
     alias: 'store.economy-sectors',
 

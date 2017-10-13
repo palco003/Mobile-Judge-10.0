@@ -1,5 +1,5 @@
 // Controller
-Ext.define('KitchenSink.view.charts.column3d.BasicController', {
+Ext.define('MobileJudge.view.stats.Controller', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.column-basic-3d',
 
