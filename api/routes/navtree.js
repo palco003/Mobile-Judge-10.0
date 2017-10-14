@@ -98,11 +98,11 @@ module.exports = function(server, db) {
                             leaf: true
                         },
                         {
-                            text: 'Stats',
+                            text: 'Pablo', // 'Stats',
                             iconCls: 'x-fa fa-bar-chart',
-                            rowCls: 'nav-tree-badge nav-tree-badge-new',
-                            viewType: 'stats', //
-                            routeId: 'stats',
+                            // rowCls: 'nav-tree-badge nav-tree-badge-new',
+                            viewType: 'studentstats', // 'stats',
+                            routeId: 'studentstats',//'stats',
                             leaf: true
                         },
                         {
