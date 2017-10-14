@@ -27,11 +27,6 @@ Ext.define('MobileJudge.view.charts.Stats', {
             xtype:'livegrades',
             height: 400,
             userCls: 'big-100 small-100'
-        },
-        {
-            xtype:'livegrades',
-            height: 200,
-            userCls: 'big-100 small-100'
         }
     ]
 });
