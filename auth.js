@@ -90,10 +90,10 @@ module.exports = function(server, db) {
 								if (user.state != 13) return invalidCredentials();
 								break;
 							//*************************************************************************************************************************
-			                               case 3: // UnregJudge
-                           				       // if (!term.allowJudgeLogin) return errorResponse('The login for judges has not yet been activated by the admin. Please try again during the event.');
-								if (user.state != 13) return invalidCredentials();
-                                		       		break;
+                            case 3: // UnregJudge
+                                if (!term.allowJudgeLogin) return errorResponse('The login for judges has not yet been activated by the admin. Please try again during the event.');
+
+                                break;
 							//************************************************************************************************************************
 						}
 
