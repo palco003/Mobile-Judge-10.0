@@ -114,10 +114,28 @@ module.exports = function(server, db) {
                     ]
                 });
                 break;
+            case 4: // UnregJudge
+                res.json({
+                    expanded: true,
+                    children: [
+                        {
+                            text: 'Home',
+                            iconCls: 'x-fa fa-home',
+                            viewType: 'studenthome',
+                            routeId: 'home', // routeId defaults to viewType
+                            leaf: true
+                        },
+                        {
+                            text: 'Event Map',
+                            iconCls: 'x-fa fa-map-marker',
+                            viewType: 'eventmap',
+                            routeId: 'map',
+                            leaf: true
+                        }
+                    ]
+                });
+                break;
         }
-
         return next();
     });
 };
-
-
