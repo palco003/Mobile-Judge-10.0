@@ -46,7 +46,7 @@ Ext.define('MobileJudge.view.charts.Grades', {
                     innerPadding: 10,
                     series: [
                         {
-                            type: 'pie',
+                            type: 'pie3d',
                             angleField: 'total',
                             donut: 50,
                             highlight: true,
