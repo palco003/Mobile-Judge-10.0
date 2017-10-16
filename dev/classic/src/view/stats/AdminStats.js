@@ -6,9 +6,9 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
         'Ext.ux.layout.ResponsiveColumn'
     ],
 
-    controller: 'charts',
+    controller: 'stats',
     viewModel: {
-        type: 'charts'
+        type: 'stats'
     },
     layout: 'responsivecolumn',
 

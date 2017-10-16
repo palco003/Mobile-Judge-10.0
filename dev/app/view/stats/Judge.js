@@ -1,8 +1,8 @@
-Ext.define('MobileJudge.view.student.Grades', {
+Ext.define('MobileJudge.view.stats.Judge', {
     extend: 'MobileJudge.view.charts.Base',
-    xtype: 'student_grades', //'chartjudges',
+    xtype: 'judge_grades', //'chartjudges',
 
-    title: 'Student Grades',
+    title: 'Judge Grades',
 
     items: [
         {
@@ -11,7 +11,7 @@ Ext.define('MobileJudge.view.student.Grades', {
 
             platformConfig: {
                 classic: {
-                    interactions: 'rotate',
+                    interactions: 'rotatePie3d',
                     insetPadding: 20,
                     innerPadding: 20,
                     legend: {
@@ -19,7 +19,7 @@ Ext.define('MobileJudge.view.student.Grades', {
                     },
                     series: [
                         {
-                            type: 'pie',
+                            type: 'pie3d',
                             angleField: 'total',
                             donut: 50,
                             highlight: {
@@ -46,9 +46,9 @@ Ext.define('MobileJudge.view.student.Grades', {
                     innerPadding: 10,
                     series: [
                         {
-                            type: 'pie',
+                            type: 'pie3d',
                             angleField: 'total',
-                            donut: 50,
+                            donut: 30,
                             highlight: true,
                             label: {
                                 field: 'state'/*,
