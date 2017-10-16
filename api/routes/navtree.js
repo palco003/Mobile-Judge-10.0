@@ -23,8 +23,8 @@ module.exports = function(server, db) {
                             text: 'Stats',
                             iconCls: 'x-fa fa-bar-chart',
                             rowCls: 'nav-tree-badge nav-tree-badge-new',
-                            viewType: 'student_stats',
-                            routeId: 'student_stats',
+                            viewType: 'studentstats',
+                            routeId: 'stats',
                             leaf: true
                         }
                     ]
@@ -101,8 +101,8 @@ module.exports = function(server, db) {
                             text: 'Stats',
                             iconCls: 'x-fa fa-bar-chart',
                             rowCls: 'nav-tree-badge nav-tree-badge-new',
-                            viewType: 'admin_stats', //'charts',
-                            routeId: 'admin_stats',
+                            viewType: 'adminstats', //'charts',
+                            routeId: 'stats',
                             leaf: true
                         },
                         {

@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.stats.AdminStats', {
     extend: 'Ext.container.Container',
-    xtype: 'admin_stats',
+    xtype: 'adminstats',
 
     requires: [
         'Ext.ux.layout.ResponsiveColumn'
@@ -24,7 +24,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
 
     items: [
         {
-            xtype:'admin_grades',
+            xtype:'admingrades',
             height: 400,
             userCls: 'big-100 small-100'
         }

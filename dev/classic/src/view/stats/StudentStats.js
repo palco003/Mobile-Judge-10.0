@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.stats.StudentStats', {
     extend: 'Ext.container.Container',
-    xtype: 'student_stats',
+    xtype: 'studentstats',
 
     requires: [
         'Ext.ux.layout.ResponsiveColumn'
@@ -24,7 +24,7 @@ Ext.define('MobileJudge.view.stats.StudentStats', {
 
     items: [
         {
-            xtype:'student_grades',
+            xtype:'studentgrades',
             height: 400,
             userCls: 'big-100 small-100'
         }

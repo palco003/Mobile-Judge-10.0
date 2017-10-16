@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.stats.Student', {
     extend: 'MobileJudge.view.charts.Base',
-    xtype: 'student_grades', //'chartjudges',
+    xtype: 'studentgrades', //'chartjudges',
 
     title: 'Student Grades',
 
@@ -46,7 +46,7 @@ Ext.define('MobileJudge.view.stats.Student', {
                     innerPadding: 10,
                     series: [
                         {
-                            type: 'pie',
+                            type: 'pie3d',
                             angleField: 'total',
                             donut: 50,
                             highlight: true,

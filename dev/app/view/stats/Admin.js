@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.stats.Admin', {
     extend: 'MobileJudge.view.charts.Base',
-    xtype: 'admin_grades',
+    xtype: 'admingrades',
 
     title: 'Admin Grades Panel',
 
