@@ -11,7 +11,7 @@ Ext.define('MobileJudge.view.charts.Grades', {
 
             platformConfig: {
                 classic: {
-                    interactions: 'rotate',
+                    interactions: 'rotatePie3d',
                     insetPadding: 20,
                     innerPadding: 20,
                     legend: {
@@ -19,7 +19,7 @@ Ext.define('MobileJudge.view.charts.Grades', {
                     },
                     series: [
                         {
-                            type: 'pie',
+                            type: 'pie3d',
                             angleField: 'total',
                             donut: 50,
                             highlight: {
