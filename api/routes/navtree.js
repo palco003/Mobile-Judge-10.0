@@ -52,8 +52,8 @@ module.exports = function(server, db) {
                             text: 'Stats',
                             iconCls: 'x-fa fa-bar-chart',
                             rowCls: 'nav-tree-badge nav-tree-badge-new',
-                            viewType: 'judge_stats', //'charts',
-                            routeId: 'judge_stats',
+                            viewType: 'judgestats', //'charts',
+                            routeId: 'stats',
                             leaf: true
                         }
                     ]

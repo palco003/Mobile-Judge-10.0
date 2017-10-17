@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.stats.JudgeStats', {
     extend: 'Ext.container.Container',
-    xtype: 'judge_stats',
+    xtype: 'judgestats',
 
     requires: [
         'Ext.ux.layout.ResponsiveColumn'
