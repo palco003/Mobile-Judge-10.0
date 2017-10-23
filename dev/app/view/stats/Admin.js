@@ -1,17 +1,17 @@
 Ext.define('MobileJudge.view.stats.Admin', {
-    extend: 'MobileJudge.view.charts.Base',
+    extend: 'MobileJudge.view.stats.Base',
     xtype: 'admingrades',
 
     title: 'Admin Grades Panel',
 
     items: [
         {
-            xtype: 'polar',
-            bind: '{judges}',
+            xtype: 'chart',
+            bind: '{projects}',
 
             platformConfig: {
                 classic: {
-                    interactions: 'rotatePie3d',
+                    interactions: 'itemhighlight',
                     insetPadding: 20,
                     innerPadding: 20,
                     legend: {

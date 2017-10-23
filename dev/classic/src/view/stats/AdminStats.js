@@ -12,7 +12,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
     },
     layout: 'responsivecolumn',
 
-    defaultType: 'basepie',
+    defaultType: 'column-basic-3d',
     defaults: {
         iconCls: 'x-fa fa-pie-chart',
         userCls: 'big-33 small-100',
@@ -24,7 +24,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
 
     items: [
         {
-            xtype:'admingrades',
+            xtype:'column-basic-3d',
             height: 400,
             userCls: 'big-100 small-100'
         }

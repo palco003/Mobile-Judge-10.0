@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.stats.Controller', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.stats',
+    alias: 'controller.column-basic-3d',
 
 	model: null,
 
@@ -27,18 +27,21 @@ Ext.define('MobileJudge.view.stats.Controller', {
 		});
 	},
 
-	tipRenderer: function (tooltip, record) {
-		var total = 0;
-		record.store.each(function(r) {
-			total += r.get('total');
-		});
+    onSeriesLabelRender: function (v) {
+        return Ext.util.Format.number(v);
+    },
 
-		var percent = Math.floor((record.get('total') / total) * 100),
-			state = record.get('state').split(':')[0];
-		tooltip.setHtml(state + ': ' + percent + '%');
-	},
+    onTooltipRender: function (tooltip, record, item) {
+        tooltip.setHtml(record.get('project') + ': ' +
+            Ext.util.Format.number(record.get('grade')));
+    },
 
-	onRefreshChart: function(panel) {
-		panel.down('polar').getStore().reload();
-	}
+    onAxisLabelRender: function (axis, label, layoutContext) {
+        // Custom renderer overrides the native axis label renderer.
+        // Since we don't want to do anything fancy with the value
+        // ourselves except adding a thousands separator, but at the same time
+        // don't want to loose the formatting done by the native renderer,
+        // we let the native renderer process the value first.
+        return Ext.util.Format.number(layoutContext.renderer(label));
+    }
 });
