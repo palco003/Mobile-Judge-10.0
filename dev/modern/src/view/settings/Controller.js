@@ -37,6 +37,7 @@ Ext.define('MobileJudge.view.settings.Controller', {
 				}, this);
 	},
 
+<<<<<<< HEAD
     onTermsLoaded: function() {
         var select = this.getReferences().termSelector;
 	console.log(this.getReferences('termSelector'));
@@ -47,6 +48,19 @@ Ext.define('MobileJudge.view.settings.Controller', {
 
 
     onNewTermClick: function() {
+=======
+	onTermsLoaded: function() {
+		var combo = this.getReferences().termSelector,
+			rec = combo.getStore().findRecord('active', true);
+			console.log(store); // should return the store-component
+    			console.log(records); // should return an array of at least 1 item
+   			console.log(store.isLoaded()); // should be true
+    			console.log(store.getCount()); // should be > 0	
+		combo.setValue(rec.get('id'));
+	},
+
+	onNewTermClick: function() {
+>>>>>>> e65f0aaa112205e8e78dac4dde988c53f5ebfc0b
 		var me = this,
 			combo = me.getReferences().termSelector,
 			store = me.model.getStore('terms'),

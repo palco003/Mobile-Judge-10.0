@@ -44137,6 +44137,248 @@ Ext.define('Ext.picker.Picker', {extend:Ext.Sheet, alias:'widget.picker', altern
   me.callParent();
   me.mask = me.bar = Ext.destroy(me.mask, me.bar);
 }});
+<<<<<<< HEAD
+=======
+Ext.define('Ext.picker.Date', {extend:Ext.picker.Picker, xtype:'datepicker', alternateClassName:'Ext.DatePicker', config:{yearFrom:1980, yearTo:(new Date).getFullYear(), monthText:'Month', dayText:'Day', yearText:'Year', slotOrder:['month', 'day', 'year'], doneButton:true}, initialize:function() {
+  this.callParent();
+  this.on({scope:this, delegate:'\x3e slot', slotpick:this.onSlotPick});
+  this.on({scope:this, show:this.onSlotPick});
+}, setValue:function(value, animated) {
+  if (Ext.isDate(value)) {
+    value = {day:value.getDate(), month:value.getMonth() + 1, year:value.getFullYear()};
+  }
+  this.callParent([value, animated]);
+  this.onSlotPick();
+}, getValue:function(useDom) {
+  var values = {}, items = this.getItems().items, ln = items.length, daysInMonth, day, month, year, item, i;
+  for (i = 0; i < ln; i++) {
+    item = items[i];
+    if (item instanceof Ext.picker.Slot) {
+      values[item.getName()] = item.getValue(useDom);
+    }
+  }
+  if (values.year === null && values.month === null && values.day === null) {
+    return null;
+  }
+  year = Ext.isNumber(values.year) ? values.year : 1;
+  month = Ext.isNumber(values.month) ? values.month : 1;
+  day = Ext.isNumber(values.day) ? values.day : 1;
+  if (month && year && month && day) {
+    daysInMonth = this.getDaysInMonth(month, year);
+  }
+  day = daysInMonth ? Math.min(day, daysInMonth) : day;
+  return new Date(year, month - 1, day);
+}, updateYearFrom:function() {
+  if (this.initialized) {
+    this.createSlots();
+  }
+}, updateYearTo:function() {
+  if (this.initialized) {
+    this.createSlots();
+  }
+}, updateMonthText:function(newMonthText, oldMonthText) {
+  var innerItems = this.getInnerItems, ln = innerItems.length, item, i;
+  if (this.initialized) {
+    for (i = 0; i < ln; i++) {
+      item = innerItems[i];
+      if (typeof item.title == 'string' && item.title == oldMonthText || item.title.html == oldMonthText) {
+        item.setTitle(newMonthText);
+      }
+    }
+  }
+}, updateDayText:function(newDayText, oldDayText) {
+  var innerItems = this.getInnerItems, ln = innerItems.length, item, i;
+  if (this.initialized) {
+    for (i = 0; i < ln; i++) {
+      item = innerItems[i];
+      if (typeof item.title == 'string' && item.title == oldDayText || item.title.html == oldDayText) {
+        item.setTitle(newDayText);
+      }
+    }
+  }
+}, updateYearText:function(yearText) {
+  var innerItems = this.getInnerItems, ln = innerItems.length, item, i;
+  if (this.initialized) {
+    for (i = 0; i < ln; i++) {
+      item = innerItems[i];
+      if (item.title == this.yearText) {
+        item.setTitle(yearText);
+      }
+    }
+  }
+}, constructor:function() {
+  this.callParent(arguments);
+  this.createSlots();
+}, createSlots:function() {
+  var me = this, slotOrder = me.getSlotOrder(), yearsFrom = me.getYearFrom(), yearsTo = me.getYearTo(), years = [], days = [], months = [], reverse = yearsFrom > yearsTo, ln, i, daysInMonth;
+  while (yearsFrom) {
+    years.push({text:yearsFrom, value:yearsFrom});
+    if (yearsFrom === yearsTo) {
+      break;
+    }
+    if (reverse) {
+      yearsFrom--;
+    } else {
+      yearsFrom++;
+    }
+  }
+  daysInMonth = me.getDaysInMonth(1, (new Date).getFullYear());
+  for (i = 0; i < daysInMonth; i++) {
+    days.push({text:i + 1, value:i + 1});
+  }
+  for (i = 0, ln = Ext.Date.monthNames.length; i < ln; i++) {
+    months.push({text:Ext.Date.monthNames[i], value:i + 1});
+  }
+  var slots = [];
+  slotOrder.forEach(function(item) {
+    slots.push(me.createSlot(item, days, months, years));
+  });
+  me.setSlots(slots);
+}, createSlot:function(name, days, months, years) {
+  switch(name) {
+    case 'year':
+      return {name:'year', align:'center', data:years, title:this.getYearText(), flex:3};
+    case 'month':
+      return {name:name, align:'right', data:months, title:this.getMonthText(), flex:4};
+    case 'day':
+      return {name:'day', align:'center', data:days, title:this.getDayText(), flex:2};
+  }
+}, onSlotPick:function() {
+  var value = this.getValue(true), slot = this.getDaySlot(), year = value.getFullYear(), month = value.getMonth(), days = [], daysInMonth, i;
+  if (!value || !Ext.isDate(value) || !slot) {
+    return;
+  }
+  this.callParent(arguments);
+  daysInMonth = this.getDaysInMonth(month + 1, year);
+  for (i = 0; i < daysInMonth; i++) {
+    days.push({text:i + 1, value:i + 1});
+  }
+  if (slot.getStore().getCount() == days.length) {
+    return;
+  }
+  slot.getStore().setData(days);
+  var store = slot.getStore(), viewItems = slot.getViewItems(), valueField = slot.getValueField(), index, item;
+  index = store.find(valueField, value.getDate());
+  if (index == -1) {
+    return;
+  }
+  item = Ext.get(viewItems[index]);
+  slot.selectedIndex = index;
+  slot.scrollToItem(item);
+  slot.setValue(slot.getValue(true));
+}, getDaySlot:function() {
+  var innerItems = this.getInnerItems(), ln = innerItems.length, i, slot;
+  if (this.daySlot) {
+    return this.daySlot;
+  }
+  for (i = 0; i < ln; i++) {
+    slot = innerItems[i];
+    if (slot.isSlot && slot.getName() == 'day') {
+      this.daySlot = slot;
+      return slot;
+    }
+  }
+  return null;
+}, getDaysInMonth:function(month, year) {
+  var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  return month == 2 && this.isLeapYear(year) ? 29 : daysInMonth[month - 1];
+}, isLeapYear:function(year) {
+  return !!((year & 3) === 0 && (year % 100 || year % 400 === 0 && year));
+}, onDoneButtonTap:function() {
+  var oldValue = this._value, newValue = this.getValue(true), testValue = newValue;
+  if (Ext.isDate(newValue)) {
+    testValue = newValue.toDateString();
+  }
+  if (Ext.isDate(oldValue)) {
+    oldValue = oldValue.toDateString();
+  }
+  if (testValue != oldValue) {
+    this.fireEvent('change', this, newValue);
+  }
+  this.hide();
+  Ext.util.InputBlocker.unblockInputs();
+}});
+Ext.define('Ext.field.DatePicker', {extend:Ext.field.Picker, alternateClassName:'Ext.form.DatePicker', xtype:'datepickerfield', config:{ui:'select', picker:true, destroyPickerOnHide:false, dateFormat:''}, applyValue:function(value, oldValue) {
+  if (!Ext.isDate(value)) {
+    if (value) {
+      value = Ext.Date.parse(value, this.getDateFormat());
+    } else {
+      value = null;
+    }
+  }
+  if (value && oldValue && value.getTime() === oldValue.getTime()) {
+    value = undefined;
+  }
+  return value;
+}, updateValue:function(value, oldValue) {
+  var me = this, picker = me._picker;
+  if (picker && picker.isPicker) {
+    picker.setValue(value);
+  }
+  if (value !== null) {
+    me.getComponent().setValue(Ext.Date.format(value, me.getDateFormat()));
+  } else {
+    me.getComponent().setValue('');
+  }
+  me.fireEvent('change', me, value, oldValue);
+}, applyDateFormat:function(dateFormat) {
+  return dateFormat || Ext.util.Format.defaultDateFormat;
+}, updateDateFormat:function(newDateFormat) {
+  var value = this.getValue();
+  if (Ext.isDate(value)) {
+    this.getComponent().setValue(Ext.Date.format(value, newDateFormat));
+  }
+}, getFormattedValue:function(format) {
+  var value = this.getValue();
+  return Ext.isDate(value) ? Ext.Date.format(value, format || this.getDateFormat()) : '';
+}, applyPicker:function(picker, pickerInstance) {
+  if (pickerInstance && pickerInstance.isPicker) {
+    picker = pickerInstance.setConfig(picker);
+  }
+  return picker;
+}, getPicker:function() {
+  var picker = this._picker, value = this.getValue();
+  if (picker && !picker.isPicker) {
+    picker = Ext.factory(picker, Ext.picker.Date);
+    if (value !== null) {
+      picker.setValue(value);
+    }
+  }
+  picker.on({scope:this, change:'onPickerChange', hide:'onPickerHide'});
+  this._picker = picker;
+  return picker;
+}, onPickerChange:function(picker, value) {
+  var me = this, oldValue = me.getValue();
+  me.setValue(value);
+  me.fireEvent('select', me, value);
+}, onPickerHide:function() {
+  var me = this, picker = me.getPicker();
+  if (me.getDestroyPickerOnHide() && picker) {
+    picker.destroy();
+    me._picker = me.getInitialConfig().picker || true;
+  }
+}, reset:function() {
+  this.setValue(this.originalValue);
+}, onFocus:function(e) {
+  var component = this.getComponent();
+  this.fireEvent('focus', this, e);
+  if (Ext.os.is.Android4) {
+    component.input.dom.focus();
+  }
+  component.input.dom.blur();
+  if (this.getReadOnly()) {
+    return false;
+  }
+  this.isFocused = true;
+  this.getPicker().show();
+}, destroy:function() {
+  var picker = this._picker;
+  if (picker && picker.isPicker) {
+    picker.destroy();
+  }
+  this.callParent();
+}});
+>>>>>>> e65f0aaa112205e8e78dac4dde988c53f5ebfc0b
 Ext.define('Ext.field.Email', {extend:Ext.field.Text, alternateClassName:'Ext.form.Email', xtype:'emailfield', config:{component:{type:'email'}, autoCapitalize:false}});
 Ext.define('Ext.field.Number', {extend:Ext.field.Text, xtype:'numberfield', alternateClassName:'Ext.form.Number', config:{component:{type:'number'}, ui:'number'}, proxyConfig:{minValue:null, maxValue:null, stepValue:null}, applyPlaceHolder:function(value) {
   this._enableNumericPlaceHolderHack = !Ext.feature.has.NumericInputPlaceHolder && !Ext.isEmpty(value);
@@ -45941,6 +46183,73 @@ Ext.define('Ext.grid.Grid', {extend:Ext.dataview.List, xtype:'grid', config:{def
   this.callParent();
   this.destroying = false;
 }});
+<<<<<<< HEAD
+=======
+Ext.define('Ext.grid.plugin.Editable', {extend:Ext.Component, alias:'plugin.grideditable', config:{grid:null, triggerEvent:'doubletap', formConfig:null, defaultFormConfig:{xtype:'formpanel', modal:true, scrollable:true, items:{xtype:'fieldset'}}, toolbarConfig:{xtype:'titlebar', docked:'top', items:[{xtype:'button', ui:'decline', text:'Cancel', align:'left', action:'cancel'}, {xtype:'button', ui:'confirm', text:'Submit', align:'right', action:'submit'}]}, enableDeleteButton:true}, init:function(grid) {
+  this.setGrid(grid);
+}, updateGrid:function(grid, oldGrid) {
+  var triggerEvent = this.getTriggerEvent();
+  if (oldGrid) {
+    oldGrid.renderElement.un(triggerEvent, 'onTrigger', this);
+  }
+  if (grid) {
+    grid.renderElement.on(triggerEvent, 'onTrigger', this);
+  }
+}, onCancelTap:function() {
+  this.sheet.hide();
+}, onSubmitTap:function() {
+  this.form.getRecord().set(this.form.getValues());
+  this.sheet.hide();
+}, onSheetHide:function() {
+  this.sheet.destroy();
+  this.form = null;
+  this.sheet = null;
+}, getRecordByTriggerEvent:function(e) {
+  var rowEl = e.getTarget('.' + Ext.baseCSSPrefix + 'grid-row'), row;
+  if (rowEl) {
+    row = Ext.getCmp(rowEl.id);
+    if (row) {
+      return row.getRecord();
+    }
+  }
+  return null;
+}, getEditorFields:function(columns) {
+  var fields = [], ln = columns.length, i, column, editor;
+  for (i = 0; i < ln; i++) {
+    column = columns[i];
+    if (column.getEditable()) {
+      editor = Ext.apply({}, column.getEditor() || column.getDefaultEditor());
+      editor.label = column.getText();
+      fields.push(editor);
+    }
+  }
+  return fields;
+}, onTrigger:function(e) {
+  var me = this, grid = me.getGrid(), formConfig = me.getFormConfig(), toolbarConfig = me.getToolbarConfig(), record = me.getRecordByTriggerEvent(e), fields, form, sheet, toolbar;
+  if (record) {
+    if (formConfig) {
+      this.form = form = Ext.factory(formConfig, Ext.form.Panel);
+    } else {
+      this.form = form = Ext.factory(me.getDefaultFormConfig());
+      fields = me.getEditorFields(grid.getColumns());
+      form.down('fieldset').setItems(fields);
+    }
+    form.setRecord(record);
+    toolbar = Ext.factory(toolbarConfig, Ext.form.TitleBar);
+    toolbar.down('button[action\x3dcancel]').on('tap', 'onCancelTap', this);
+    toolbar.down('button[action\x3dsubmit]').on('tap', 'onSubmitTap', this);
+    this.sheet = sheet = grid.add({xtype:'sheet', items:[toolbar, form], hideOnMaskTap:true, enter:'right', exit:'right', right:0, width:320, layout:'fit', stretchY:true, hidden:true});
+    if (me.getEnableDeleteButton()) {
+      form.add({xtype:'button', text:'Delete', ui:'decline', margin:10, handler:function() {
+        grid.getStore().remove(record);
+        sheet.hide();
+      }});
+    }
+    sheet.on('hide', 'onSheetHide', this);
+    sheet.show();
+  }
+}});
+>>>>>>> e65f0aaa112205e8e78dac4dde988c53f5ebfc0b
 Ext.define('Ext.navigation.Bar', {extend:Ext.TitleBar, isToolbar:true, config:{baseCls:Ext.baseCSSPrefix + 'toolbar', cls:Ext.baseCSSPrefix + 'navigation-bar', ui:'dark', title:null, defaultType:'button', layout:{type:'hbox'}, defaultBackButtonText:'Back', animation:{duration:300}, useTitleForBackButtonText:null, view:null, android2Transforms:false, backButton:{align:'left', ui:'back', hidden:true}}, constructor:function(config) {
   config = config || {};
   if (!config.items) {
@@ -58643,10 +58952,19 @@ Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewControlle
     store.removeAt(rowIndex);
   }, this);
 }, onTermsLoaded:function() {
+<<<<<<< HEAD
   var select = this.getReferences().termSelector;
   console.log(this.getReferences('termSelector'));
   var rec = select.getStore().findRecord('active', true);
   select.setValue(rec.get('id'));
+=======
+  var combo = this.getReferences().termSelector, rec = combo.getStore().findRecord('active', true);
+  console.log(store);
+  console.log(records);
+  console.log(store.isLoaded());
+  console.log(store.getCount());
+  combo.setValue(rec.get('id'));
+>>>>>>> e65f0aaa112205e8e78dac4dde988c53f5ebfc0b
 }, onNewTermClick:function() {
   var me = this, combo = me.getReferences().termSelector, store = me.model.getStore('terms'), now = new Date, month = now.getMonth(), rec = new MobileJudge.model.settings.Term({name:'New Term', start:now, end:now, deadline:now});
   store.rejectChanges();
@@ -58683,7 +59001,25 @@ Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewControlle
     me.onTermsLoaded(store);
   }, this);
 }});
+<<<<<<< HEAD
 Ext.define('MobileJudge.view.settings.Index', {extend:Ext.tab.Panel, alias:'widget.settings', cls:'shadow', activeTab:0, margin:20, items:[{xtype:'terms', title:'Terms', iconCls:''}, {xtype:'questions', title:'Questions', iconCls:''}]});
+=======
+Ext.define('MobileJudge.view.settings.Questions', {extend:Ext.grid.Grid, alias:'widget.questions', title:'Questions', iconCls:'x-fa fa-question', bind:'{questions}', viewConfig:{preserveScrollOnRefresh:true, preserveScrollOnReload:true, loadMask:false}, headerBorders:false, rowLines:false, plugins:[{ptype:'grideditable', pluginId:'gridEditor', listeners:{cancelEdit:'onQuestionCancelEdit'}}], tbar:[{iconCls:'x-fa fa-edit', reference:'newButton', tooltip:'New', handler:'onNewQuestionButtonClick'}, 
+{iconCls:'x-fa fa-refresh', tooltip:'Refresh', handler:'onRefreshButtonClick'}], columns:[{width:40, dataIndex:'id', text:'', renderer:function(v, meta, rec) {
+  return rec.phantom ? '' : v;
+}}, {flex:1, dataIndex:'text', text:'Question', editor:{xtype:'textfield', allowBlank:false}}, {width:75, align:'center', dataIndex:'value', text:'Max', editor:{xtype:'numberfield', minValue:1, maxValue:10, allowBlank:false}}, {width:75, align:'center', dataIndex:'display', text:'Order', editor:{xtype:'numberfield', minValue:1, allowBlank:false}}, {width:75, align:'center', dataIndex:'enabled', text:'Enabled', renderer:function(value) {
+  return '\x3cspan class\x3d"x-fa ' + (value ? 'fa-check' : '') + '"\x3e\x3c/span\x3e';
+}, editor:'checkboxfield'}, {xtype:'column', items:[{iconCls:'x-fa fa-close', tooltip:'Delete', handler:'onQuestionDelete'}], width:30, dataIndex:'bool', sortable:false, hideable:false}]});
+Ext.define('MobileJudge.view.settings.Terms', {extend:Ext.form.Panel, alias:'widget.terms', title:'Terms', reference:'termForm', iconCls:'x-fa fa-calendar', cls:'term-editor', layout:'fit', bodyPadding:10, scrollable:true, modelValidation:true, defaultType:'fieldset', defaults:{anchor:'100%', layout:'fit', labelAlign:'top', labelSeparator:'', userCls:'groupFieldContainer', defaultType:'textfield', defaults:{anchor:'100%', labelAlign:'left', labelSeparator:'', labelWidth:160}}, toolbar:[{xtype:'selectfield', 
+docked:'top', reference:'termSelector', fieldLabel:'Select Term', emptyText:'-- Create New Term --', labelWidth:80, queryMode:'local', forceSelection:true, editable:false, displayField:'name', valueField:'id', flex:1, bind:{store:'{terms}', disabled:'{status.canSave}'}}, {ui:'soft-blue', glyph:'', iconCls:'x-fa fa-edit', text:'New', bind:{disabled:'{!status.canCreate}'}, handler:'onNewTermClick'}, {ui:'soft-green', glyph:'', iconCls:'x-fa fa-save', text:'Save', bind:{disabled:'{!status.canSave}'}, 
+handler:'onSaveTermClick'}, {ui:'soft-red', glyph:'', iconCls:'x-fa fa-remove', text:'Delete', bind:{disabled:'{!status.canDelete}'}, handler:'onDeleteTermClick'}], items:[{labelClsExtra:'x-fa fa-gear', fieldLabel:'Selected Term', items:[{fieldLabel:'Name', bind:'{selectedTerm.name}'}, {fieldLabel:'Is Active?', xtype:'fieldset', layout:'hbox', userCls:'dateFieldContainer', items:[{xtype:'selectfield', readOnly:true, bind:'{selectedTerm.active}'}, {xtype:'button', text:'Make Active', iconCls:'x-fa fa-calendar-check-o', 
+margin:'0 0 0 20', handler:'onMakeActiveTerm', bind:{hidden:'{selectedTerm.active}', disabled:'{status.canSave}'}}]}, {xtype:'checkboxfield', fieldLabel:'Allow Judges to Login?', bind:'{selectedTerm.allowJudgeLogin}'}, {xtype:'checkboxfield', fieldLabel:'Students Can See Grades?', bind:'{selectedTerm.showGrades}'}, {xtype:'numberfield', fieldLabel:'Students per Judge', bind:'{selectedTerm.studentsPerJudge}'}, {xtype:'numberfield', fieldLabel:'Display Order', bind:'{selectedTerm.display}'}]}, {labelClsExtra:'x-fa fa-globe', 
+fieldLabel:'Senior Project Website', items:[{fieldLabel:'Url', bind:'{selectedTerm.srProjectUrl}'}, {fieldLabel:'Token', bind:'{selectedTerm.srProjectToken}'}, {fieldLabel:'Live Url', bind:'{selectedTerm.liveUrl}'}, {fieldLabel:'Development Url', bind:'{selectedTerm.developmentUrl}'}, {fieldLabel:'No Profile Image Url', bind:'{selectedTerm.noProfileImageUrl}'}]}, {labelClsExtra:'x-fa fa-envelope-o', fieldLabel:'Email Settings', items:[{fieldLabel:'From', emptyText:'John Doe \x3cusername@example.com\x3e', 
+bind:'{selectedTerm.mailFrom}'}, {xtype:'selectfield', queryMode:'local', editable:false, emptyText:'Select a Template', displayField:'name', valueField:'id', fieldLabel:'Reset Password', bind:{store:'templates4Term', value:'{selectedTerm.resetPasswordTemplate}'}}, {xtype:'selectfield', queryMode:'local', editable:false, emptyText:'Select a Template', displayField:'name', valueField:'id', fieldLabel:'Confirm Registration', bind:{store:'templates4Term', value:'{selectedTerm.confirmTemplate}'}}, {xtype:'selectfield', 
+queryMode:'local', editable:false, emptyText:'Select a Template', displayField:'name', valueField:'id', fieldLabel:'Reject Template', bind:{store:'templates4Term', value:'{selectedTerm.rejectInviteTemplate}'}}, {xtype:'selectfield', queryMode:'local', editable:false, emptyText:'Select a Template', displayField:'name', valueField:'id', fieldLabel:'Remove Template', bind:{store:'templates4Term', value:'{selectedTerm.removeInviteTemplate}'}}]}, {labelClsExtra:'x-fa fa-clock-o', fieldLabel:'Event Info', 
+items:[{fieldLabel:'Start Time', xtype:'fieldset', layout:'hbox', userCls:'dateFieldContainer', items:[{xtype:'datepickerfield', flex:1, bind:'{selectedTerm.startDate}'}, {xtype:'textfield', flex:1, bind:'{selectedTerm.startTime}'}]}, {fieldLabel:'End Time', xtype:'fieldset', layout:'hbox', userCls:'dateFieldContainer', items:[{xtype:'datepickerfield', flex:1, bind:'{selectedTerm.endDate}'}, {xtype:'textfield', flex:1, bind:'{selectedTerm.endTime}'}]}, {fieldLabel:'Deadline', xtype:'fieldset', layout:'hbox', 
+userCls:'dateFieldContainer', items:[{xtype:'datepickerfield', flex:1, bind:'{selectedTerm.deadlineDate}'}, {xtype:'textfield', flex:1, bind:'{selectedTerm.deadlineTime}'}]}, {fieldLabel:'Place', bind:'{selectedTerm.location}'}, {fieldLabel:'Map Url', bind:'{selectedTerm.mapImageUrl}'}]}]});
+>>>>>>> e65f0aaa112205e8e78dac4dde988c53f5ebfc0b
 Ext.define('MobileJudge.view.settings.Model', {extend:Ext.app.ViewModel, alias:'viewmodel.settings', stores:{terms:{type:'terms', storeId:'terms', listeners:{load:'onTermsLoaded'}}, questions:{type:'questions', storeId:'questions'}, templates4Term:{type:'templates', storeId:'templates4Term'}}, formulas:{selectedTerm:{bind:{bindTo:'{termSelector.selection}', deep:true}, get:function(term) {
   return term;
 }, set:function(term) {
@@ -58698,6 +59034,7 @@ Ext.define('MobileJudge.view.settings.Model', {extend:Ext.app.ViewModel, alias:'
   ret.canCreate = !ret.dirty && !ret.phantom;
   return ret;
 }}}});
+<<<<<<< HEAD
 var store = Ext.create('Ext.data.Store', {fields:['name', 'email', 'phone'], data:[{'id':'16', 'text':'How significant is the problem?', 'value':'10', 'display':'1', 'enabled':'✔', 'bool':'x'}, {'id':'17', 'text':'How significant is the solution?', 'value':'10', 'display':'2', 'enabled':'✔', 'bool':'x'}, {'id':'18', 'text':'How impressive is the demo?', 'value':'10', 'display':'3', 'enabled':'✔', 'bool':'x'}, {'id':'19', 'text':'How well prepared is the student?', 'value':'10', 'display':'4', 'enabled':'✔', 
 'bool':'x'}, {'id':'20', 'text':'How expressive and self-sustained is the poster?', 'value':'10', 'display':'4', 'enabled':'✔', 'bool':'x'}]});
 Ext.define('MobileJudge.view.settings.Questions', {extend:Ext.grid.Grid, alias:'widget.questions', title:'Questions', store:store, columns:[{text:'', dataIndex:'id', width:'10'}, {text:'Question', dataIndex:'text', width:'250'}, {text:'Max', dataIndex:'value', width:'45'}, {text:'Order', dataIndex:'display', width:'55'}, {text:'Enabled', dataIndex:'enabled', width:'70'}, {text:'', dataIndex:'bool', width:'20'}], height:200, layout:'fit', fullscreen:true});
@@ -58705,6 +59042,9 @@ Ext.define('MobileJudge.view.settings.Terms', {extend:Ext.form.Panel, alias:'wid
 ui:'decline'}]}, {xtype:'fieldset', title:'Selected Term', items:[{xtype:'textfield', label:'Name'}, {xtype:'checkboxfield', label:'Is Active?'}, {xtype:'checkboxfield', label:'Judge Login?'}, {xtype:'checkboxfield', label:'Stud. Grades?'}, {xtype:'numberfield', label:'Stud. per Judge'}, {xtype:'numberfield', label:'Display Order'}]}, {xtype:'fieldset', title:'Senior Project Website', items:[{xtype:'textfield', label:'Url'}, {xtype:'textfield', label:'Token'}, {xtype:'textfield', label:'Live Url'}, 
 {xtype:'textfield', label:'Dev. Url'}, {xtype:'textfield', label:'No Prof. Img Url'}]}, {xtype:'fieldset', title:'Email Settings', items:[{xtype:'textfield', label:'From'}, {xtype:'selectfield', label:'Reset Pass.', options:[{text:'Forgot Password'}]}, {xtype:'selectfield', label:'Confirm Reg.', options:[{text:'Registration Confirmation for Judges'}]}, {xtype:'selectfield', label:'Confirm Reg.', options:[{text:'Acceptance Confirmation for Judges'}]}, {xtype:'selectfield', label:'Reject Template', 
 options:[{text:'Judge Reject Invite'}]}, {xtype:'selectfield', label:'Acpt. Template', options:[{text:'Judge Accept Invite'}]}, {xtype:'selectfield', label:'Remv. Template', options:[{text:'Judge Remove Invite'}]}]}, {xtype:'fieldset', title:'Event Info', layout:'vbox', defaultType:'textfield', items:[{label:'Start Date'}, {label:'Start Time'}, {label:'End Date'}, {label:'End Time'}, {label:'Deadline Date'}, {label:'Deadline Time'}, {label:'Place'}, {label:'Map Url'}]}]});
+=======
+Ext.define('MobileJudge.view.settings.Index', {extend:Ext.tab.Panel, alias:'widget.settings', controller:'settings', viewModel:{type:'settings'}, cls:'shadow', activeTab:0, margin:20, items:[{xtype:'terms'}, {xtype:'questions'}]});
+>>>>>>> e65f0aaa112205e8e78dac4dde988c53f5ebfc0b
 Ext.define('MobileJudge.view.students.Home', {extend:Ext.Container, xtype:'studenthome', cls:'userProfile-container dashboard', scrollable:'y', controller:'student', viewModel:{data:{}}, items:[{xtype:'profile', userCls:'big-100 small-100 dashboard-item shadow'}]});
 (function(global, factory) {
   if (typeof module === 'object' && typeof module.exports === 'object') {

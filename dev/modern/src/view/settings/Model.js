@@ -2,6 +2,15 @@ Ext.define('MobileJudge.view.settings.Model', {
 	extend: 'Ext.app.ViewModel',
 	alias: 'viewmodel.settings',
 
+<<<<<<< HEAD
+=======
+	requires: [
+		'MobileJudge.store.settings.Terms',
+		'MobileJudge.store.settings.Questions',
+        	'MobileJudge.store.email.Templates'
+	],
+
+>>>>>>> e65f0aaa112205e8e78dac4dde988c53f5ebfc0b
 	stores: {
 		terms: {
 			type: 'terms',
