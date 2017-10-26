@@ -1,10 +1,9 @@
 Ext.define('MobileJudge.view.settings.Terms', {
     extend: 'Ext.form.Panel',
     xtype: 'panel',
-    //fullscreen: true,
-    //renderTo: Ext.getBody(),
     alias: 'widget.terms',
-
+    reference: 'termForm',
+    modelValidation: true,
     requires: [
         'Ext.form.FieldSet',
         'Ext.field.Select',
@@ -19,19 +18,17 @@ Ext.define('MobileJudge.view.settings.Terms', {
         items: [{
                 xtype: 'selectfield',
                 label: 'Select Term',
-                options: [{
-                    text: 'Fall 2017',
-                    value: 'first'
-                }, {
-                    text: 'Second Option',
-                    value: 'second'
-                }, {
-                    text: 'Third Option',
-                    value: 'third'
-                }]
+		labelWidth: 150,
+		reference: 'termSelector',
+		displayField: 'name',
+		valueField: 'id',
+                bind: {
+                    store: '{terms}',
+		    disabled: '{status.canSave}'
+                }
             }, {
                 xtype: 'button',
-                text: 'New',
+                text: 'New (Disabled)',
                 iconCls: 'x-fa fa-edit',
                 ui: 'action'
             }, {
