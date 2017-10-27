@@ -19,13 +19,13 @@ Ext.define('MobileJudge.view.settings.Index', {
             title: 'Terms',
             iconCls: ''
 
-        },
-        {
-            xtype: 'questions',
-            title: 'Questions',
-            iconCls: ''
-
         }
+        //{
+          //  xtype: 'questions',
+          //  title: 'Questions',
+          //  iconCls: ''
+
+        //}
     ]
 });
 

@@ -28,7 +28,7 @@ Ext.define('MobileJudge.view.settings.Terms', {
                 }
             }, {
                 xtype: 'button',
-                text: 'New (Disabled)',
+                text: 'New',
                 iconCls: 'x-fa fa-edit',
                 ui: 'action'
             }, {
@@ -50,7 +50,8 @@ Ext.define('MobileJudge.view.settings.Terms', {
         items: [{
                 xtype: 'textfield',
                 label: 'Name',
-		labelWidth: 150
+		labelWidth: 150,
+		bind: '{selectedTerm.name}'
             }, {
                 xtype: 'checkboxfield',
                 label: 'Is Active?',
@@ -59,19 +60,23 @@ Ext.define('MobileJudge.view.settings.Terms', {
             }, {
                 xtype: 'checkboxfield',
                 label: 'Judge Login?',
-                labelWidth: 150
+                labelWidth: 150,
+		bind: '{selectedTerm.allowJudgeLogin}'
             }, {
                 xtype: 'checkboxfield',
                 label: 'Stud. Grades?',
-                labelWidth: 150
+                labelWidth: 150,
+		bind: '{selectedTerm.showGrades}'
             }, {
                 xtype: 'numberfield',
                 label: 'Stud. per Judge',
-                labelWidth: 150
+                labelWidth: 150,
+		bind: '{selectedTerm.studentsPerJudge}'
             }, {
                 xtype: 'numberfield',
                 label: 'Display Order',
-                labelWidth: 150
+                labelWidth: 150,
+		bind: '{selectedTerm.display}'
             }
 
         ]
@@ -83,15 +88,20 @@ Ext.define('MobileJudge.view.settings.Terms', {
             labelWidth: 100
         },
         items: [{
-            label: 'Url'
+            label: 'Url',
+	    bind: '{selectedTerm.srProjectUrl}'
         }, {
-            label: 'Token'
+            label: 'Token',
+	    bind: '{selectedTerm.srProjectToken}'
         }, {
-            label: 'Live Url'
+            label: 'Live Url',
+	    bind: '{selectedTerm.liveUrl}'
         }, {
-            label: 'Dev. Url'
+            label: 'Dev. Url',
+	    bind: '{selectedTerm.developmentUrl}'
         }, {
-            label: 'No Prof. Img Url'
+            label: 'No Prof. Img Url',
+	    bind: '{selectedTerm.noProfileImageUrl}'
         }]
 
     }, {
@@ -102,62 +112,64 @@ Ext.define('MobileJudge.view.settings.Terms', {
 	},
         items: [{
                 xtype: 'textfield',
-                label: 'From'
-                    //placeHolder: 'Masoud Sadjadi <sadjadi@cs.fiu.edu>'
+                label: 'From',
+                bind: '{selectedTerm.mailFrom}'
             }, {
                 xtype: 'selectfield',
                 label: 'Reset Pass.',
-                options: [{
-                        text: 'Forgot Password'
-                            //value:
-                    }
-
-                ]
+                displayField: 'name',
+		valueField: 'id',
+		bind: {
+			store: 'templates4Term',
+			value: '{selectedTerm.resetPasswordTemplate}'
+		}
             }, {
                 xtype: 'selectfield',
                 label: 'Confirm Reg.',
-                options: [{
-                        text: 'Registration Confirmation for Judges'
-                            //value:
-                    }
+                displayField: 'name',
+                valueField: 'id',
+		bind: {
+			store: 'templates4Term',
+			value: '{selectedTerm.confirmTemplate}'
+		}
 
-                ]
             }, {
                 xtype: 'selectfield',
-                label: 'Confirm Reg.',
-                options: [{
-                        text: 'Acceptance Confirmation for Judges'
-                            //value:
-                    }
-
-                ]
+                label: 'Confirm Acpt.',
+		displayField: 'name',
+                valueField: 'id',
+		bind: {
+                        store: 'templates4Term',
+                        value: '{selectedTerm.acceptanceConfirmation}'
+                }
             }, {
                 xtype: 'selectfield',
                 label: 'Reject Template',
-                options: [{
-                        text: 'Judge Reject Invite'
-                            //value:
-                    }
-
-                ]
+                displayField: 'name',
+                valueField: 'id',
+		bind: {
+			store: 'templates4Term',
+			value: '{selectedTerm.rejectInviteTemplate}'       
+		}
             }, {
                 xtype: 'selectfield',
                 label: 'Acpt. Template',
-                options: [{
-                        text: 'Judge Accept Invite'
-                            //value:
-                    }
+                displayField: 'name',
+                valueField: 'id',
+		bind: {
+                        store: 'templates4Term',
+                        value: '{selectedTerm.acceptInviteTemplate}'
+                }
 
-                ]
             }, {
                 xtype: 'selectfield',
                 label: 'Remv. Template',
-                options: [{
-                        text: 'Judge Remove Invite'
-                            //value:
-                    }
-
-                ]
+                displayField: 'name',
+                valueField: 'id',
+		bind: {
+			store: 'templates4Term',
+			value: '{selectedTerm.removeInviteTemplate}'
+		}
             }
 
         ]
