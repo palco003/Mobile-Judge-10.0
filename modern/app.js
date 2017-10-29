@@ -58630,6 +58630,38 @@ Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewControlle
 }, onTermsLoaded:function() {
   var select = this.getReferences().termSelector, rec = select.getStore().findRecord('active', true);
   select.setValue(rec.get('id'));
+}, onNewTermClick:function() {
+  var me = this, select = me.getReferences().termSelector, store = me.model.getStore('terms'), now = new Date, month = now.getMonth(), rec = new MobileJudge.model.settings.Term({name:'New Term', start:now, end:now, deadline:now});
+  store.rejectChanges();
+  store.insert(0, rec);
+  select.setValue(rec);
+}, onSaveTermClick:function() {
+  var me = this, form = me.getReferences().termForm, store = me.model.getStore('terms'), rec = me.model.get('selectedTerm'), changed = false;
+  if (rec.modified && rec.modified.active === false && rec.get('active')) {
+    changed = rec.get('name');
+  }
+  store.sync({success:function() {
+    if (changed) {
+      Ext.GlobalEvents.fireEvent('termChanged', changed);
+    }
+  }});
+}, onDeleteTermClick:function() {
+  var me = this, store = me.model.getStore('terms'), rec = me.model.get('selectedTerm');
+  Ext.Msg.confirm('Delete', 'Are you sure you want to delete the selected record?', function(choice) {
+    if (choice !== 'yes') {
+      return;
+    }
+    var sync = !rec.phantom;
+    store.remove(rec);
+    if (sync) {
+      store.sync();
+    }
+    me.onTermsLoaded(store);
+  }, this);
+}, onMakeActiveTerm:function() {
+  var me = this, rec = me.model.get('selectedTerm');
+  rec.set('active', true);
+  me.onSaveTermClick();
 }});
 Ext.define('MobileJudge.view.settings.Index', {extend:Ext.tab.Panel, alias:'widget.settings', controller:'settings', viewModel:{type:'settings'}, cls:'shadow', activeTab:0, margin:20, items:[{xtype:'terms', title:'Terms', iconCls:''}]});
 Ext.define('MobileJudge.view.settings.Model', {extend:Ext.app.ViewModel, alias:'viewmodel.settings', stores:{terms:{type:'terms', storeId:'terms', listeners:{load:'onTermsLoaded'}}, questions:{type:'questions', storeId:'questions'}, templates4Term:{type:'templates', storeId:'templates4Term'}}, formulas:{selectedTerm:{bind:{bindTo:'{termSelector.selection}', deep:true}, get:function(term) {
@@ -58643,12 +58675,14 @@ Ext.define('MobileJudge.view.settings.Model', {extend:Ext.app.ViewModel, alias:'
 var store = Ext.create('Ext.data.Store', {fields:['name', 'email', 'phone'], data:[{'id':'16', 'text':'How significant is the problem?', 'value':'10', 'display':'1', 'enabled':'✔', 'bool':'x'}, {'id':'17', 'text':'How significant is the solution?', 'value':'10', 'display':'2', 'enabled':'✔', 'bool':'x'}, {'id':'18', 'text':'How impressive is the demo?', 'value':'10', 'display':'3', 'enabled':'✔', 'bool':'x'}, {'id':'19', 'text':'How well prepared is the student?', 'value':'10', 'display':'4', 'enabled':'✔', 
 'bool':'x'}, {'id':'20', 'text':'How expressive and self-sustained is the poster?', 'value':'10', 'display':'4', 'enabled':'✔', 'bool':'x'}]});
 Ext.define('MobileJudge.view.settings.Questions', {extend:Ext.grid.Grid, alias:'widget.questions', title:'Questions', store:store, columns:[{text:'', dataIndex:'id', width:'10'}, {text:'Question', dataIndex:'text', width:'250'}, {text:'Max', dataIndex:'value', width:'45'}, {text:'Order', dataIndex:'display', width:'55'}, {text:'Enabled', dataIndex:'enabled', width:'70'}, {text:'', dataIndex:'bool', width:'20'}], height:200, layout:'fit', fullscreen:true});
-Ext.define('MobileJudge.view.settings.Terms', {extend:Ext.form.Panel, xtype:'panel', alias:'widget.terms', reference:'termForm', modelValidation:true, items:[{xtype:'fieldset', title:'Select a Term', layout:'vbox', items:[{xtype:'selectfield', label:'Select Term', labelWidth:150, reference:'termSelector', displayField:'name', valueField:'id', bind:{store:'{terms}', disabled:'{status.canSave}'}}, {xtype:'button', text:'New', iconCls:'x-fa fa-edit', ui:'action'}, {xtype:'button', text:'Save', iconCls:'x-fa fa-save', 
-ui:'confirm'}, {xtype:'button', text:'Delete', iconCls:'x-fa fa-remove', ui:'decline'}]}, {xtype:'fieldset', title:'Selected Term', items:[{xtype:'textfield', label:'Name', labelWidth:150, bind:'{selectedTerm.name}'}, {xtype:'checkboxfield', label:'Is Active?', labelWidth:150}, {xtype:'checkboxfield', label:'Judge Login?', labelWidth:150, bind:'{selectedTerm.allowJudgeLogin}'}, {xtype:'checkboxfield', label:'Stud. Grades?', labelWidth:150, bind:'{selectedTerm.showGrades}'}, {xtype:'numberfield', 
-label:'Stud. per Judge', labelWidth:150, bind:'{selectedTerm.studentsPerJudge}'}, {xtype:'numberfield', label:'Display Order', labelWidth:150, bind:'{selectedTerm.display}'}]}, {xtype:'fieldset', title:'Senior Project Website', defaultType:'textfield', defaults:{labelWidth:100}, items:[{label:'Url', bind:'{selectedTerm.srProjectUrl}'}, {label:'Token', bind:'{selectedTerm.srProjectToken}'}, {label:'Live Url', bind:'{selectedTerm.liveUrl}'}, {label:'Dev. Url', bind:'{selectedTerm.developmentUrl}'}, 
-{label:'No Prof. Img Url', bind:'{selectedTerm.noProfileImageUrl}'}]}, {xtype:'fieldset', title:'Email Settings', defaults:{labelWidth:150}, items:[{xtype:'textfield', label:'From', bind:'{selectedTerm.mailFrom}'}, {xtype:'selectfield', label:'Reset Pass.', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.resetPasswordTemplate}'}}, {xtype:'selectfield', label:'Confirm Reg.', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.confirmTemplate}'}}, 
-{xtype:'selectfield', label:'Confirm Acpt.', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.acceptanceConfirmation}'}}, {xtype:'selectfield', label:'Reject Template', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.rejectInviteTemplate}'}}, {xtype:'selectfield', label:'Acpt. Template', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.acceptInviteTemplate}'}}, {xtype:'selectfield', 
-label:'Remv. Template', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.removeInviteTemplate}'}}]}, {xtype:'fieldset', title:'Event Info', layout:'vbox', defaultType:'textfield', defaults:{labelWidth:150}, items:[{label:'Start Date'}, {label:'Start Time'}, {label:'End Date'}, {label:'End Time'}, {label:'Deadline Date'}, {label:'Deadline Time'}, {label:'Place'}, {label:'Map Url'}]}]});
+Ext.define('MobileJudge.view.settings.Terms', {extend:Ext.form.Panel, xtype:'panel', alias:'widget.terms', reference:'termForm', modelValidation:true, items:[{xtype:'fieldset', title:'Select a Term', layout:'vbox', items:[{xtype:'selectfield', label:'Select Term', labelWidth:150, reference:'termSelector', displayField:'name', valueField:'id', bind:{store:'{terms}', disabled:'{status.canSave}'}}, {xtype:'button', text:'New', iconCls:'x-fa fa-edit', ui:'action', bind:{disabled:'{!status.canCreate}'}, 
+handler:'onNewTermClick'}, {xtype:'button', text:'Save', iconCls:'x-fa fa-save', ui:'confirm', bind:{disabled:'{!status.canSave}'}, handler:'onSaveTermClick'}, {xtype:'button', text:'Delete', iconCls:'x-fa fa-remove', ui:'decline', bind:{disabled:'{!status.canDelete}'}, handler:'onDeleteTermClick'}]}, {xtype:'fieldset', title:'Selected Term', items:[{xtype:'textfield', label:'Name', labelWidth:150, bind:'{selectedTerm.name}'}, {xtype:'fieldset', layout:'hbox', border:false, padding:0, margin:0, items:[{xtype:'checkboxfield', 
+label:'IsActive?', labelWidth:150, bind:'{selectedTerm.active}'}, {xtype:'button', text:'Make Active', border:false, docked:'right', ui:'action', handler:'onMakeActiveTerm', bind:{hidden:'{selectedTerm.active}', disabled:'{status.canSave}'}}]}, {xtype:'fieldset', layout:'hbox', border:false, padding:0, margin:0, items:[{xtype:'checkboxfield', label:'Judge Login?', labelWidth:150, bind:'{selectedTerm.allowJudgeLogin}'}, {xtype:'button', border:false, hidden:true, docked:'right'}]}, {xtype:'fieldset', 
+layout:'hbox', border:false, padding:0, margin:0, items:[{xtype:'checkboxfield', label:'Stud. Grades?', labelWidth:150, bind:'{selectedTerm.showGrades}'}, {xtype:'button', border:false, hidden:true, docked:'right'}]}, {xtype:'numberfield', label:'Stud. per Judge', labelWidth:150, bind:'{selectedTerm.studentsPerJudge}'}, {xtype:'numberfield', label:'Display Order', labelWidth:150, bind:'{selectedTerm.display}'}]}, {xtype:'fieldset', title:'Senior Project Website', defaultType:'textfield', defaults:{labelWidth:100}, 
+items:[{label:'Url', bind:'{selectedTerm.srProjectUrl}'}, {label:'Token', bind:'{selectedTerm.srProjectToken}'}, {label:'Live Url', bind:'{selectedTerm.liveUrl}'}, {label:'Dev. Url', bind:'{selectedTerm.developmentUrl}'}, {label:'No Prof. Img Url', bind:'{selectedTerm.noProfileImageUrl}'}]}, {xtype:'fieldset', title:'Email Settings', defaults:{labelWidth:150}, items:[{xtype:'textfield', label:'From', bind:'{selectedTerm.mailFrom}'}, {xtype:'selectfield', label:'Reset Pass.', displayField:'name', 
+valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.resetPasswordTemplate}'}}, {xtype:'selectfield', label:'Confirm Reg.', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.confirmTemplate}'}}, {xtype:'selectfield', label:'Confirm Acpt.', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.acceptanceConfirmation}'}}, {xtype:'selectfield', label:'Reject Template', displayField:'name', valueField:'id', bind:{store:'templates4Term', 
+value:'{selectedTerm.rejectInviteTemplate}'}}, {xtype:'selectfield', label:'Acpt. Template', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.acceptInviteTemplate}'}}, {xtype:'selectfield', label:'Remv. Template', displayField:'name', valueField:'id', bind:{store:'templates4Term', value:'{selectedTerm.removeInviteTemplate}'}}]}, {xtype:'fieldset', title:'Event Info', layout:'vbox', defaultType:'textfield', defaults:{labelWidth:150}, items:[{label:'Start Date', 
+bind:'{selectedTerm.startDate}'}, {label:'Start Time', bind:'{selectedTerm.startTime}'}, {label:'End Date', bind:'{selectedTerm.endDate}'}, {label:'End Time', bind:'{selectedTerm.endTime}'}, {label:'Deadline Date', bind:'{selectedTerm.deadlineDate}'}, {label:'Deadline Time', bind:'{selectedTerm.deadlineTime}'}, {label:'Place', bind:'{selectedTerm.location}'}, {label:'Map Url', bind:'{selectedTerm.mapImageUrl}'}]}]});
 Ext.define('MobileJudge.view.students.Home', {extend:Ext.Container, xtype:'studenthome', cls:'userProfile-container dashboard', scrollable:'y', controller:'student', viewModel:{data:{}}, items:[{xtype:'profile', userCls:'big-100 small-100 dashboard-item shadow'}]});
 (function(global, factory) {
   if (typeof module === 'object' && typeof module.exports === 'object') {
