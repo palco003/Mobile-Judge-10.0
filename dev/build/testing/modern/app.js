@@ -45941,6 +45941,70 @@ Ext.define('Ext.grid.Grid', {extend:Ext.dataview.List, xtype:'grid', config:{def
   this.callParent();
   this.destroying = false;
 }});
+Ext.define('Ext.grid.plugin.Editable', {extend:Ext.Component, alias:'plugin.grideditable', config:{grid:null, triggerEvent:'doubletap', formConfig:null, defaultFormConfig:{xtype:'formpanel', modal:true, scrollable:true, items:{xtype:'fieldset'}}, toolbarConfig:{xtype:'titlebar', docked:'top', items:[{xtype:'button', ui:'decline', text:'Cancel', align:'left', action:'cancel'}, {xtype:'button', ui:'confirm', text:'Submit', align:'right', action:'submit'}]}, enableDeleteButton:true}, init:function(grid) {
+  this.setGrid(grid);
+}, updateGrid:function(grid, oldGrid) {
+  var triggerEvent = this.getTriggerEvent();
+  if (oldGrid) {
+    oldGrid.renderElement.un(triggerEvent, 'onTrigger', this);
+  }
+  if (grid) {
+    grid.renderElement.on(triggerEvent, 'onTrigger', this);
+  }
+}, onCancelTap:function() {
+  this.sheet.hide();
+}, onSubmitTap:function() {
+  this.form.getRecord().set(this.form.getValues());
+  this.sheet.hide();
+}, onSheetHide:function() {
+  this.sheet.destroy();
+  this.form = null;
+  this.sheet = null;
+}, getRecordByTriggerEvent:function(e) {
+  var rowEl = e.getTarget('.' + Ext.baseCSSPrefix + 'grid-row'), row;
+  if (rowEl) {
+    row = Ext.getCmp(rowEl.id);
+    if (row) {
+      return row.getRecord();
+    }
+  }
+  return null;
+}, getEditorFields:function(columns) {
+  var fields = [], ln = columns.length, i, column, editor;
+  for (i = 0; i < ln; i++) {
+    column = columns[i];
+    if (column.getEditable()) {
+      editor = Ext.apply({}, column.getEditor() || column.getDefaultEditor());
+      editor.label = column.getText();
+      fields.push(editor);
+    }
+  }
+  return fields;
+}, onTrigger:function(e) {
+  var me = this, grid = me.getGrid(), formConfig = me.getFormConfig(), toolbarConfig = me.getToolbarConfig(), record = me.getRecordByTriggerEvent(e), fields, form, sheet, toolbar;
+  if (record) {
+    if (formConfig) {
+      this.form = form = Ext.factory(formConfig, Ext.form.Panel);
+    } else {
+      this.form = form = Ext.factory(me.getDefaultFormConfig());
+      fields = me.getEditorFields(grid.getColumns());
+      form.down('fieldset').setItems(fields);
+    }
+    form.setRecord(record);
+    toolbar = Ext.factory(toolbarConfig, Ext.form.TitleBar);
+    toolbar.down('button[action\x3dcancel]').on('tap', 'onCancelTap', this);
+    toolbar.down('button[action\x3dsubmit]').on('tap', 'onSubmitTap', this);
+    this.sheet = sheet = grid.add({xtype:'sheet', items:[toolbar, form], hideOnMaskTap:true, enter:'right', exit:'right', right:0, width:320, layout:'fit', stretchY:true, hidden:true});
+    if (me.getEnableDeleteButton()) {
+      form.add({xtype:'button', text:'Delete', ui:'decline', margin:10, handler:function() {
+        grid.getStore().remove(record);
+        sheet.hide();
+      }});
+    }
+    sheet.on('hide', 'onSheetHide', this);
+    sheet.show();
+  }
+}});
 Ext.define('Ext.navigation.Bar', {extend:Ext.TitleBar, isToolbar:true, config:{baseCls:Ext.baseCSSPrefix + 'toolbar', cls:Ext.baseCSSPrefix + 'navigation-bar', ui:'dark', title:null, defaultType:'button', layout:{type:'hbox'}, defaultBackButtonText:'Back', animation:{duration:300}, useTitleForBackButtonText:null, view:null, android2Transforms:false, backButton:{align:'left', ui:'back', hidden:true}}, constructor:function(config) {
   config = config || {};
   if (!config.items) {
@@ -58662,8 +58726,14 @@ Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewControlle
   var me = this, rec = me.model.get('selectedTerm');
   rec.set('active', true);
   me.onSaveTermClick();
+}, onNewQuestionButtonClick:function(button) {
+  var rec = new MobileJudge.model.settings.Question, grid = button.up('grid'), editor = grid.getPlugins('gridEditor');
+  grid.getStore().insert(0, rec);
+}, onRefreshButtonClick:function(button) {
+  var grid = button.up('grid'), store = grid.getStore();
+  store.reload();
 }});
-Ext.define('MobileJudge.view.settings.Index', {extend:Ext.tab.Panel, alias:'widget.settings', controller:'settings', viewModel:{type:'settings'}, cls:'shadow', activeTab:0, margin:20, items:[{xtype:'terms', title:'Terms', iconCls:''}]});
+Ext.define('MobileJudge.view.settings.Index', {extend:Ext.tab.Panel, alias:'widget.settings', controller:'settings', viewModel:{type:'settings'}, cls:'shadow', activeTab:0, margin:20, items:[{xtype:'terms', title:'Terms', iconCls:''}, {xtype:'questions', title:'Questions', iconCls:''}]});
 Ext.define('MobileJudge.view.settings.Model', {extend:Ext.app.ViewModel, alias:'viewmodel.settings', stores:{terms:{type:'terms', storeId:'terms', listeners:{load:'onTermsLoaded'}}, questions:{type:'questions', storeId:'questions'}, templates4Term:{type:'templates', storeId:'templates4Term'}}, formulas:{selectedTerm:{bind:{bindTo:'{termSelector.selection}', deep:true}, get:function(term) {
   return term;
 }, set:function(term) {
@@ -58672,9 +58742,8 @@ Ext.define('MobileJudge.view.settings.Model', {extend:Ext.app.ViewModel, alias:'
   }
   this.set('selectedTerm', term);
 }}}});
-var store = Ext.create('Ext.data.Store', {fields:['name', 'email', 'phone'], data:[{'id':'16', 'text':'How significant is the problem?', 'value':'10', 'display':'1', 'enabled':'✔', 'bool':'x'}, {'id':'17', 'text':'How significant is the solution?', 'value':'10', 'display':'2', 'enabled':'✔', 'bool':'x'}, {'id':'18', 'text':'How impressive is the demo?', 'value':'10', 'display':'3', 'enabled':'✔', 'bool':'x'}, {'id':'19', 'text':'How well prepared is the student?', 'value':'10', 'display':'4', 'enabled':'✔', 
-'bool':'x'}, {'id':'20', 'text':'How expressive and self-sustained is the poster?', 'value':'10', 'display':'4', 'enabled':'✔', 'bool':'x'}]});
-Ext.define('MobileJudge.view.settings.Questions', {extend:Ext.grid.Grid, alias:'widget.questions', title:'Questions', store:store, columns:[{text:'', dataIndex:'id', width:'10'}, {text:'Question', dataIndex:'text', width:'250'}, {text:'Max', dataIndex:'value', width:'45'}, {text:'Order', dataIndex:'display', width:'55'}, {text:'Enabled', dataIndex:'enabled', width:'70'}, {text:'', dataIndex:'bool', width:'20'}], height:200, layout:'fit', fullscreen:true});
+Ext.define('MobileJudge.view.settings.Questions', {extend:Ext.grid.Grid, xtype:'grid', alias:'widget.questions', store:'questions', plugins:{type:'grideditable', pluginId:'gridEditor', triggerEvent:'doubletap', enableDeleteButton:true, formConfig:{items:[{xtype:'textfield', name:'text', label:'Question'}, {xtype:'textfield', name:'value', label:'Max'}, {xtype:'textfield', name:'display', label:'Order'}, {xtype:'checkboxfield', name:'enabled', label:'Enabled?'}]}}, items:[{xtype:'toolbar', docked:'top', 
+items:[{xtype:'button', text:'New', handler:'onNewQuestionButtonClick'}, {xtype:'button', text:'Refresh', handler:'onRefreshButtonClick'}]}], columns:[{text:'', dataIndex:'id', width:'40'}, {text:'Question', dataIndex:'text', width:'250'}, {text:'Max', dataIndex:'value', width:'70'}, {text:'Order', dataIndex:'display', width:'70'}, {text:'Enabled', dataIndex:'enabled', width:'80'}], height:500, layout:'fit'});
 Ext.define('MobileJudge.view.settings.Terms', {extend:Ext.form.Panel, xtype:'panel', alias:'widget.terms', reference:'termForm', modelValidation:true, items:[{xtype:'fieldset', title:'Select a Term', layout:'vbox', items:[{xtype:'selectfield', label:'Select Term', labelWidth:150, reference:'termSelector', displayField:'name', valueField:'id', bind:{store:'{terms}', disabled:'{status.canSave}'}}, {xtype:'button', text:'New', iconCls:'x-fa fa-edit', ui:'action', bind:{disabled:'{!status.canCreate}'}, 
 handler:'onNewTermClick'}, {xtype:'button', text:'Save', iconCls:'x-fa fa-save', ui:'confirm', bind:{disabled:'{!status.canSave}'}, handler:'onSaveTermClick'}, {xtype:'button', text:'Delete', iconCls:'x-fa fa-remove', ui:'decline', bind:{disabled:'{!status.canDelete}'}, handler:'onDeleteTermClick'}]}, {xtype:'fieldset', title:'Selected Term', items:[{xtype:'textfield', label:'Name', labelWidth:150, bind:'{selectedTerm.name}'}, {xtype:'fieldset', layout:'hbox', border:false, padding:0, margin:0, items:[{xtype:'checkboxfield', 
 label:'IsActive?', labelWidth:150, bind:'{selectedTerm.active}'}, {xtype:'button', text:'Make Active', border:false, docked:'right', ui:'action', handler:'onMakeActiveTerm', bind:{hidden:'{selectedTerm.active}', disabled:'{status.canSave}'}}]}, {xtype:'fieldset', layout:'hbox', border:false, padding:0, margin:0, items:[{xtype:'checkboxfield', label:'Judge Login?', labelWidth:150, bind:'{selectedTerm.allowJudgeLogin}'}, {xtype:'button', border:false, hidden:true, docked:'right'}]}, {xtype:'fieldset', 

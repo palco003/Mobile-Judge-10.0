@@ -66,6 +66,21 @@ Ext.define('MobileJudge.view.settings.Controller', {
 		var me = this, rec = me.model.get('selectedTerm');
 		rec.set('active', true);
 		me.onSaveTermClick();
-	},
+    },
+
+    onNewQuestionButtonClick: function(button) {
+        var rec = new MobileJudge.model.settings.Question(),
+            grid = button.up('grid'),
+            editor = grid.getPlugins('gridEditor');	
+        grid.getStore().insert(0, rec);
+        //if (editor) editor.startEdit(rec, 0);
+    },
+
+    onRefreshButtonClick: function(button) {
+        var grid = button.up('grid'),
+            store = grid.getStore();
+        store.reload();
+    }
+
     
 });
