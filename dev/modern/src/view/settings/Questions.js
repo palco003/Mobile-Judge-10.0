@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.settings.Questions', {
     extend: 'Ext.grid.Grid',
-    xtype: 'grid',
+   // xtype: 'grid',
     alias: 'widget.questions',
     
     requires: [

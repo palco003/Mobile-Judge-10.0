@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.settings.Terms', {
     extend: 'Ext.form.Panel',
-    xtype: 'panel',
+    //xtype: 'panel',
     alias: 'widget.terms',
     reference: 'termForm',
     modelValidation: true,
