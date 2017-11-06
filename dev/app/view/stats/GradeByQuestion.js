@@ -54,7 +54,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                         saturationFactor: 1.5
                     },
                     label: {
-                        field: 'questionId',
+                        field: 'question',
                         display: 'insideStart'
                     }
                 }]
