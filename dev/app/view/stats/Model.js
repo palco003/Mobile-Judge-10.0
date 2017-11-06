@@ -5,7 +5,7 @@ Ext.define('MobileJudge.view.stats.StatsModel', {
     requires: [
         'MobileJudge.proxy.API',
         'MobileJudge.store.stats.GradeAverage',
-        'MobileJudge.store.stats.QuestionGrades'
+        'MobileJudge.store.stats.QuestionAverage',
     ],
 
     stores: {
@@ -18,7 +18,7 @@ Ext.define('MobileJudge.view.stats.StatsModel', {
             }
         },
         avgQuestionGrades: {
-            type: 'questionGrades',
+            type: 'questionAverage',
             storeId: 'statsQuestionGrades',
             proxy: {
                 type: 'api',

@@ -2,12 +2,18 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
     extend: 'MobileJudge.view.stats.Base',
     xtype: 'gradeByQuestion',
 
-    title: 'Grade by Question',
+    requires: [
+        'MobileJudge.store.stats.QuestionAverage'
+    ],
+
+    title: 'Average Grade by Question',
     platformConfig: {
         classic: {
-            bind: '{judges_grade}',
             items: [{
                 xtype: 'chart',
+                store: {
+                    type: 'questionAverage'
+                },
                 insetPadding: {
                     top: 60,
                     bottom: 20,
@@ -26,7 +32,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                 }, {
                     type: 'category3d',
                     title: {
-                        text: 'Question',
+                        text: 'Question ID',
                         fontSize: 16
                     },
                     position: 'bottom',
@@ -39,8 +45,8 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                 series: [{
                     type: 'bar3d',
                     highlight: true,
-                    xField: 'question',
-                    yField: ['grade'],
+                    xField: 'questionId',
+                    yField: ['average'],
                     style: {
                         minGapWidth: 10
                     },
