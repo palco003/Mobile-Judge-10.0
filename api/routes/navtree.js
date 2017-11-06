@@ -24,7 +24,7 @@ module.exports = function(server, db) {
                             iconCls: 'x-fa fa-bar-chart',
                             rowCls: 'nav-tree-badge nav-tree-badge-new',
                             viewType: 'student_stats',
-                            routeId: 'student_stats',
+                            routeId: 'stats',
                             leaf: true
                         }
                     ]
@@ -53,7 +53,7 @@ module.exports = function(server, db) {
                             iconCls: 'x-fa fa-bar-chart',
                             rowCls: 'nav-tree-badge nav-tree-badge-new',
                             viewType: 'judge_stats', //'charts',
-                            routeId: 'judge_stats',
+                            routeId: 'stats',
                             leaf: true
                         }
                     ]
@@ -102,7 +102,7 @@ module.exports = function(server, db) {
                             iconCls: 'x-fa fa-bar-chart',
                             rowCls: 'nav-tree-badge nav-tree-badge-new',
                             viewType: 'admin_stats', //'charts',
-                            routeId: 'admin_stats',
+                            routeId: 'stats',
                             leaf: true
                         },
                         {

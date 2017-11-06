@@ -3,7 +3,10 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
     xtype: 'admin_stats',
 
     requires: [
-        'Ext.ux.layout.ResponsiveColumn'
+        'Ext.ux.layout.ResponsiveColumn',
+        'MobileJudge.view.admin.Grades',
+        'MobileJudge.view.charts.ChartsModel',
+        'MobileJudge.view.charts.Controller'
     ],
 
     controller: 'charts',
@@ -11,16 +14,6 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
         type: 'charts'
     },
     layout: 'responsivecolumn',
-
-    defaultType: 'basepie',
-    defaults: {
-        iconCls: 'x-fa fa-pie-chart',
-        userCls: 'big-33 small-100',
-        height: 300,
-        defaults: {
-            animation : !Ext.isIE9m && Ext.os.is.Desktop
-        }
-    },
 
     items: [
         {
