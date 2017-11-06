@@ -1283,7 +1283,7 @@ Ext.define('MobileJudge.store.stats.QuestionAverage', {
         console.log(groups);
         groups.each(function (group) {
             console.log(group);
-            data.push({ questionId: group.config.groupKey, average: group.average('grade') });
+            data.push({ questionId: group.config.groupKey, question: group.get('question'), average: group.average('grade') });
         });
         return data;
     })()
