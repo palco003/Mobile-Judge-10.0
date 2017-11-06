@@ -21,7 +21,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     position: 'left',
                     grid: true,
                     title: {
-                        text: 'Average Grade of Students',
+                        text: 'Average Grade',
                         fontSize: 16
                     }
                 }, {

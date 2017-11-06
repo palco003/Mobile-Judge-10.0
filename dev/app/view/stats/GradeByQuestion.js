@@ -5,7 +5,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
     title: 'Grade by Question',
     platformConfig: {
         classic: {
-            bind: '{student_grade}',
+            bind: '{judges_grade}',
             items: [{
                 xtype: 'chart',
                 insetPadding: {
@@ -26,7 +26,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                 }, {
                     type: 'category3d',
                     title: {
-                        text: 'Project',
+                        text: 'Question',
                         fontSize: 16
                     },
                     position: 'bottom',
@@ -39,7 +39,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                 series: [{
                     type: 'bar3d',
                     highlight: true,
-                    xField: 'project',
+                    xField: 'question',
                     yField: ['grade'],
                     style: {
                         minGapWidth: 10
@@ -48,19 +48,10 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                         saturationFactor: 1.5
                     },
                     label: {
-                        field: 'project',
+                        field: 'questionId',
                         display: 'insideStart'
                     }
                 }]
-                // sprites: {
-                //     type: 'text',
-                //     text: 'Grade by Project',
-                //     fontSize: 25,
-                //     width: 150,
-                //     height: 30,
-                //     x: 240,
-                //     y: 40
-                // }
             }]
         }
     }
