@@ -1,12 +1,10 @@
-Ext.define('MobileJudge.view.stats.GradeByProject', {
+Ext.define('MobileJudge.view.stats.GradeByQuestion', {
     extend: 'MobileJudge.view.stats.Base',
-    xtype: 'gradeByProject',
+    xtype: 'gradeByQuestion',
 
-    title: 'Grade by Project',
     platformConfig: {
         classic: {
             bind: '{student_grade}',
-            layout: 'fit',
             items: [{
                 xtype: 'chart',
                 insetPadding: {
@@ -21,7 +19,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     position: 'left',
                     grid: true,
                     title: {
-                        text: 'Average Grade of Students',
+                        text: 'Average Grade',
                         fontSize: 16
                     }
                 }, {

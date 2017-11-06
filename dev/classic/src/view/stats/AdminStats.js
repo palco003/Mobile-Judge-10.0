@@ -31,8 +31,13 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
             userCls: 'big-100 small-100'
         },
         {
-            xtype:'gradeByProject',
-            userCls: 'big-100 small-100'
+            title: 'Grade by Question',
+            items: [
+                {
+                    xtype: 'gradeByProject',
+                    userCls: 'big-100 small-100'
+                }
+            ]
         },
         {
             xtype:'gradeByProject',
