@@ -38,13 +38,13 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     },
                     position: 'bottom',
                     renderer: function(axis, v){
-                        v = Ext.util.Format.ellipsis(v,60);
+                        v = Ext.util.Format.ellipsis(v,30);
                         return v.replace(/((?:\w+ ){3})/gi, "$1\n");
                     },
                     label: {
                         fontSize: 10,
                         rotate: {
-                            degrees: -15
+                            degrees: -45
                         }
                     }
                 }],
