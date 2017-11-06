@@ -1,66 +1,71 @@
 Ext.define('MobileJudge.view.admin.Grades', {
-    extend: 'MobileJudge.view.charts.Base',
-    xtype: 'admin_grades', //'chartjudges',
+    extend: 'Ext.Panel',
+    xtype: 'admin_grades',
 
     title: 'Admin Grades Panel',
-
-    items: [
-        {
-            xtype: 'polar',
-            bind: '{judges}',
-
-            platformConfig: {
-                classic: {
-                    interactions: 'rotatePie3d',
-                    insetPadding: 20,
-                    innerPadding: 20,
-                    legend: {
-                        docked: 'right'
-                    },
-                    series: [
-                        {
-                            type: 'pie3d',
-                            angleField: 'total',
-                            donut: 50,
-                            highlight: {
-                                margin: 40
-                            },
-                            label: {
-                                field: 'state',
-                                calloutLine: {
-                                    length: 60,
-                                    width: 3
-                                    // specifying 'color' is also possible here
-                                }
-                            },
-                            tooltip: {
-                                trackMouse: true,
-                                renderer: 'tipRenderer'
-                            }
-                        }
-                    ]
+    platformConfig: {
+        classic: {
+            bind: '{student_grade}',
+            width: 650,
+            height: 500,
+            layout: 'fit',
+            items: [{
+                xtype: 'chart',
+                insetPadding: {
+                    top: 60,
+                    bottom: 20,
+                    left: 20,
+                    right: 40
                 },
-                modern: {
-                    interactions: 'rotate',
-                    insetPadding: 10,
-                    innerPadding: 10,
-                    series: [
-                        {
-                            type: 'pie3d',
-                            angleField: 'total',
-                            donut: 30,
-                            highlight: true,
-                            label: {
-                                field: 'state'/*,
-								calloutLine: {
-									width: 3
-								}*/
-                            }
+                // store: store,
+                axes: [{
+                    type: 'numeric3d',
+                    position: 'left',
+                    grid: true,
+                    title: {
+                        text: 'Average Grade of Students',
+                        fontSize: 16
+                    }
+                }, {
+                    type: 'category3d',
+                    title: {
+                        text: 'Project',
+                        fontSize: 16
+                    },
+                    position: 'bottom',
+                    label: {
+                        rotate: {
+                            degrees: 0
                         }
-                    ]
+                    }
+                }],
+                series: [{
+                    type: 'bar3d',
+                    highlight: true,
+                    xField: 'project',
+                    yField: ['grade'],
+                    style: {
+                        minGapWidth: 10
+                    },
+                    highlightCfg: {
+                        saturationFactor: 1.5
+                    },
+                    label: {
+                        field: 'project',
+                        display: 'insideStart'
+                    }
+                }],
+                sprites: {
+                    type: 'text',
+                    text: 'Grade by Project',
+                    fontSize: 25,
+                    width: 150,
+                    height: 30,
+                    x: 240,
+                    y: 40
                 }
-            }
+            }]
         }
-    ]
+    }
 });
 
