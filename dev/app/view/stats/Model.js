@@ -4,13 +4,13 @@ Ext.define('MobileJudge.view.stats.StatsModel', {
 
     requires: [
         'MobileJudge.proxy.API',
-        'MobileJudge.store.stats.GroupedProjects',
+        'MobileJudge.store.stats.GradeAverage',
         'MobileJudge.store.stats.QuestionGrades'
     ],
 
     stores: {
         avgProjectGrades: {
-            type: 'groupedProjects',
+            type: 'gradeAverage',
             storeId: 'statsProjectGrades',
             proxy: {
                 type: 'api',
