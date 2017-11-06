@@ -2,13 +2,18 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
     extend: 'MobileJudge.view.stats.Base',
     xtype: 'gradeByProject',
 
+    requires: [
+        'MobileJudge.store.stats.GroupedProjects'
+    ],
+
     title: 'Grade by Project',
     platformConfig: {
         classic: {
-            bind: '{student_grade}',
+            // bind: '{student_grade}',
             layout: 'fit',
             items: [{
                 xtype: 'chart',
+                store: 'MobileJudge.store.stats.GroupedProjects',
                 insetPadding: {
                     top: 60,
                     bottom: 20,
