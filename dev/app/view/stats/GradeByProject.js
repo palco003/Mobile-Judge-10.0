@@ -3,6 +3,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
     xtype: 'gradeByProject',
 
     requires: [
+        'Ext.util.Format',
         'MobileJudge.store.stats.GradeAverage'
     ],
 
@@ -36,10 +37,14 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         fontSize: 16
                     },
                     position: 'bottom',
+                    renderer: function(axis, v){
+                        v = Ext.util.Format.ellipsis(v,60);
+                        return v.replace(/((?:\w+ ){3})/gi, "$1\n");
+                    },
                     label: {
                         fontSize: 10,
                         rotate: {
-                            degrees: -45
+                            degrees: -15
                         }
                     }
                 }],
