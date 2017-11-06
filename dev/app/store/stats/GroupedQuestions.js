@@ -2,7 +2,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
     extend: 'Ext.data.Store',
     alias: 'store.questionGrades',
     storeId: 'questionGrades',
-    fields: ['questionId', 'grade'],
+    fields: ['questionId', 'question', 'grade'],
     data: {
         items: [{
             "questionId": 16,
