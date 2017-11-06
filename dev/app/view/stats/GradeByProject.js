@@ -32,6 +32,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     }
                 }, {
                     type: 'category3d',
+                    fields: 'question',
                     title: {
                         text: 'Project',
                         fontSize: 16
@@ -39,7 +40,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     position: 'bottom',
                     label: {
                         rotate: {
-                            degrees: -45
+                            degrees: 0
                         }
                     },
                     renderer: function(v) {
