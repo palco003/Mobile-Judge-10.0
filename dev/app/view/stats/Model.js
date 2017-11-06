@@ -25,22 +25,6 @@ Ext.define('MobileJudge.view.stats.StatsModel', {
 				type: 'api',
 				url: '/api/stats/question_grades'
 			}
-		},
-		graded: {
-			type: 'chartStates',
-			storeId: 'chartGradedStates',
-			proxy: {
-				type: 'api',
-				url: '/api/stats/graded'
-			}
-		},
-		accepted: {
-			type: 'chartStates',
-			storeId: 'chartAcceptedStates',
-			proxy: {
-				type: 'api',
-				url: '/api/stats/accepted'
-			}
 		}
 	}
 });
