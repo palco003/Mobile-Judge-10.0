@@ -3,24 +3,24 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
     xtype: 'gradeByProject',
 
     requires: [
-        'MobileJudge.store.stats.GroupedProjects'
+        'MobileJudge.store.stats.GradeAverage'
     ],
 
     title: 'Grade by Project',
     platformConfig: {
         classic: {
-            // bind: '{student_grade}',
             layout: 'fit',
             items: [{
                 xtype: 'chart',
-                store: 'MobileJudge.store.stats.GroupedProjects',
+                store: {
+                    type: 'gradeAverage'
+                },
                 insetPadding: {
                     top: 60,
                     bottom: 20,
                     left: 20,
                     right: 40
                 },
-                // store: store,
                 axes: [{
                     type: 'numeric3d',
                     position: 'left',
