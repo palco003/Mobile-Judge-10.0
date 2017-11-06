@@ -2,21 +2,28 @@ Ext.define('MobileJudge.view.stats.StatsModel', {
 	extend: 'Ext.app.ViewModel',
 	alias: 'viewmodel.stats',
 
-	stores: { // TODO: change types and storeid's
-		judges: {
-			type: 'chartStates',
-			storeId: 'chartJudgeStates',
+    requires: [
+        'MobileJudge.proxy.API',
+        'MobileJudge.store.charts.States',
+        'MobileJudge.store.stats.ProjectGrades',
+        'MobileJudge.store.stats.QuestionGrades'
+    ],
+
+    stores: { // TODO: change types and storeid's
+		avgProjectGrades: {
+			type: 'projectGrades',
+			storeId: 'statsProjectGrades',
 			proxy: {
 				type: 'api',
-				url: '/api/stats/judges'
+				url: '/api/stats/project_grades'
 			}
 		},
-		students: {
-			type: 'chartStates',
-			storeId: 'chartStudentStates',
+        avgQuestionGrades: {
+			type: 'questionGrades',
+			storeId: 'statsQuestionGrades',
 			proxy: {
 				type: 'api',
-				url: '/api/stats/students'
+				url: '/api/stats/question_grades'
 			}
 		},
 		graded: {
