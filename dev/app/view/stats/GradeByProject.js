@@ -6,8 +6,6 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
     platformConfig: {
         classic: {
             bind: '{student_grade}',
-            width: 650,
-            height: 500,
             layout: 'fit',
             items: [{
                 xtype: 'chart',
