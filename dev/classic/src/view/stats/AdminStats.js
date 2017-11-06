@@ -19,7 +19,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
     defaults: {
         iconCls: 'x-fa fa-pie-chart',
         userCls: 'big-33 small-100',
-        height: 300,
+        height: 500,
         defaults: {
             animation : !Ext.isIE9m && Ext.os.is.Desktop
         }
@@ -28,17 +28,14 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
     items: [
         {
             xtype:'gradeByProject',
-            height: 400,
             userCls: 'big-100 small-100'
         },
         {
             xtype:'gradeByProject',
-            height: 400,
             userCls: 'big-100 small-100'
         },
         {
             xtype:'gradeByProject',
-            height: 400,
             userCls: 'big-100 small-100'
         }
     ]
