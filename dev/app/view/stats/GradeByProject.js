@@ -3,6 +3,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
     xtype: 'gradeByProject',
 
     requires: [
+        'Ext.util.Format',
         'MobileJudge.store.stats.GradeAverage'
     ],
 
@@ -38,8 +39,12 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     position: 'bottom',
                     label: {
                         rotate: {
-                            degrees: 0
+                            degrees: -45
                         }
+                    },
+                    renderer: function(v) {
+                        v = Ext.util.Format.ellipsis(v,80);
+                        return v.replace(/((?:\w+ ){3})/gi, "$1\n");
                     }
                 }],
                 series: [{
@@ -54,7 +59,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         saturationFactor: 1.5
                     },
                     label: {
-                        field: 'project',
+                        field: 'average',
                         display: 'insideStart'
                     }
                 }]
