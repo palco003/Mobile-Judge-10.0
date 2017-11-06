@@ -6,7 +6,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
         'Ext.ux.layout.ResponsiveColumn',
         'MobileJudge.view.charts.ChartsModel',
         'MobileJudge.view.charts.Controller',
-        'MobileJudge.view.stats.GradeByProject'
+        'MobileJudge.view.stats.*'
     ],
 
     controller: 'charts',
@@ -34,7 +34,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
             title: 'Grade by Question',
             items: [
                 {
-                    xtype: 'gradeByProject',
+                    xtype: 'gradeByQuestion',
                     userCls: 'big-100 small-100'
                 }
             ]
