@@ -3,10 +3,7 @@ Ext.define('MobileJudge.view.admin.Grades', {
     xtype: 'admin_grades',
 
     requires: [
-        'Ext.chart.CartesianChart',
-        'Ext.chart.axis.Category3D',
-        'Ext.chart.axis.Numeric3D',
-        'Ext.chart.series.Bar3D'
+        'Ext.chart.*'
     ],
 
     title: 'Admin Grades Panel',
