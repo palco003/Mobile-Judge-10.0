@@ -2,7 +2,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
     extend: 'MobileJudge.view.stats.Base',
     xtype: 'gradeByProject',
 
-    title: 'Grade by Project',
+    title: 'Grade by Project testing',
     platformConfig: {
         classic: {
             bind: '{student_grade}',

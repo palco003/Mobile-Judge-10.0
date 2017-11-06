@@ -4,9 +4,9 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
 
     requires: [
         'Ext.ux.layout.ResponsiveColumn',
-        'MobileJudge.view.admin.Grades',
         'MobileJudge.view.charts.ChartsModel',
-        'MobileJudge.view.charts.Controller'
+        'MobileJudge.view.charts.Controller',
+        'MobileJudge.view.stats.GradeByProject'
     ],
 
     controller: 'charts',
@@ -17,10 +17,9 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
 
     items: [
         {
-            xtype:'admin_grades',
+            xtype:'gradeByProject',
             height: 400,
             userCls: 'big-100 small-100'
         }
     ]
 });
-
