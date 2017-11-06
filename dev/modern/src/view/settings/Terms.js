@@ -197,16 +197,8 @@ Ext.define('MobileJudge.view.settings.Terms', {
                 value: '{selectedTerm.confirmTemplate}'
             }
 
-        }, {
-            xtype: 'selectfield',
-            label: 'Confirm Acpt.',
-            displayField: 'name',
-            valueField: 'id',
-            bind: {
-                store: 'templates4Term',
-                value: '{selectedTerm.acceptanceConfirmation}'
-            }
-        }, {
+        }, 
+        {
             xtype: 'selectfield',
             label: 'Reject Template',
             displayField: 'name',
@@ -215,16 +207,7 @@ Ext.define('MobileJudge.view.settings.Terms', {
                 store: 'templates4Term',
                 value: '{selectedTerm.rejectInviteTemplate}'
             }
-        }, {
-            xtype: 'selectfield',
-            label: 'Acpt. Template',
-            displayField: 'name',
-            valueField: 'id',
-            bind: {
-                store: 'templates4Term',
-                value: '{selectedTerm.acceptInviteTemplate}'
-            }
-
+        
         }, {
             xtype: 'selectfield',
             label: 'Remv. Template',
