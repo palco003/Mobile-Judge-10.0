@@ -30,6 +30,16 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
             xtype:'gradeByProject',
             height: 400,
             userCls: 'big-100 small-100'
+        },
+        {
+            xtype:'gradeByProject',
+            height: 400,
+            userCls: 'big-100 small-100'
+        },
+        {
+            xtype:'gradeByProject',
+            height: 400,
+            userCls: 'big-100 small-100'
         }
     ]
 });
