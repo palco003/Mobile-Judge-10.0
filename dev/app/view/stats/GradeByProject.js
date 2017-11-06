@@ -6,7 +6,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
         'MobileJudge.store.stats.GradeAverage'
     ],
 
-    title: 'Grade by Project',
+    title: 'Average Grade by Project',
     platformConfig: {
         classic: {
             layout: 'fit',
@@ -37,8 +37,9 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     },
                     position: 'bottom',
                     label: {
+                        fontSize: 10,
                         rotate: {
-                            degrees: 0
+                            degrees: -45
                         }
                     }
                 }],

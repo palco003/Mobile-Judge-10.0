@@ -19,7 +19,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
     defaults: {
         iconCls: 'x-fa fa-pie-chart',
         userCls: 'big-33 small-100',
-        height: 500,
+        height: 650,
         defaults: {
             animation : !Ext.isIE9m && Ext.os.is.Desktop
         }
