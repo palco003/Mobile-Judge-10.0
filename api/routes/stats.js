@@ -1,7 +1,7 @@
 var epilogue = require('epilogue');
 
 module.exports = function(server, db) {
-    return {
+    return { // TODO: change names of each one, and change models
         judges: epilogue.resource({
             model: db.stats_judges,
             endpoints: [apiPrefix + '/stats/judges'],
