@@ -7,6 +7,8 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
         'MobileJudge.store.stats.GradeAverage'
     ],
 
+    bind: '{Students}',
+
     title: 'Average Grade by Project',
     platformConfig: {
         classic: {
@@ -84,7 +86,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                             // }
                             Ext.Msg.alert(item.record.get('project'), msg);
                             // Ext.Msg.alert(item.record.get('project'));
-                            console.log('project' + item.record.get('project'));
+                            console.log('project: ' + item.record.get('project'));
                         }
                     }
                     // interactions: [
