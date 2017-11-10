@@ -72,7 +72,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         //     panel.setHtml('Project: ' + item.record.get('project'));
                         // },
                         itemclick: function(chart, item) {
-                            var store = Ext.getStore('MobileJudge.store.grade.Student');
+                            var store = Ext.getStore('MobileJudge.store.grade.Students');
                             var msg = "<br>-------------------------------";
                             console.log('store' + store);
 
