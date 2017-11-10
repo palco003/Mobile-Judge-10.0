@@ -113,7 +113,11 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     //         }
                     //     }
                     // ]
-                }]
+                }],
+                plugins: {
+                    ptype: 'chartitemevents',
+                    moveEvents: true
+                }
             }]
         }
     }
