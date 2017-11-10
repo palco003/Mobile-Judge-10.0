@@ -63,53 +63,58 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         field: 'project',
                         display: 'insideStart'
                     },
-                    interactions: [
-                        'panzoom',
-                        'itemhighlight',
-                        {
-                            type: 'iteminfo',
-                            listeners: {
-                                show: function (me, item, panel) {
-                                    panel.setHtml('Student: ' + item.record.get('fullName'));
-                                    // panel.setWidth('90%');
-                                    // panel.setHeight('60%');
-                                    // var store = Ext.getStore('MobileJudge.model.grade.Student');
-                                    // var msg = "<br>-------------------------------";
-                                    // if (item.record.data.fullName !== null) {
-                                    //     for (var i = 0; i < store.getCount(); i++) {
-                                    //         if (store.getAt(i).get('fullName') === item.record.data.fullName) {
-                                    //             msg += "<br>" + store.getAt(i).get('fullName').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
-                                    //         }
-                                    //     }
-                                    //
-                                    //     panel.setHtml("<p>" + item.record.data.fullName + "<br>Student ID: " + item.record.data.id + "<br> Raw Grade: " + item.record.data.rawGrade + "<br> Approved Grade: " + item.record.data.grade + "<br> Project: " + item.record.data.project + "<br> Location: " + item.record.data.location + msg + "</p>");
-                                    // }
-
-                                    // else {
-                                    //     for (i = 0; i < store.getAllCount(); i++) {
-                                    //         if (store.getAt(i).get('Name') === item.record.data.Name) {
-                                    //             msg += "<br>" + store.getAt(i).get('StuName').toString().charAt(0) + ". " + store.getAt(i).get('StuLName') + " -- Raw: " + store.getAt(i).get('RawGrade') + " Accepted: " + store.getAt(i).get('ApprovedGrade');
-                                    //             //msg += "<br>" + store.getAt(i).get('StuName') + " "+ store.getAt(i).get('StuLName') + " -- Raw: n/a Accepted: n/a";
-                                    //         }
-                                    //     }
-                                    //
-                                    //
-                                    //     panel.setHtml("<center>" + item.record.data.Name + "<br> Raw Grade: " + item.record.data.RawGrade + "<br> Approved Grade: " + item.record.data.ApprovedGrade + msg + "</center>");
-                                    //     //panel.setWidth(200);
-                                    //     //panel.setHeight(200);
-                                    //     //panel.setHtml("" + item.record.data.Name + "<br> Raw Grade: n/a <br> Approved Grade: n/a" + msg);
-                                    // }
-
-
-                                    //panel.setHtml("First Name: " + "First Name "+ "<br>Last Name: " + "last Name"+"<br>Student ID: " + "ID " + "<br> Raw Grade: " + item.record.data.RawGrade + "<br> Approved Grade: " + item.record.data.ApprovedGrade + "<br> Project: " + item.record.data.project + "<br> Location: " + item.record.data.location);
-
-                                }
-                            }
+                    listeners: {
+                        itemclick: function(chart, item) {
+                            alert('click');
+                            console.log(chart, item);
                         }
-                    ]
+                    }
+                    // interactions: [
+                    //     'panzoom',
+                    //     'itemhighlight',
+                    //     {
+                    //         type: 'iteminfo',
+                    //         listeners: {
+                    //             show: function (me, item, panel) {
+                    //                 panel.setHtml('Student: ' + item.record.get('fullName'));
+                    //                 // panel.setWidth('90%');
+                    //                 // panel.setHeight('60%');
+                    //                 // var store = Ext.getStore('MobileJudge.model.grade.Student');
+                    //                 // var msg = "<br>-------------------------------";
+                    //                 // if (item.record.data.fullName !== null) {
+                    //                 //     for (var i = 0; i < store.getCount(); i++) {
+                    //                 //         if (store.getAt(i).get('fullName') === item.record.data.fullName) {
+                    //                 //             msg += "<br>" + store.getAt(i).get('fullName').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
+                    //                 //         }
+                    //                 //     }
+                    //                 //
+                    //                 //     panel.setHtml("<p>" + item.record.data.fullName + "<br>Student ID: " + item.record.data.id + "<br> Raw Grade: " + item.record.data.rawGrade + "<br> Approved Grade: " + item.record.data.grade + "<br> Project: " + item.record.data.project + "<br> Location: " + item.record.data.location + msg + "</p>");
+                    //                 // }
+                    //
+                    //                 // else {
+                    //                 //     for (i = 0; i < store.getAllCount(); i++) {
+                    //                 //         if (store.getAt(i).get('Name') === item.record.data.Name) {
+                    //                 //             msg += "<br>" + store.getAt(i).get('StuName').toString().charAt(0) + ". " + store.getAt(i).get('StuLName') + " -- Raw: " + store.getAt(i).get('RawGrade') + " Accepted: " + store.getAt(i).get('ApprovedGrade');
+                    //                 //             //msg += "<br>" + store.getAt(i).get('StuName') + " "+ store.getAt(i).get('StuLName') + " -- Raw: n/a Accepted: n/a";
+                    //                 //         }
+                    //                 //     }
+                    //                 //
+                    //                 //
+                    //                 //     panel.setHtml("<center>" + item.record.data.Name + "<br> Raw Grade: " + item.record.data.RawGrade + "<br> Approved Grade: " + item.record.data.ApprovedGrade + msg + "</center>");
+                    //                 //     //panel.setWidth(200);
+                    //                 //     //panel.setHeight(200);
+                    //                 //     //panel.setHtml("" + item.record.data.Name + "<br> Raw Grade: n/a <br> Approved Grade: n/a" + msg);
+                    //                 // }
+                    //
+                    //
+                    //                 //panel.setHtml("First Name: " + "First Name "+ "<br>Last Name: " + "last Name"+"<br>Student ID: " + "ID " + "<br> Raw Grade: " + item.record.data.RawGrade + "<br> Approved Grade: " + item.record.data.ApprovedGrade + "<br> Project: " + item.record.data.project + "<br> Location: " + item.record.data.location);
+                    //
+                    //             }
+                    //         }
+                    //     }
+                    // ]
                 }]
             }]
         }
     }
 });
-
