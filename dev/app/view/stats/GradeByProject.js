@@ -4,7 +4,6 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
 
     requires: [
         'Ext.util.Format',
-        'MobileJudge.store.grade.Students',
         'MobileJudge.store.stats.GradeAverage'
     ],
 
@@ -15,7 +14,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
             items: [{
                 xtype: 'cartesian',
                 store: {
-                        type: 'gradeAverage'
+                    type: 'gradeAverage'
                 },
                 insetPadding: {
                     top: 60,
@@ -73,7 +72,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         //     panel.setHtml('Project: ' + item.record.get('project'));
                         // },
                         itemclick: function(chart, item) {
-                            var store = Ext.getStore('gradeAverage');
+                            var store = Ext.getStore('students');
                             var msg = "<br>-------------------------------";
                             console.log('store' + store);
 
