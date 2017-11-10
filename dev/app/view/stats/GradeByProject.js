@@ -74,7 +74,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         itemclick: function(chart, item) {
                             var store = Ext.getStore('MobileJudge.model.grade.Student');
                             var msg = "<br>-------------------------------";
-                            console.log(store);
+                            console.log('store' + store);
 
                             // for (var i = 0; i < store.getCount(); i++) {
                             //     if(item.record.get('project') === store.getAt(i).get('project')){
@@ -82,9 +82,9 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                             //         msg += "<br>" + store.getAt(i).get('fullName').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
                             //     }
                             // }
-                            Ext.Msg.alert(msg);
+                            Ext.Msg.alert(item.record.get('project'), msg);
                             // Ext.Msg.alert(item.record.get('project'));
-                            console.log(item.record.get('project'));
+                            console.log('project' + item.record.get('project'));
                         }
                     }
                     // interactions: [
