@@ -14,13 +14,8 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
             layout: 'fit',
             items: [{
                 xtype: 'cartesian',
-                stores: {
-                    gradeAverage: {
+                store: {
                         type: 'gradeAverage'
-                    }
-                    // students: {
-                    //     type: 'students'
-                    // }
                 },
                 insetPadding: {
                     top: 60,
