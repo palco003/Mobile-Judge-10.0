@@ -17,10 +17,10 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                 stores: {
                     gradeAverage: {
                         type: 'gradeAverage'
-                    },
-                    students: {
-                        type: 'students'
                     }
+                    // students: {
+                    //     type: 'students'
+                    // }
                 },
                 insetPadding: {
                     top: 60,
@@ -78,7 +78,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         //     panel.setHtml('Project: ' + item.record.get('project'));
                         // },
                         itemclick: function(chart, item) {
-                            var store = Ext.getStore('students');
+                            var store = Ext.getStore('gradeAverage');
                             var msg = "<br>-------------------------------";
                             console.log('store' + store);
 
