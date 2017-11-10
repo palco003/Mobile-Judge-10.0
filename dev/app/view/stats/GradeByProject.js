@@ -64,13 +64,14 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         display: 'insideStart'
                     },
                     listeners: {
-                        // show: function (me, item, panel) {
-                        //     panel.setHtml('Student: ' + item.record.get('fullName'));
-                        // },
-                        itemclick: function(chart, item) {
+                        show: function (me, item, panel) {
                             alert(item.record.get('project'));
-                            console.log(chart, item.record.get('project'));
-                        }
+                            panel.setHtml('Project: ' + item.record.get('project'));
+                        },
+                        // itemclick: function(chart, item) {
+                        //     alert(item.record.get('project'));
+                        //     console.log(chart, item.record.get('project'));
+                        // }
                     }
                     // interactions: [
                     //     'panzoom',
