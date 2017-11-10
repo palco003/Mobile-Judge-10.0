@@ -59,18 +59,13 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         saturationFactor: 1.5
                     },
                     label: {
-                        field: 'project',
+                        field: 'average',
                         display: 'insideStart'
                     },
                     highlight: {
                         fillStyle: '#5DBCD2'
                     },
                     listeners: {
-
-                        // show: function (me, item, panel) {
-                        //     alert(item.record.get('project'));
-                        //     panel.setHtml('Project: ' + item.record.get('project'));
-                        // },
                         itemclick: function(chart, item) {
                             var store = Ext.getStore('gradeAverage');
                             var msg = "<br>-------------------------------";
