@@ -89768,6 +89768,8 @@ Ext.define('MobileJudge.view.authentication.Controller', {extend:Ext.app.ViewCon
         res.me().done(function(data) {
           var oauth = model.get('oauth') || {};
           if (data.name) {
+            console.log(data.name);
+            console.log(data.fullName);
             model.set('userName', data.name);
             var s = data.name.split(' ');
             if (s.length > 1) {
@@ -90144,6 +90146,59 @@ Ext.define('MobileJudge.view.authentication.Dialog', {extend:Ext.form.Panel, xty
     target.inputEl.set({autocomplete:'on'});
   }
 }});
+Ext.create('Ext.data.Store', {storeId:'studentDetailData', listeners:{load:function() {
+  var grid = Ext.getCmp('judgeaveragegrade');
+}}, fields:['judgeName', 'gradeAverage', 'status'], data:[]});
+Ext.define('MobileJudge.view.unregistered.LockingWindow', {extend:Ext.window.Window, xtype:'lockingwindow', cls:'auth-locked-window', closable:false, resizable:false, autoShow:true, titleAlign:'center', maximized:true, modal:true, title:'Mobile Judge', layout:{type:'vbox', align:'center', pack:'center'}, viewModel:{type:'regAuthentication'}, controller:'regAuthentication'});
+Ext.define('MobileJudge.view.unregistered.JudgeAverageGrade', {extend:Ext.grid.Panel, alias:'widget.judgeaveragegrade', store:'studentDetailData', initComponent:function() {
+  this.callParent();
+}, listeners:{cellclick:function(iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent) {
+  var zRec = iColIdx;
+  var data = Ext.getStore('studentDetailData').data.items[iRowIdx];
+  if (zRec < 2) {
+    Ext.widget('acceptgradewizard').show().loadData(data);
+  }
+}}, columns:[{xtype:'gridcolumn', text:'Judge', dataIndex:'judgeName', flex:2, width:120}, {xtype:'gridcolumn', text:'Accepted Grade', dataIndex:'gradeAverage', flex:2, width:35}, {xtype:'gridcolumn', text:'Raw Grade', dataIndex:'rawGrade', flex:2, width:35}, {id:'secondViewStatus', xtype:'actioncolumn', text:'Status', flex:1, items:[{icon:'/resources/images/icons/Green.ico', tooltip:'Status', handler:'changeStatusSecondView'}], renderer:function(value, metadata, record) {
+  if (record.get('accepted') != null) {
+    var green = false;
+    var red = false;
+    var yellow = false;
+    if (record.get('pending') == true) {
+      this.items[0].tooltip = 'Pending';
+      this.items[0].icon = '/resources/images/icons/Yellow.ico';
+      yellow = true;
+    }
+    if (record.get('accepted') == true) {
+      this.items[0].tooltip = 'Accepted';
+      this.items[0].icon = '/resources/images/icons/Green.ico';
+      green = true;
+    }
+    if (record.get('rejected') == true) {
+      this.items[0].tooltip = 'Rejected';
+      this.items[0].icon = '/resources/images/icons/Red.ico';
+      red = true;
+    }
+    if (green && red && yellow) {
+      this.items[0].tooltip = 'Accepted|Pending|Rejected';
+      this.items[0].icon = '/resources/images/icons/RedYellowGreen.ico';
+    } else {
+      if (green && red) {
+        this.items[0].tooltip = 'Accepted|Rejected';
+        this.items[0].icon = '/resources/images/icons/RedGreen.ico';
+      } else {
+        if (green && yellow) {
+          this.items[0].tooltip = 'Accepted|Pending';
+          this.items[0].icon = '/resources/images/icons/YellowGreen.ico';
+        } else {
+          if (yellow && red) {
+            this.items[0].tooltip = 'Pending|Rejected';
+            this.items[0].icon = '/resources/images/icons/RedYellow.ico';
+          }
+        }
+      }
+    }
+  }
+}, width:40, dataIndex:'bool', sortable:false, hideable:false}], floating:false, draggable:false, modal:true, closable:false, height:500, width:375, renderTo:Ext.get('grademodal')});
 Ext.define('MobileJudge.view.authentication.LockingWindow', {extend:Ext.window.Window, xtype:'lockingwindow', cls:'auth-locked-window', closable:false, resizable:false, autoShow:true, titleAlign:'center', maximized:true, modal:true, title:'Mobile Judge', layout:{type:'vbox', align:'center', pack:'center'}, viewModel:{type:'authentication'}, controller:'authentication'});
 Ext.define('MobileJudge.view.authentication.LockScreen', {extend:MobileJudge.view.authentication.LockingWindow, xtype:'lockscreen', defaultFocus:'authdialog', items:[{xtype:'authdialog', reference:'authDialog', defaultButton:'loginButton', autoComplete:false, width:455, cls:'auth-dialog-login', defaultFocus:'textfield[inputType\x3dpassword]', layout:{type:'vbox', align:'stretch'}, items:[{xtype:'container', cls:'auth-profile-wrap', height:120, layout:{type:'hbox', align:'center'}, items:[{xtype:'image', 
 height:80, margin:20, width:80, alt:'lockscreen-image', cls:'lockscreen-profile-img auth-profile-img', bind:{src:'{profilePic}'}}, {xtype:'box', bind:{html:'\x3cdiv class\x3d"user-name-text"\x3e{userName}\x3c/div\x3e\x3cdiv class\x3d"user-post-text"\x3e{title}\x3c/div\x3e'}}]}, {xtype:'container', cls:'lock-screen-password-textbox', padding:'0 20', layout:{type:'vbox', align:'stretch'}, defaults:{margin:'10 0'}, items:[{xtype:'textfield', labelAlign:'top', labelSeparator:'', fieldLabel:"It's been a while. please enter your password to resume", 
@@ -90174,9 +90229,9 @@ Ext.define('MobileJudge.view.authentication.Register', {extend:MobileJudge.view.
 align:'stretch'}, bbar:{items:['-\x3e', {ui:'soft-blue', iconCls:'x-fa fa-angle-left', text:'Back', handler:'onSetPageOne'}, '-\x3e', {ui:'soft-green', iconAlign:'right', iconCls:'x-fa fa-angle-right', text:'Done', handler:'onDoneRegister'}, '-\x3e']}, items:[{xtype:'label', cls:'lock-screen-top-label', text:'Please select any of the following students whom ' + 'you may have a conflict of interests with. For example: colleagues, relatives, friends, etc.', height:55}, {xtype:'box', height:10, userCls:'auth-dialog', 
 html:'\x3cdiv class\x3d"outer-div"\x3e\x3cdiv class\x3d"seperator"\x3e\x3c/div\x3e\x3c/div\x3e'}, {xtype:'container', flex:1, scrollable:'y', items:[{xtype:'dataview', reference:'gridConflicts', cls:'conflictSelector', loadMask:false, trackOver:false, itemSelector:'.conflictSelector .search-user-item', selectedItemCls:'selected', selectionModel:{type:'dataviewmodel', mode:'SIMPLE'}, tpl:['\x3ctpl for\x3d"."\x3e', '\x3cdiv class\x3d"search-user-item"\x3e', '\x3cdiv class\x3d"search-user-image"\x3e', 
 '\x3cimg src\x3d"{profileImgUrl}" class\x3d"circular" width\x3d"50" height\x3d"50"/\x3e', '\x3c/div\x3e', '\x3cdiv class\x3d"search-user-content"\x3e', '\x3cdiv class\x3d"search-user-title"\x3e{fullName}\x3c/div\x3e', '\x3cdiv class\x3d"search-user-email"\x3e{project}\x3c/div\x3e', '\x3c/div\x3e', '\x3c/div\x3e', '\x3c/tpl\x3e'], bind:{store:'{conflicts}'}}]}]}]}]});
-Ext.define('MobileJudge.view.authentication.SignUp', {extend:MobileJudge.view.authentication.Dialog, xtype:'signup', layout:{type:'vbox', align:'stretch'}, defaultButton:'submitButton', autoComplete:true, defaults:{margin:'10 0', selectOnFocus:true, hideLabel:true, allowBlank:false, cls:'auth-textbox', height:55}, items:[{xtype:'label', cls:'lock-screen-top-label', text:'Create an account', height:10}, {xtype:'textfield', bind:'{salutation}', emptyText:'Salutation: Mr, Mrs, Dr ...', triggers:{glyphed:{cls:'trigger-glyph-noop auth-title-trigger'}}, 
-allowBlank:true}, {xtype:'textfield', emptyText:'Full Name: John Smith', bind:'{userName}', triggers:{glyphed:{cls:'trigger-glyph-noop auth-email-trigger'}}}, {xtype:'textfield', bind:'{title}', emptyText:'Title: CEO, President, Student ...', triggers:{glyphed:{cls:'trigger-glyph-noop auth-title-trigger'}}, allowBlank:true}, {xtype:'textfield', bind:'{affiliation}', emptyText:'Organization: FIU, IBM, Google ...', triggers:{glyphed:{cls:'trigger-glyph-noop auth-affiliation-trigger'}}, allowBlank:true}, 
-{xtype:'textfield', name:'email', emptyText:'Email: user@example.com', bind:'{email}', triggers:{glyphed:{cls:'trigger-glyph-noop auth-envelope-trigger'}}}, {xtype:'textfield', emptyText:'Password: Remember this password!', name:'password', inputType:'password', bind:'{password}', triggers:{glyphed:{cls:'trigger-glyph-noop auth-password-trigger'}}, id:'firstPass'}, {xtype:'textfield', emptyText:'Confirm Password: Input same password!', name:'password', inputType:'password', triggers:{glyphed:{cls:'trigger-glyph-noop auth-password-trigger'}}, 
+Ext.define('MobileJudge.view.authentication.SignUp', {extend:MobileJudge.view.authentication.Dialog, xtype:'signup', layout:{type:'vbox', align:'stretch'}, defaultButton:'submitButton', autoComplete:true, defaults:{margin:'10 0', selectOnFocus:true, hideLabel:true, allowBlank:false, cls:'auth-textbox', height:55}, bind:'{judges}', items:[{xtype:'label', cls:'lock-screen-top-label', text:'Create an account', height:10}, {xtype:'textfield', bind:'{salutation}', emptyText:'Salutation: Mr, Mrs, Dr ...', 
+triggers:{glyphed:{cls:'trigger-glyph-noop auth-title-trigger'}}, allowBlank:true}, {xtype:'textfield', emptyText:'Full Name: John Smith', bind:'{userName}', triggers:{glyphed:{cls:'trigger-glyph-noop auth-email-trigger'}}}, {xtype:'textfield', bind:'{title}', emptyText:'Title: CEO, President, Student ...', triggers:{glyphed:{cls:'trigger-glyph-noop auth-title-trigger'}}, allowBlank:true}, {xtype:'textfield', bind:'{affiliation}', emptyText:'Organization: FIU, IBM, Google ...', triggers:{glyphed:{cls:'trigger-glyph-noop auth-affiliation-trigger'}}, 
+allowBlank:true}, {xtype:'textfield', name:'email', emptyText:'Email: user@example.com', bind:'{email}', triggers:{glyphed:{cls:'trigger-glyph-noop auth-envelope-trigger'}}}, {xtype:'textfield', emptyText:'Password: Remember this password!', name:'password', inputType:'password', bind:'{password}', triggers:{glyphed:{cls:'trigger-glyph-noop auth-password-trigger'}}, id:'firstPass'}, {xtype:'textfield', emptyText:'Confirm Password: Input same password!', name:'password', inputType:'password', triggers:{glyphed:{cls:'trigger-glyph-noop auth-password-trigger'}}, 
 initialPassField:'firstPass', vtype:'password'}, {xtype:'button', scale:'large', ui:'soft-blue', reference:'submitButton', margin:'5 0', iconAlign:'right', iconCls:'x-fa fa-angle-right', text:'Signup', bind:false, formBind:true, handler:'onSetPageTwo'}, {xtype:'box', height:10, html:'\x3cdiv class\x3d"outer-div"\x3e\x3cdiv class\x3d"seperator"\x3eLink your social accounts\x3c/div\x3e\x3c/div\x3e'}, {xtype:'container', layout:{type:'hbox', pack:'center'}, cls:'social-login', defaultType:'button', 
 defaults:{scale:'large', width:60}, items:[{ui:'fiu', reference:'linkfiu', userCls:'btn-oauth', preventDefault:false}, {xtype:'box', width:1, html:'\x3cdiv class\x3d"outer-div"\x3e\x3cdiv class\x3d"seperator"\x3e\x3c/div\x3e\x3c/div\x3e', margin:'0 8'}, {ui:'google', reference:'linkgoogle', userCls:'btn-oauth', iconCls:'x-fa fa-google-plus', preventDefault:false}, {xtype:'box', width:1, html:'\x3cdiv class\x3d"outer-div"\x3e\x3cdiv class\x3d"seperator"\x3e\x3c/div\x3e\x3c/div\x3e', margin:'0 8'}, 
 {ui:'linkedin2', reference:'linklinkedin2', userCls:'btn-oauth', iconCls:'x-fa fa-linkedin', preventDefault:false}, {xtype:'box', width:1, html:'\x3cdiv class\x3d"outer-div"\x3e\x3cdiv class\x3d"seperator"\x3e\x3c/div\x3e\x3c/div\x3e', margin:'0 8'}, {ui:'facebook', reference:'linkfacebook', userCls:'btn-oauth', iconCls:'x-fa fa-facebook', preventDefault:false}, {xtype:'box', width:1, html:'\x3cdiv class\x3d"outer-div"\x3e\x3cdiv class\x3d"seperator"\x3e\x3c/div\x3e\x3c/div\x3e', margin:'0 8'}, {ui:'twitter', 
@@ -92163,13 +92218,80 @@ Ext.define('MobileJudge.view.unregistered.Controller', {extend:Ext.app.ViewContr
 }, onFilterChange:function(selModel, selections) {
   var filter = ['PE'];
   this.model.getStore(selModel.storeId).filter('abbr', Ext.isEmpty(filter) ? 'XX' : filter);
+}, onTap:function(view, index, item, record) {
+  localStorage.setItem('userId', JSON.stringify(record.id));
+  Ext.widget({xtype:'register', record:record, viewModel:{data:{unregjudges:record}}});
 }});
 Ext.define('MobileJudge.view.unregistered.Index', {extend:Ext.tab.Panel, alias:'widget.unregistered', controller:'unregistered', viewModel:{type:'unregistered'}, cls:'shadow', activeTab:0, margin:20, defaults:{cls:'user-grid', viewConfig:{preserveScrollOnRefresh:true, preserveScrollOnReload:true, loadMask:false}, headerBorders:false, rowLines:false}, items:[{xtype:'unregjudges', title:'Judges', iconCls:'x-fa fa-legal'}]});
+Ext.create('Ext.data.Store', {storeId:'judgeDetailData', listeners:{load:function() {
+  var grid = Ext.getCmp('JudgeGradeView');
+}}, fields:['studentName', 'projectName', 'gradeAverage', 'status'], data:[]});
+Ext.define('MobileJudge.view.unregistered.GradeJudgeDetailWizard', {extend:Ext.window.Window, alias:'widget.gradejudgedetailwizard', cls:'wizardone', layout:'card', listeners:{close:'updateMainStore'}, loadData:function(record) {
+  var ctrl = this.getController();
+  $('#nameLabel').text(record.data.fullName);
+  ctrl.loadSecondViewData(record.data);
+}, bodyPadding:10, scrollable:false, controller:'grade', modal:true, width:800, height:600, title:'Judge Grades by Students', initComponent:function() {
+  this.callParent(arguments);
+}, tbar:{items:[{id:'theJudgePanel', xtype:'panel', width:400, height:40, items:[{items:[{xtype:'label', text:'Name:', readOnly:true}, {id:'nameLabel', xtype:'label', text:'', readOnly:true, style:'padding:0px 0px 0px 30px'}]}]}, {id:'detailAllButton', xtype:'image', src:'/resources/images/icons/RedYellowGreen.ico', width:40, dataIndex:'bool', sortable:false, hideable:false, listeners:{el:{click:'globalSecondViewStatus'}}, tooltip:'', layout:{align:'right'}}], renderTo:Ext.getBody()}, items:[{itemId:'middle', 
+xtype:'JudgeGradeView', flex:1}]});
+Ext.define('MobileJudge.view.unregistered.JudgeGradeView', {extend:Ext.grid.Panel, alias:'widget.JudgeGradeView', store:'judgeDetailData', initComponent:function() {
+  this.callParent();
+}, listeners:{cellclick:function(iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent) {
+  var zRec = iColIdx;
+  var data = Ext.getStore('judgeDetailData').data.items[iRowIdx];
+  if (zRec < 2) {
+    Ext.widget('acceptgradewizard').show().loadData(data);
+  }
+}}, columns:[{xtype:'gridcolumn', text:'Student', dataIndex:'judgeName', flex:2, width:120}, {xtype:'gridcolumn', text:'Project', dataIndex:'projectName', flex:2, width:35}, {xtype:'gridcolumn', text:'Accepted Grade', dataIndex:'gradeAverage', flex:2, width:35}, {xtype:'gridcolumn', text:'Raw Grade', dataIndex:'rawGrade', flex:2, width:35}, {id:'secondViewStatus', xtype:'actioncolumn', text:'Status', flex:1, items:[{icon:'/resources/images/icons/Green.ico', tooltip:'Status', handler:'changeStatusSecondView'}], 
+renderer:function(value, metadata, record) {
+  if (record.get('accepted') != null) {
+    var green = false;
+    var red = false;
+    var yellow = false;
+    if (record.get('pending') == true) {
+      this.items[0].tooltip = 'Pending';
+      this.items[0].icon = '/resources/images/icons/Yellow.ico';
+      yellow = true;
+    }
+    if (record.get('accepted') == true) {
+      this.items[0].tooltip = 'Accepted';
+      this.items[0].icon = '/resources/images/icons/Green.ico';
+      green = true;
+    }
+    if (record.get('rejected') == true) {
+      this.items[0].tooltip = 'Rejected';
+      this.items[0].icon = '/resources/images/icons/Red.ico';
+      red = true;
+    }
+    if (green && red && yellow) {
+      this.items[0].tooltip = 'Accepted|Pending|Rejected';
+      this.items[0].icon = '/resources/images/icons/RedYellowGreen.ico';
+    } else {
+      if (green && red) {
+        this.items[0].tooltip = 'Accepted|Rejected';
+        this.items[0].icon = '/resources/images/icons/RedGreen.ico';
+      } else {
+        if (green && yellow) {
+          this.items[0].tooltip = 'Accepted|Pending';
+          this.items[0].icon = '/resources/images/icons/YellowGreen.ico';
+        } else {
+          if (yellow && red) {
+            this.items[0].tooltip = 'Pending|Rejected';
+            this.items[0].icon = '/resources/images/icons/RedYellow.ico';
+          }
+        }
+      }
+    }
+  }
+}, width:40, dataIndex:'bool', sortable:false, hideable:false}], floating:false, draggable:false, modal:true, closable:false, height:500, width:375, renderTo:Ext.get('grademodal')});
 Ext.define('MobileJudge.view.unregistered.Model', {extend:Ext.app.ViewModel, alias:'viewmodel.unregistered', requires:[], data:{judgeFilter:[]}, formulas:{judgeFilterSelection:function(get) {
   return get('judgeFilter');
 }}, stores:{judgeStates:{type:'judgeStates', storeId:'judgeStates', listeners:{load:'onStatesLoaded'}}, unregjudges:{type:'unregjudges', storeId:'unregjudges'}}});
-Ext.define('MobileJudge.view.unregistered.unregJudges', {extend:Ext.grid.Panel, alias:'widget.unregjudges', bind:'{unregjudges}', dockedItems:[{xtype:'toolbar', dock:'top', items:[{xtype:'dataview', cls:'stateSelector', id:'filterbtn2', loadMask:false, trackOver:false, itemSelector:'.stateSelector button', selectedItemCls:'selected', hidden:true, selectionModel:{type:'dataviewmodel', storeId:'unregjudges', mode:'SIMPLE'}, tpl:['\x3ctpl for\x3d"."\x3e', '\x3cbutton type\x3d"button" title\x3d"{name}" id\x3d"{name}"\x3e{abbr}\x3c/button\x3e', 
-'\x3c/tpl\x3e'], bind:{selection:'{judgeFilterSelection}', store:'{judgeStates}'}, listeners:{selectionchange:'onFilterChange'}}, '-\x3e']}, {xtype:'pagingtoolbar', dock:'bottom', displayInfo:true, bind:'{unregjudges}'}], columns:[{xtype:'gridcolumn', dataIndex:'fullName', text:'Name', flex:1}, {xtype:'gridcolumn', dataIndex:'email', text:'Email', flex:2}]});
+Ext.create('Ext.data.Store', {storeId:'unregjudges', listeners:{load:function() {
+  var grid = Ext.getCmp('unregjudges');
+}}, fields:['id', 'fullName', 'email'], data:[]});
+Ext.define('MobileJudge.view.unregistered.unregJudges', {extend:Ext.grid.Panel, alias:'widget.unregjudges', store:'unregjudges', listeners:{cellclick:'onTap'}, bind:'{unregjudges}', dockedItems:[{xtype:'toolbar', dock:'top', items:[{xtype:'dataview', cls:'stateSelector', id:'filterbtn2', loadMask:false, trackOver:false, itemSelector:'.stateSelector button', selectedItemCls:'selected', hidden:true, selectionModel:{type:'dataviewmodel', storeId:'unregjudges', mode:'SIMPLE'}, tpl:['\x3ctpl for\x3d"."\x3e', 
+'\x3cbutton type\x3d"button" title\x3d"{name}" id\x3d"{name}"\x3e{abbr}\x3c/button\x3e', '\x3c/tpl\x3e'], bind:{selection:'{judgeFilterSelection}', store:'{judgeStates}'}, listeners:{selectionchange:'onFilterChange'}}, '-\x3e']}, {xtype:'pagingtoolbar', dock:'bottom', displayInfo:true, bind:'{unregjudges}'}], columns:[{xtype:'gridcolumn', dataIndex:'id', text:'', flex:1}, {xtype:'gridcolumn', dataIndex:'fullName', text:'Name', flex:1}, {xtype:'gridcolumn', dataIndex:'email', text:'Email', flex:2}]});
 Ext.define('MobileJudge.view.unregs.Home', {extend:Ext.container.Container, xtype:'unreghome', layout:'responsivecolumn', cls:'userProfile-container', controller:'unregistered', viewModel:{data:{}}, items:[{xtype:'profile', userCls:'big-100 small-100 shadow'}]});
 (function(global, factory) {
   if (typeof module === 'object' && typeof module.exports === 'object') {

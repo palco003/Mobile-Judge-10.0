@@ -9,6 +9,7 @@ module.exports = function(server, db) {
 	server.post(apiPrefix + '/login', function (req, res, next) {
 		if (req.body === undefined
 			|| (req.body.email === undefined && req.body.id === undefined)
+			//|| (req.body.email === undefined && req.body.fullName === undefined) //???????
 			|| (req.body.password === undefined && req.body.provider === undefined)) {
 			return next(new badRequest('Missing username and/or password'));
 		}

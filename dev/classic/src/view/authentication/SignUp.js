@@ -17,6 +17,8 @@ Ext.define('MobileJudge.view.authentication.SignUp', {
 		cls: 'auth-textbox',
 		height: 55
 	},
+
+	bind: '{judges}',
 	items: [
 		{
 			xtype: 'label',

@@ -1,68 +1,102 @@
-/*var epilogue = require('epilogue'),
+var epilogue = require('epilogue'),
 	badRequest = require('restify').errors.BadRequestError,
-	crypt = require('../utils/crypt.js'),
-	config = require('../config/server.json'),
 	fs = require('fs'),
+	csv = require('csv'),
 	_ = require('lodash');
-
 
 module.exports = function(server, db) {
 
-	var retrieveEmail = function(invite) {
-		var sentId = crypt.decrypt(invite.toUpperCase()).split(','),
-			emailId = sentId[0], createdAt = new Date(parseInt(sentId[1]));
-		return Promise.all([
-			db.email.findOne({
+	server.post(apiPrefix + '/unregjudges', function(req, res, next) {
+		if (req.files === undefined || req.files.judgesCsv === undefined) {
+			return next(new badRequest('missing file'));
+		}
+
+		var file = req.files.judgesCsv;
+
+		Promise.all([
+			db.term.getActiveTerm({ attributes: ['id'] }),
+			db.user.findAll({
+				attributes: [[db.sequelize.fn('MAX', db.sequelize.col('id')), 'id']],
 				where: {
-					id: emailId,
-					createdAt: createdAt
+					role: 2
 				}
-			}),
-			db.term.getActiveTerm()
-		]);
-	};
+			})
+		]).then(function (arr) {
+			file.skipped = 0; file.records = 0;
+			var termId = arr[0].id,
+				id = (arr[1][0] || []).length == 0 ? 1 : arr[1][0].get('id'),
+				regex = /^(?:\w+[\-\.])*\w+@(?:\w+[\-\.])*\w+\.\w+$/;
+				transform = csv.transform(function (record, callback) {
+					if (!regex.test(record.email)) {
+						callback(null, null);
+						return;
+					}
+					_.assign(record, {
+						termId: termId,
+						state: 1,
+						role: 2,
+						projectId: 0,
+						location: 0
+					});
 
-	var response ='<!DOCTYPE html>' +
-			'<html lang="en">' +
-			'<head>' +
-				'<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
-				'<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">' +
-				'<meta charset="utf-8">' +
-				'<title>[[subject]]</title>' +
-				'<!--[if lt IE 9]>' +
-				'<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>' +
-				'<![endif]-->' +
-			'</head>' +
-			'<body>[[body]]</body>' +
-			'</html>';
+					db.user.count({
+						where: {
+							email: record.email,
+							'$or': [
+								{termId: termId},
+								{role: 2, state: 12}
+							]
+						}
+					}).then(function (judges) {
+						file.records++;
+						if (judges != 0) file.skipped++;
+						callback(null, judges != 0
+								? null
+								: _.assign(record, {
+							id: id + file.records - file.skipped //transform.running - arr[2]
+						}));
+					});
 
-	//server.get(apiPrefix + '/invite/:id/accept', function (req, res, next) {
-	var regis = function(req, res, next){
-		retrieveEmail(req.params.id)
-		.then(function(ret) {
-				var email = ret[0], term = ret[1];
-	//			if (email == null || email.termId != term.id) return next(new notFound('Invalid invite id'));
+				}, function (err, output) {
+					if (err) {
+						res.send(err.message);
+						return next();
+					}
 
-				db.user.findById(email.userId).then(function (user) {
-					//if (user.state <= 2) setState(user, 4);
-
-					var script = '<script type="text/javascript">' +
-						'localStorage.setItem("userId", ' + JSON.stringify(user.id) + ');' +
-						'localStorage.setItem("email", ' + JSON.stringify(user.email) +');' +
-						(user.fullName ? 'localStorage.setItem("userName", ' + JSON.stringify(user.fullName) +');' : 'localStorage.removeItem("userName");') +
-						'window.location.replace("' + config.registerRedirect + '");' +
-					'</script>';
-
-					res.html(response
-							.replace(/\[\[subject\]\]/, 'Please wait...')
-							.replace(/\[\[body\]\]/, script));
-					next();
-					//db.touch(email);
+					db.user.bulkCreate(output).then(function() {
+						res.json({
+							success: true,
+							fileName: file.name,
+							fileSize: file.size,
+							total: file.records,
+							records: output.length,
+							skipped: file.skipped
+						});
+						next();
+					});
 				});
-		});
-	};
-};*/
 
+			fs.createReadStream(file.path)
+				.pipe(csv.parse({
+					columns: ['email', 'firstName', 'lastName'],
+					skip_empty_lines: true,
+					trim: true
+				}))
+				.pipe(transform);
+		});
+	});
+
+	return epilogue.resource({
+		model: db.judge,
+		excludeAttributes: ['password','oauth'],
+		actions: ['list'],
+		search: {
+			param: 'query',
+			attributes: [ 'fullName', 'affiliation', 'email' ]
+		},
+		endpoints: [apiPrefix + '/unregjudges']
+	});
+};
 
 
 

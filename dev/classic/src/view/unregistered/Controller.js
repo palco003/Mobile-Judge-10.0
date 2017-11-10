@@ -26,18 +26,17 @@ Ext.define('MobileJudge.view.unregistered.Controller', {
 
     },
 
-
     /*loadSecondViewData: function (data) {
         var me = this;
         Ext.Ajax.request({
-            url: '/api/second_view',
+            url: '/api/unregsnew',
             success: function (response) {
                 var data = JSON.parse(response.responseText)
-                Ext.getStore('studentDetailData').loadData(data);
+                Ext.getStore('unregjudges').loadData(data);
                 var average = me.getAverage(data);
 
                 Ext.getCmp('gradeLabel').setText(average);
-                me.changeIconSecondView();
+                //me.changeIconSecondView();
             },
             failure: this.updateError,
             jsonData: data,
@@ -46,12 +45,81 @@ Ext.define('MobileJudge.view.unregistered.Controller', {
         });
     },*/
 
-    /*onRegister : function(data){
-        Ext.Ajax.request({
-            url: '/api/unregs',
-        })
+    onTap: function (view, index, item, record) {
+            localStorage.setItem("userId", JSON.stringify(record.id));
+            //localStorage.setItem("email", JSON.stringify(record.email));
             
+            Ext.widget({
+                xtype: 'register',
+                record: record,
+                viewModel : {
+                    data: {
+                        unregjudges: record
+                    }
+                } 
+            });
+        
+    },
+
+    /*loadSecondViewData: function (data) {
+        var me = this;
+        Ext.Ajax.request({
+            url: '/api/second_view',
+            success: function (response) {
+                var data = JSON.parse(response.responseText)
+                Ext.getStore('studentDetailData').loadData(data);
+                //var average = me.getAverage(data);
+
+                Ext.getCmp('gradeLabel').setText(average);
+                //me.changeIconSecondView();
+            },
+            failure: this.updateError,
+            jsonData: data,
+            disableCaching: true,
+            method: 'POST'
+        });
     },*/
+
+    /*getData: function (data) {
+        Ext.Ajax.request({
+            url: '/api/views_table/judges',
+            success: function (response) {
+                var data = JSON.parse(response.responseText)
+                data.judges.forEach(function (judge) {
+                    data.students.forEach(function (student) {
+                        if (student.judgeId == judge.id)
+                            student.judgeName = judge.fullName;
+                    })
+                })
+                data.students.forEach(function (student) {
+                    var tempAverage = 1;
+                    data.grades.forEach(function (grade) {
+                        if (student.judgeName == grade.judge && student.fullName == grade.student && student.project == grade.projectName) {
+                            student.gradeAverage = student.gradeAverage + grade.grade;
+                            tempAverage++;
+                        }
+                    })
+                    student.gradeAverage = student.gradeAverage / tempAverage;
+                })
+
+                return data;
+                Ext.getStore('mockData').data = data.students;
+                Ext.getStore('mockData').reload();
+            },
+            failure: this.updateError,
+            jsonData: data,
+            disableCaching: true,
+            method: 'POST'
+        });
+    },*/
+
+    //onRegister : function(email){
+        //Ext.Ajax.request({
+        //    url: '/api/unregs',
+        //})
+        //window.open('/api/invite/'+email.sentId+'/accept');
+        //'<a href="'+term.liveUrl+'api/invite/'+email.sentId+'/accept">Accept</a>'    
+    //},
     /*onJudgesUpdate: function(editor, e){
         var store = Ext.getStore("judges");
         var record = store.getAt(e.rowIdx);

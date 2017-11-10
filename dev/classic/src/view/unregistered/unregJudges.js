@@ -1,6 +1,18 @@
+Ext.create('Ext.data.Store', {
+    storeId:'unregjudges',
+    listeners:{
+        load : function() {
+            var grid = Ext.getCmp("unregjudges");
+        }
+    },
+    fields:['id','fullName','email'],
+    data:[]
+});
+
 Ext.define('MobileJudge.view.unregistered.unregJudges', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.unregjudges',
+    store: 'unregjudges',
 
     requires: [
         'Ext.grid.plugin.RowEditing',
@@ -8,28 +20,45 @@ Ext.define('MobileJudge.view.unregistered.unregJudges', {
         'Ext.form.field.Checkbox',
         'Ext.form.field.Number',
         'Ext.form.field.Text',
-        'Ext.toolbar.Toolbar'
+        'Ext.toolbar.Toolbar',
+        'Ext.window.Window'
     ],
 
-    //listeners: {
+    /*loadData: function(record) {
+        var ctrl = this.getController();
+
+        $("#nameLabel").text(record.data.fullName);
+        ctrl.loadSecondViewData(record.data);
+
+    },*/
+    
+
+    listeners: {
         //afterrender: 'changeIcon',
         //painted: 'changeIcon',
 
         //cellclick: 'onRegister',
-        /*function (iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent){
-            var zRec = iView.getRecord(iRowEl);
-            window.open("/#register");*/
+        //cellclick: function (iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent){
+           // var zRec = iView.getRecord(iRowEl);
+            //window.open('api/'+iRowEl);
             //var data = Ext.getStore("unregjudges").data.items[iRowIdx];
-
 
         //}
 
-        /*cellclick: function (iView, iCellEl, iColIdx, iStore, iRowEl, iRowIdx, iEvent) {
-            var data = Ext.getStore("unregjudges").data.items[iRowIdx];*/
+        cellclick: 'onTap'
+
+            //var zRec = iColIdx;
+            //var data = Ext.getStore("unregjudges").data.items[iRowIdx];
+            
+            //db.user.findById(email.userId).then(function (user) {
+              //  localStorage.setItem("userId", JSON.stringify(user.id));
 
             //if (iColIdx < 3)
-            //    Ext.widget('gradejudgedetailwizard').show().loadData(data);
-    //},
+               //window.open('api/registernow');
+            //Ext.widget('register');//.show().loadData(data);
+            //}
+        //},
+    },
 
     bind: '{unregjudges}',
 
@@ -77,6 +106,12 @@ dockedItems: [
     ],
 
     columns: [
+        {
+            xtype: 'gridcolumn',
+            dataIndex: 'id',
+            text: '',
+            flex: 1,
+        },
         {
             xtype: 'gridcolumn',
             dataIndex: 'fullName',

@@ -203,22 +203,22 @@ Ext.define('MobileJudge.view.settings.Terms', {
 					fieldLabel: 'Confirm Registration',
 					bind: {
 						store: 'templates4Term',
-						value: '{selectedTerm.confirmTemplate}'
+						value: '{selectedTerm.acceptanceConfirmation}'
 					}
 				},
-				{
-                                        xtype: 'combobox',
-                                        queryMode: 'local',
-                                        editable: false,
-                                        emptyText: 'Select a Template',
-                                        displayField: 'name',
-                                        valueField: 'id',
-                                        fieldLabel: 'Confirm Registration',
-                                        bind: {
-                                                store: 'templates4Term',
-                                                value: '{selectedTerm.acceptanceConfirmation}'
-                                        }
-                                },
+				/*{
+                    xtype: 'combobox',
+                    queryMode: 'local',
+                    editable: false,
+                    emptyText: 'Select a Template',
+                    displayField: 'name',
+                    valueField: 'id',
+                    fieldLabel: 'Confirm Registration',
+                    bind: {
+                        store: 'templates4Term',
+                        value: '{selectedTerm.acceptanceConfirmation}'
+                    }
+                },*/
 				{
 					xtype: 'combobox',
 					queryMode: 'local',
@@ -239,7 +239,7 @@ Ext.define('MobileJudge.view.settings.Terms', {
                                         emptyText: 'Select a Template',
                                         displayField: 'name',
                                         valueField: 'id',
-                                        fieldLabel: 'Reject Template',
+                                        fieldLabel: 'Accept Invite Template',
                                         bind: {
                                                 store: 'templates4Term',
                                                 value: '{selectedTerm.acceptInviteTemplate}'

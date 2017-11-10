@@ -104,6 +104,8 @@ Ext.define('MobileJudge.view.authentication.Controller', {
 					var oauth = model.get('oauth') || {};
 
 					if (data.name) {
+						console.log(data.name);
+						console.log(data.fullName);
 						model.set('userName', data.name);
 						var s = data.name.split(' ');
 						if (s.length > 1) {
@@ -152,19 +154,38 @@ Ext.define('MobileJudge.view.authentication.Controller', {
 			conflicts = isPhone ? grid.getSelections() : grid.getSelection(),
 			userInfo = {
 				id: localStorage.getItem('userId'),
-				email: model.get('email'),
+				
+			
+				email: model.get('email'),	
+				
+				
 				firstName: model.get('firstName'),
+				
+				
 				lastName: model.get('lastName'),
+				
+				
 				fullName: model.get('userName'),
+        
+                
                 salutation: model.get('salutation'),
+				
+				
 				affiliation: model.get('affiliation'),
+				
+				
 				title: model.get('title'),
+				
+				
 				password: model.get('password'),
+				
+				
 				profilePic: model.get('profilePic'),
 				oauth: model.get('oauth'),
 				conflicts: conflicts.map(function(r) { return r.get('id'); })
 			};
 
+		
 		win.mask();
 		Ext.Ajax.request({
 			url: '/api/register',
