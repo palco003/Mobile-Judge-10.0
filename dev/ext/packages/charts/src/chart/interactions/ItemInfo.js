@@ -43,8 +43,8 @@ Ext.define('Ext.chart.interactions.ItemInfo', {
          * Defines the gestures that should trigger the item info panel to be displayed in ExtJS.
          */
         extjsGestures: {
-            'start' : { event: 'click',      handler: 'onInfoGesture'},
-            'move'  : { event: 'mousemove',  handler: 'onInfoGesture'},
+            'start' : { event: 'itemclick', handler: 'onInfoGesture'},
+            'move'  : { event: 'mousemove', handler: 'onInfoGesture'},
             'end'   : { event: 'mouseleave', handler: 'onInfoGesture'}
         }
 
