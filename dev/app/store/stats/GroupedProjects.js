@@ -261,7 +261,7 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
     data: (function () {
         var data = [];
         var expense = Ext.createByAlias('store.students');
-        console.log(expense);
+        console.log('store before group ' + expense);
         expense.group('project');
         var groups = expense.getGroups();
         console.log(groups);
