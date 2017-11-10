@@ -1008,7 +1008,7 @@ Ext.define('MobileJudge.store.stats.ProjectGrades', {
 
 Ext.define('MobileJudge.model.stats.GradeAverage', {
     extend: 'Ext.data.Model',
-    fields: ['project', 'average']
+    fields: ['project', 'fullname', 'average']
 });
 
 Ext.define('MobileJudge.store.stats.GradeAverage', {
@@ -1021,11 +1021,15 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         console.log('store before group ' + expense);
         expense.group('project');
         var groups = expense.getGroups();
+        // for(var i = 0; i < groups.getCount(); i++){
+        //
+        // }
         console.log(groups);
         groups.each(function (group) {
-            console.log(group);
+            // console.log(group);
             data.push({
                 project: group.config.groupKey,
+                fullname: group.data.fullname,
                 average: group.average('grade')
             });
         });
