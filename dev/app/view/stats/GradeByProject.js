@@ -69,7 +69,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         // },
                         itemclick: function(chart, item) {
                             alert(item.record.get('project'));
-                            console.log(chart, item.record.get('fullName'));
+                            console.log(chart, item.record.get('project'));
                         }
                     }
                     // interactions: [
