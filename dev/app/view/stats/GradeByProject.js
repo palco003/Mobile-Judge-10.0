@@ -12,7 +12,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
         classic: {
             layout: 'fit',
             items: [{
-                xtype: 'chart',
+                xtype: 'cartesian',
                 store: {
                     type: 'gradeAverage'
                 },
@@ -65,26 +65,26 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     }
                 }],
                 interactions: [
-                    'panzoom',
-                    'itemhighlight',
+                    // 'panzoom',
+                    // 'itemhighlight',
                     {
                         type: 'iteminfo',
                         listeners: {
-                            //panel.setWidth(400);
                             show: function (me, item, panel) {
-                                panel.setWidth('90%');
-                                panel.setHeight('60%');
-                                var store = Ext.getStore('MobileJudge.model.grade.Student');
-                                var msg = "<br>-------------------------------";
-                                if (item.record.data.fullName !== null) {
-                                    for (var i = 0; i < store.getCount(); i++) {
-                                        if (store.getAt(i).get('fullName') === item.record.data.fullName) {
-                                            msg += "<br>" + store.getAt(i).get('fullName').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
-                                        }
-                                    }
-
-                                    panel.setHtml("<p>" + item.record.data.fullName + "<br>Student ID: " + item.record.data.id + "<br> Raw Grade: " + item.record.data.rawGrade + "<br> Approved Grade: " + item.record.data.grade + "<br> Project: " + item.record.data.project + "<br> Location: " + item.record.data.location + msg + "</p>");
-                                }
+                                panel.setHtml('Student: ' + item.record.get('fullName'));
+                                // panel.setWidth('90%');
+                                // panel.setHeight('60%');
+                                // var store = Ext.getStore('MobileJudge.model.grade.Student');
+                                // var msg = "<br>-------------------------------";
+                                // if (item.record.data.fullName !== null) {
+                                //     for (var i = 0; i < store.getCount(); i++) {
+                                //         if (store.getAt(i).get('fullName') === item.record.data.fullName) {
+                                //             msg += "<br>" + store.getAt(i).get('fullName').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
+                                //         }
+                                //     }
+                                //
+                                //     panel.setHtml("<p>" + item.record.data.fullName + "<br>Student ID: " + item.record.data.id + "<br> Raw Grade: " + item.record.data.rawGrade + "<br> Approved Grade: " + item.record.data.grade + "<br> Project: " + item.record.data.project + "<br> Location: " + item.record.data.location + msg + "</p>");
+                                // }
 
                                 // else {
                                 //     for (i = 0; i < store.getAllCount(); i++) {
