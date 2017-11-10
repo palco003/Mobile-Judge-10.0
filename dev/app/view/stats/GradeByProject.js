@@ -63,7 +63,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         display: 'insideStart'
                     },
                     highlight: {
-                        fillStyle: '#619fff'
+                        fillStyle: '#5DBCD2'
                     },
                     listeners: {
 
@@ -72,7 +72,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         //     panel.setHtml('Project: ' + item.record.get('project'));
                         // },
                         itemclick: function(chart, item) {
-                            alert(item.record.get('project'));
+                            Ext.Msg.alert(item.record.get('project'));
                             console.log(chart, item.record.get('project'));
                         }
                     }
