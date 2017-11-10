@@ -12,6 +12,7 @@ Ext.define('MobileJudge.view.settings.Controller', {
         var select = this.getReferences().termSelector,
 	rec = select.getStore().findRecord('active', true);
         select.setValue(rec.get('id'));
+	console.log("load");
     },
 
     onNewTermClick: function() {
@@ -33,19 +34,28 @@ Ext.define('MobileJudge.view.settings.Controller', {
     },
 
     onSaveTermClick: function() {
+	console.log("save");
 	var me = this,
 	    form = me.getReferences().termForm,
 	    store = me.model.getStore('terms'),
 	    rec = me.model.get('selectedTerm'),
 	    changed = false;
-
+	console.log("save after var me");
 	//if (!form.isValid()) return;
-	if (rec.modified && rec.modified.active === false && rec.get('active')) changed = rec.get('name');
+	if (rec.modified && rec.modified.active === false && rec.get('active')) 
+	{
+		console.log("before changed is rec");
+		changed = rec.get('name');
+		console.log("after changed is changed");
+	}
 	store.sync({
 	    success: function() {
+		console.log("Inside success");
 		if (changed) Ext.GlobalEvents.fireEvent('termChanged', changed);
+		console.log("inside if changed");
 	    }
 	});
+	console.log("save end");
     },
 
     onDeleteTermClick: function() {
@@ -66,6 +76,7 @@ Ext.define('MobileJudge.view.settings.Controller', {
 		var me = this, rec = me.model.get('selectedTerm');
 		rec.set('active', true);
 		me.onSaveTermClick();
+		console.log("hello");
     },
 
     onNewQuestionButtonClick: function(button) {

@@ -57742,7 +57742,7 @@ Ext.define('MobileJudge.model.settings.Question', {extend:Ext.data.Model, fields
 Ext.define('MobileJudge.model.settings.Term', {extend:Ext.data.Model, fields:[{name:'id', type:'int', convert:null}, {name:'name', type:'string'}, {name:'start', type:'date', dateWriteFormat:'C'}, {name:'end', type:'date', dateWriteFormat:'C'}, {name:'deadline', type:'date', dateWriteFormat:'C'}, {name:'active', type:'boolean', defaultValue:false, convert:null}, {name:'allowJudgeLogin', type:'boolean', defaultValue:false, convert:null}, {name:'showGrades', type:'boolean', defaultValue:false, convert:null}, 
 {name:'studentsPerJudge', type:'int', defaultValue:5, convert:null}, {name:'location', type:'string', defaultValue:'SCIS JCCL Lab (ECS 241), which is located on the second floor of the ECS building on the Main Campus (also known as Modesto A. Maidique Campus)'}, {name:'mapImageUrl', type:'string'}, {name:'srProjectUrl', type:'string', defaultValue:'http://spws.cis.fiu.edu:8080/SPW2-RegisterAPI/rest/SPWRegister'}, {name:'srProjectToken', type:'string', defaultValue:'123FIUspw'}, {name:'liveUrl', type:'string', 
 defaultValue:'http://mj.cis.fiu.edu/'}, {name:'developmentUrl', type:'string', defaultValue:'http://mj-dev.cis.fiu.edu/'}, {name:'noProfileImageUrl', type:'string', defaultValue:'http://spws.cis.fiu.edu/Senior-Project-Web-Site-Ver-5/img/no-photo.jpeg'}, {name:'display', type:'int', defaultValue:0, convert:null}, {name:'mailFrom', type:'string', defaultValue:'Masoud Sadjadi \x3csadjadi@cs.fiu.edu\x3e'}, {name:'resetPasswordTemplate', type:'int', defaultValue:3, convert:null}, {name:'confirmTemplate', 
-type:'int', defaultValue:38, convert:null}, {name:'rejectInviteTemplate', type:'int', defaultValue:36, convert:null}, {name:'removeInviteTemplate', type:'int', defaultValue:37, convert:null}, {name:'startDate', type:'date', depends:'start', persist:false, convert:function(v, r) {
+type:'int', defaultValue:38, convert:null}, {name:'acceptanceConfirmation', type:'int', defaultValue:73, convert:null}, {name:'rejectInviteTemplate', type:'int', defaultValue:36, convert:null}, {name:'acceptInviteTemplate', type:'int', defaultValue:71, convert:null}, {name:'removeInviteTemplate', type:'int', defaultValue:37, convert:null}, {name:'startDate', type:'date', depends:'start', persist:false, convert:function(v, r) {
   return r.setDate('start', v);
 }}, {name:'startTime', type:'date', depends:'start', persist:false, convert:function(v, r) {
   return r.setTime('start', v);
@@ -57754,8 +57754,8 @@ type:'int', defaultValue:38, convert:null}, {name:'rejectInviteTemplate', type:'
   return r.setDate('deadline', v);
 }}, {name:'deadlineTime', type:'date', depends:'deadline', persist:false, convert:function(v, r) {
   return r.setTime('deadline', v);
-}}], validators:{name:[{type:'presence'}, {type:'length', min:1}], studentsPerJudge:[{type:'presence'}, {type:'range', min:1, max:10}], startDate:'presence', startTime:'presence', endDate:'presence', endTime:'presence', deadlineDate:'presence', deadlineTime:'presence', mailFrom:[{type:'presence'}, {type:'format', matcher:/^([\w\s]+)?(\<([\w\.\-_]+)?\w+@\w+(\.\w+){1,}\>)$|^(([\w\.\-_]+)?\w+@\w+(\.\w+){1,})$/}], resetPasswordTemplate:'presence', confirmTemplate:'presence', rejectInviteTemplate:'presence', 
-removeInviteTemplate:'presence'}, setDateTime:function(field, v) {
+}}], validators:{name:[{type:'presence'}, {type:'length', min:1}], studentsPerJudge:[{type:'presence'}, {type:'range', min:1, max:10}], startDate:'presence', startTime:'presence', endDate:'presence', endTime:'presence', deadlineDate:'presence', deadlineTime:'presence', mailFrom:[{type:'presence'}, {type:'format', matcher:/^([\w\s]+)?(\<([\w\.\-_]+)?\w+@\w+(\.\w+){1,}\>)$|^(([\w\.\-_]+)?\w+@\w+(\.\w+){1,})$/}], resetPasswordTemplate:'presence', confirmTemplate:'presence', acceptanceConfirmation:'presence', 
+rejectInviteTemplate:'presence', acceptInviteTemplate:'presence', removeInviteTemplate:'presence'}, setDateTime:function(field, v) {
   var me = this, modified = me.modified || (me.modified = {}), previousValues = me.previousValues || (me.previousValues = {}), comparator = me.fieldsMap[field];
   if (comparator.isEqual(me.data[field], v)) {
     return;
@@ -58694,21 +58694,29 @@ Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewControlle
 }, onTermsLoaded:function() {
   var select = this.getReferences().termSelector, rec = select.getStore().findRecord('active', true);
   select.setValue(rec.get('id'));
+  console.log('load');
 }, onNewTermClick:function() {
   var me = this, select = me.getReferences().termSelector, store = me.model.getStore('terms'), now = new Date, month = now.getMonth(), rec = new MobileJudge.model.settings.Term({name:'New Term', start:now, end:now, deadline:now});
   store.rejectChanges();
   store.insert(0, rec);
   select.setValue(rec);
 }, onSaveTermClick:function() {
+  console.log('save');
   var me = this, form = me.getReferences().termForm, store = me.model.getStore('terms'), rec = me.model.get('selectedTerm'), changed = false;
+  console.log('save after var me');
   if (rec.modified && rec.modified.active === false && rec.get('active')) {
+    console.log('before changed is rec');
     changed = rec.get('name');
+    console.log('after changed is changed');
   }
   store.sync({success:function() {
+    console.log('Inside success');
     if (changed) {
       Ext.GlobalEvents.fireEvent('termChanged', changed);
     }
+    console.log('inside if changed');
   }});
+  console.log('save end');
 }, onDeleteTermClick:function() {
   var me = this, store = me.model.getStore('terms'), rec = me.model.get('selectedTerm');
   Ext.Msg.confirm('Delete', 'Are you sure you want to delete the selected record?', function(choice) {
@@ -58726,6 +58734,7 @@ Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewControlle
   var me = this, rec = me.model.get('selectedTerm');
   rec.set('active', true);
   me.onSaveTermClick();
+  console.log('hello');
 }, onNewQuestionButtonClick:function(button) {
   var rec = new MobileJudge.model.settings.Question, grid = button.up('grid'), editor = grid.getPlugins('gridEditor');
   grid.getStore().insert(0, rec);
