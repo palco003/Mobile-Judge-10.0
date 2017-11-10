@@ -4,6 +4,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
 
     requires: [
         'Ext.util.Format',
+        'MobileJudge.store.grade.Students',
         'MobileJudge.store.stats.GradeAverage'
     ],
 
@@ -13,8 +14,13 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
             layout: 'fit',
             items: [{
                 xtype: 'cartesian',
-                store: {
-                    type: 'gradeAverage'
+                stores: {
+                    gradeAverage: {
+                        type: 'gradeAverage'
+                    },
+                    students: {
+                        type: 'students'
+                    }
                 },
                 insetPadding: {
                     top: 60,
