@@ -50,7 +50,6 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                 }],
                 series: [{
                     type: 'bar3d',
-                    highlight: true,
                     xField: 'project',
                     yField: ['average'],
                     style: {
@@ -63,15 +62,19 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         field: 'project',
                         display: 'insideStart'
                     },
+                    highlight: {
+                        fillStyle: '#619fff'
+                    },
                     listeners: {
-                        show: function (me, item, panel) {
-                            alert(item.record.get('project'));
-                            panel.setHtml('Project: ' + item.record.get('project'));
-                        },
-                        // itemclick: function(chart, item) {
+
+                        // show: function (me, item, panel) {
                         //     alert(item.record.get('project'));
-                        //     console.log(chart, item.record.get('project'));
-                        // }
+                        //     panel.setHtml('Project: ' + item.record.get('project'));
+                        // },
+                        itemclick: function(chart, item) {
+                            alert(item.record.get('project'));
+                            console.log(chart, item.record.get('project'));
+                        }
                     }
                     // interactions: [
                     //     'panzoom',
