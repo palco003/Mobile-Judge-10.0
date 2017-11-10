@@ -64,8 +64,8 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         display: 'insideStart'
                     },
                     interactions: [
-                        // 'panzoom',
-                        // 'itemhighlight',
+                        'panzoom',
+                        'itemhighlight',
                         {
                             type: 'iteminfo',
                             listeners: {
