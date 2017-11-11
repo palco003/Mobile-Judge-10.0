@@ -1024,12 +1024,12 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         // for(var i = 0; i < groups.getCount(); i++){
         //
         // }
-        console.log(groups);
+        // console.log(groups);
         groups.each(function (group) {
-            // console.log(group);
+            console.log(group);
             data.push({
                 project: group.config.groupKey,
-                fullname: group.data.fullname,
+                // fullname: group.data.fullname,
                 average: group.average('grade')
             });
         });
