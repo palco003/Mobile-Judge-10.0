@@ -80,7 +80,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                             //         msg += "<br>" + store.getAt(i).get('fullName').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
                             //     }
                             // }
-                            msg += "<br> Raw Grade: " + item.record.get('avgGrade') + "<br> Raw Grade: " + item.record.get('rawGrade');
+                            msg += "<br> Accepted Grade: " + item.record.get('avgGrade') + "<br> Raw Grade: " + item.record.get('rawGrade');
                             msg += "<br> Full name: " + item.record.get('fullname');
                             Ext.Msg.alert(item.record.get('project'), msg);
                             // Ext.Msg.alert(item.record.get('project'));
