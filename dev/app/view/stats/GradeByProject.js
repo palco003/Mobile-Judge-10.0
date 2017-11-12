@@ -69,7 +69,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         itemclick: function(chart, item) {
                             var store = Ext.getStore('gradeAverage');
                             var msg = "<br>-------------------------------";
-                            console.log('store' + store);
+                            console.log('store ' + store);
 
                             // for (var i = 0; i < store.getCount(); i++) {
                             //     if(item.record.get('project') === store.getAt(i).get('project')){

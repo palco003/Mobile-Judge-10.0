@@ -1,4 +1,4 @@
-Ext.define('MobileJudge.store.grade.Grades', {
+Ext.define('MobileJudge.store.people.Grades', {
     extend: 'Ext.data.Store',
     alias: 'store.studentGrades',
 

@@ -244,7 +244,7 @@ Ext.define('MobileJudge.view.grade.Controller', {
             data.push(tempObj);
 
             if(store.data.items[rowIndex].data.accepted && !store.data.items[rowIndex].data.rejected && !store.data.items[rowIndex].data.pending)
-                status = "Rejected"
+                status = "Rejected";
             else if(!store.data.items[rowIndex].data.accepted && store.data.items[rowIndex].data.rejected && !store.data.items[rowIndex].data.pending)
                 status = "Pending";
             else if(!store.data.items[rowIndex].data.accepted && !store.data.items[rowIndex].data.rejected && store.data.items[rowIndex].data.pending)
