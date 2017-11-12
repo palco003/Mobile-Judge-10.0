@@ -1008,7 +1008,8 @@ Ext.define('MobileJudge.store.stats.ProjectGrades', {
 
 Ext.define('MobileJudge.model.stats.GradeAverage', {
     extend: 'Ext.data.Model',
-    fields: ['project', 'rawGrade', 'avgGrade']
+    fields: ['studentid', 'termid', 'state', 'abbr', 'fullname',
+        'email', 'project', 'grade', 'rawGrade', 'max', 'pending', 'accepted', 'rejected', 'filterStatus']
 });
 
 Ext.define('MobileJudge.store.stats.GradeAverage', {
