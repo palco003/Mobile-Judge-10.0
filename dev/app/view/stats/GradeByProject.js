@@ -65,10 +65,9 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         field: ['avgGrade', 'rawGrade'],
                         display: 'insideStart'
                     },
-                    highlight: {
-                        // fillStyle: ['#5DBCD2']
-                        fillStyle: ['#d2d2d2']
-                    },
+                    // highlight: {
+                    //     fillStyle: ['#5DBCD2']
+                    // },
                     listeners: {
                         itemclick: function(chart, item) {
                             var store = Ext.getStore('gradeAverage');
