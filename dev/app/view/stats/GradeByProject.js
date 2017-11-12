@@ -51,7 +51,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                 series: [{
                     type: 'bar3d',
                     xField: 'project',
-                    yField: ['average'],
+                    yField: ['avgGrade', 'rawGrade'],
                     style: {
                         minGapWidth: 10
                     },
@@ -59,7 +59,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         saturationFactor: 1.5
                     },
                     label: {
-                        field: 'average',
+                        field: 'avgGrade',
                         display: 'insideStart'
                     },
                     highlight: {
@@ -77,6 +77,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                             //         msg += "<br>" + store.getAt(i).get('fullName').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
                             //     }
                             // }
+                            msg += "<br> Raw Grade: " + item.record.get('rawGrade');
                             Ext.Msg.alert(item.record.get('project'), msg);
                             // Ext.Msg.alert(item.record.get('project'));
                             console.log('project: ' + item.record.get('project'));
