@@ -31,27 +31,27 @@ Ext.define('MobileJudge.view.settings.Terms', {
             text: 'New',
             iconCls: 'x-fa fa-edit',
             ui: 'action',
-	    bind: {
-		disabled: '{!status.canCreate}'	
-	    },
+	    //bind: {
+	    //	disabled: '{!status.canCreate}'	
+	    //},
 	    handler: 'onNewTermClick'
         }, {
             xtype: 'button',
             text: 'Save',
             iconCls: 'x-fa fa-save',
             ui: 'confirm',
-	    bind: {
-		disabled: '{!status.canSave}'
-	    },
+	    //bind: {
+	    //	disabled: '{!status.canSave}'
+	    //},
 	    handler: 'onSaveTermClick'
         }, {
             xtype: 'button',
             text: 'Delete',
             iconCls: 'x-fa fa-remove',
             ui: 'decline',
-	    bind: {
-		disabled: '{!status.canDelete}'
-	    },
+	    //bind: {
+	    //	disabled: '{!status.canDelete}'
+	    //},
 	    handler: 'onDeleteTermClick'
         }
 
