@@ -52,6 +52,8 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     type: 'bar3d',
                     xField: 'project',
                     yField: ['avgGrade', 'rawGrade'],
+                    stacked: false,
+                    showInLegend: true,
                     style: {
                         minGapWidth: 10
                     },
