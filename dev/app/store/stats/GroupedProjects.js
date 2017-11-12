@@ -1029,7 +1029,8 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
             data.push({
                 project: group.config.groupKey, // each group is a project
                 avgGrade: group.average('grade'),
-                rawGrade: group.average('rawGrade')
+                rawGrade: group.average('rawGrade'),
+                fullname: group.get('fullname')
             });
         });
         return data;
