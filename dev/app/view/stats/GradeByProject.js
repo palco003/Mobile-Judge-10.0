@@ -81,7 +81,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                             //     }
                             // }
                             msg += "<br> Raw Grade: " + item.record.get('rawGrade');
-                            msg += "<br> Full name: " + item.record.get('fullName');
+                            msg += "<br> Full name: " + item.record.get('fullname');
                             Ext.Msg.alert(item.record.get('project'), msg);
                             // Ext.Msg.alert(item.record.get('project'));
                             console.log('project: ' + item.record.get('project'));
