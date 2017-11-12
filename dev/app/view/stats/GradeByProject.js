@@ -63,10 +63,13 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     },
                     label: {
                         field: ['avgGrade', 'rawGrade'],
+                        fillStyle: ['#FFF',
+                            '#FFF'],
                         display: 'insideStart'
                     },
                     highlight: {
-                        fillStyle: '#5DBCD2'
+                        fillStyle: ['#5DBCD2',
+                            '#82d22d']
                     },
                     listeners: {
                         itemclick: function(chart, item) {
