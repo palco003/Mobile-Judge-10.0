@@ -15711,10 +15711,12 @@ Ext.define('MobileJudge.store.stats.QuestionAverage', {
         console.log(groups);
         groups.each(function (group) {
             console.log(group);
-            data.push({
-                question: group.config.groupKey,
-                average: group.average('grade')
-            });
+            if(group.get('comment') !== null){
+                data.push({
+                    question: group.config.groupKey,
+                    average: group.average('grade')
+                });
+            }
         });
         return data;
     })()
