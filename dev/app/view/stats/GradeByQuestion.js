@@ -77,7 +77,11 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                             Ext.Msg.alert(item.record.get('question'), msg);
                         }
                     }
-                }]
+                }],
+                plugins: {
+                    ptype: 'chartitemevents',
+                    moveEvents: true
+                }
             }]
         }
     }
