@@ -71,7 +71,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     listeners: {
                         itemclick: function(chart, item) {
                             var store = Ext.createByAlias('store.projectGrades');
-                            var msg = "";
+                            var msg = "<p style=\"text-align: center;\">";
                             msg += "<br>Average Accepted Grade: " + item.record.get('avgGrade') +
                                 "<br>Average Raw Grade: " + item.record.get('rawGrade');
                             msg += "<br>-------------------------------";
@@ -80,13 +80,12 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
 
                             for (var i = 0; i < store.getCount(); i++) {
                                 if(item.record.get('project') === store.getAt(i).get('project')){
-                                    msg += "<br><p style=\"text-align: center;\">" + store.getAt(i).get('fullname').toString()
+                                    msg += "<br>" + store.getAt(i).get('fullname').toString()
                                         + " -- "
-                                        + store.getAt(i).get('rawGrade')
-                                        + "</p>";
+                                        + store.getAt(i).get('rawGrade');
                                 }
                             }
-
+                            msg += "</p>";
                             Ext.Msg.alert(item.record.get('project'), msg);
                             console.log('project: ' + item.record.get('project'));
                         }
