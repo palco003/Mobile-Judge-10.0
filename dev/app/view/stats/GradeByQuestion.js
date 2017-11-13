@@ -57,6 +57,25 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                     label: {
                         field: 'average',
                         display: 'insideStart'
+                    },
+                    listeners: {
+                        itemclick: function(chart, item) {
+                            var store = Ext.createByAlias('store.questionGrades');
+                            var msg = "<p style=\"text-align: center;\">";
+
+                            msg += "<br>-------------------------------";
+
+                            for (var i = 0; i < store.getCount(); i++) {
+                                if(item.record.get('question') === store.getAt(i).get('question')){
+                                    msg += "<br>" + store.getAt(i).get('judge').toString()
+                                        + " -- "
+                                        + store.getAt(i).get('grade');
+                                }
+                            }
+
+                            msg += "</p>";
+                            Ext.Msg.alert(item.record.get('question'), msg);
+                        }
                     }
                 }]
             }]
