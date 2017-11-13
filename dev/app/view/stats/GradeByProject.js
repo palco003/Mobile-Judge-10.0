@@ -81,7 +81,9 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                             for (var i = 0; i < store.getCount(); i++) {
                                 if(item.record.get('project') === store.getAt(i).get('project')){
                                     console.log(store.getAt(i).get('fullname').toString());
-                                    msg += "<br>" + store.getAt(i).get('fullname').toString() + "<span style=\"display:inline-block; width: 50;\"></span> -- " + store.getAt(i).get('rawGrade');
+                                    msg += "<br>" + store.getAt(i).get('fullname').toString()
+                                        + "<span style=\"display:inline-block; width: 50px;\"></span> -- "
+                                        + store.getAt(i).get('rawGrade');
                                 }
                             }
 
