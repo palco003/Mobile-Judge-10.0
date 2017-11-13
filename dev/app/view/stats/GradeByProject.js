@@ -70,19 +70,19 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     // },
                     listeners: {
                         itemclick: function(chart, item) {
-                            var store = Ext.createByAlias('store.gradeAverage');
+                            var store = Ext.createByAlias('store.projectGrades');
                             var msg = "<br>-------------------------------";
                             console.log('store ');
                             console.log(store);
 
-                            // for (var i = 0; i < store.getCount(); i++) {
-                            //     if(item.record.get('project') === store.getAt(i).get('project')){
-                            //         console.log(store.getAt(i).get('fullName').toString());
-                            //         msg += "<br>" + store.getAt(i).get('fullName').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
-                            //     }
-                            // }
+                            for (var i = 0; i < store.getCount(); i++) {
+                                if(item.record.get('project') === store.getAt(i).get('project')){
+                                    console.log(store.getAt(i).get('fullname').toString());
+                                    msg += "<br>" + store.getAt(i).get('fullname').toString().charAt(0) + " -- " + store.getAt(i).get('rawGrade');
+                                }
+                            }
                             msg += "<br> Accepted Grade: " + item.record.get('avgGrade') + "<br> Raw Grade: " + item.record.get('rawGrade');
-                            msg += "<br> Full name: " + item.record.get('fullname');
+                            msg += "<br> Name: " + item.record.get('fullname');
                             Ext.Msg.alert(item.record.get('project'), msg);
                             // Ext.Msg.alert(item.record.get('project'));
                             console.log('project: ' + item.record.get('project'));
