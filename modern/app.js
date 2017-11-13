@@ -58689,7 +58689,7 @@ Ext.define('MobileJudge.view.pages.Map', {extend:Ext.TabPanel, xtype:'eventmap',
     }));
   }});
 }}});
-Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewController, alias:'controller.settings', model:null, init:function(view) {
+Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewController, alias:'controller.settings', init:function(view) {
   this.model = view.getViewModel();
 }, onTermsLoaded:function() {
   var select = this.getReferences().termSelector, rec = select.getStore().findRecord('active', true);
@@ -58714,7 +58714,7 @@ Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewControlle
     if (changed) {
       Ext.GlobalEvents.fireEvent('termChanged', changed);
     }
-    console.log('inside if changed');
+    console.log(changed);
   }});
   console.log('save end');
 }, onDeleteTermClick:function() {
@@ -58733,7 +58733,7 @@ Ext.define('MobileJudge.view.settings.Controller', {extend:Ext.app.ViewControlle
 }, onMakeActiveTerm:function() {
   var me = this, rec = me.model.get('selectedTerm');
   rec.set('active', true);
-  me.onSaveTermClick();
+  setTimeout(me.onSaveTermClick(), 300);
   console.log('hello');
 }, onNewQuestionButtonClick:function(button) {
   var rec = new MobileJudge.model.settings.Question, grid = button.up('grid'), editor = grid.getPlugins('gridEditor');

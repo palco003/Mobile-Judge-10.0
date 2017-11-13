@@ -2,7 +2,7 @@ Ext.define('MobileJudge.view.settings.Controller', {
 	extend: 'Ext.app.ViewController',
 	alias: 'controller.settings',
 
-	model: null,
+	//model: null,
 
     init: function(view) {
         this.model = view.getViewModel();
@@ -52,7 +52,7 @@ Ext.define('MobileJudge.view.settings.Controller', {
 	    success: function() {
 		console.log("Inside success");
 		if (changed) Ext.GlobalEvents.fireEvent('termChanged', changed);
-		console.log("inside if changed");
+		console.log(changed);
 	    }
 	});
 	console.log("save end");
@@ -75,7 +75,7 @@ Ext.define('MobileJudge.view.settings.Controller', {
     onMakeActiveTerm: function() {
 		var me = this, rec = me.model.get('selectedTerm');
 		rec.set('active', true);
-		me.onSaveTermClick();
+		setTimeout(me.onSaveTermClick(), 300);
 		console.log("hello");
     },
 
