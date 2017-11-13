@@ -232,7 +232,7 @@ Ext.define('MobileJudge.view.settings.Terms', {
 						value: '{selectedTerm.rejectInviteTemplate}'
 					}
 				},
-				/*{
+				{
                                         xtype: 'combobox',
                                         queryMode: 'local',
                                         editable: false,
@@ -244,7 +244,7 @@ Ext.define('MobileJudge.view.settings.Terms', {
                                                 store: 'templates4Term',
                                                 value: '{selectedTerm.acceptInviteTemplate}'
                                         }
-                                },*/
+                                },
 				{
 					xtype: 'combobox',
 					queryMode: 'local',
