@@ -1,47 +1,3 @@
-// var store = Ext.create('Ext.data.Store', { //('MobileJudge.store.stats.ProjectGrades', {
-//     storeId: 'projectGrades',
-//     // alias: 'store.projectGrades',
-//
-//     // TODO: get average grade
-//     groupField: 'project',
-//     fields: ['grade', 'project'],
-//
-//     autoLoad: true,
-//     data: []
-//     // pageSize: 0
-// });
-
-// Ext.define('MobileJudge.store.stats.GroupedProjects', {
-//     extend: 'Ext.data.Store',
-//     alias: 'store.groupedProjects',
-//     requires: [
-//         'MobileJudge.model.stats.GroupedProjects'
-//     ],
-//
-//     model: 'MobileJudge.model.stats.GroupedProjects',
-//     listeners: {
-//         load: function() {
-//             // // instance of the original store
-//             // Ext.define('MobileJudge.store.stats.GroupedProjects', {
-//             //     extend: 'Ext.data.Store',
-//             //     model: 'MobileJudge.model.stats.GroupedProjects'
-//             // });
-//
-//             // store to contain the grouped data
-//             var groupedStore = Ext.create('MobileJudge.store.stats.GroupedProjects');
-//             console.log(groupedStore);
-//             // iterate the groups and average the 'grade' value per project
-//             store.getGroups().each(function(item) {
-//                 console.log(item);
-//                 groupedStore.add({
-//                     project: item.getGroupKey(),
-//                     grade: item.average('grade')
-//                 });
-//             });
-//         }
-//     }
-// });
-
 Ext.define('MobileJudge.store.stats.ProjectGrades', {
     extend: 'Ext.data.Store',
     alias: 'store.projectGrades',
@@ -1020,12 +976,9 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         var data = [];
         var store = Ext.createByAlias('store.projectGrades');
         // var store = Ext.getStore('projectGrades').data.items;
-        console.log('store before group ' + store);
         store.group('project');
         var groups = store.getGroups();
         groups.each(function (group) {
-            console.log(group.config.groupKey);
-            console.log(group);
             data.push({
                 project: group.config.groupKey, // each group is a project
                 avgGrade: group.average('grade'),

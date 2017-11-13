@@ -15710,6 +15710,7 @@ Ext.define('MobileJudge.store.stats.QuestionAverage', {
         var groups = store.getGroups();
         console.log(groups);
         groups.each(function (group) {
+            console.log('within group: ');
             console.log(group);
             if(group.get('comment') !== null){
                 data.push({
