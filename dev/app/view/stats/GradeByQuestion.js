@@ -67,9 +67,11 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
 
                             for (var i = 0; i < store.getCount(); i++) {
                                 if(item.record.get('question') === store.getAt(i).get('question')){
-                                    msg += "<br>" + store.getAt(i).get('judge').toString()
-                                        + " -- "
-                                        + store.getAt(i).get('grade');
+                                    if(store.getAt(i).get('comment') !== null){
+                                        msg += "<br>" + store.getAt(i).get('judge').toString()
+                                            + " -- "
+                                            + store.getAt(i).get('grade');
+                                    }
                                 }
                             }
 
