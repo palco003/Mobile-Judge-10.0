@@ -72,11 +72,9 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                         itemclick: function(chart, item) {
                             var store = Ext.createByAlias('store.projectGrades');
                             var msg = "<p style=\"text-align: center;\">";
-                            msg += "<br>Average Accepted Grade: " + item.record.get('avgGrade') +
+                            msg += "Average Accepted Grade: " + item.record.get('avgGrade') +
                                 "<br>Average Raw Grade: " + item.record.get('rawGrade');
                             msg += "<br>-------------------------------";
-                            console.log('store ');
-                            console.log(store);
 
                             for (var i = 0; i < store.getCount(); i++) {
                                 if(item.record.get('project') === store.getAt(i).get('project')){
@@ -85,9 +83,9 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                                         + store.getAt(i).get('rawGrade');
                                 }
                             }
+
                             msg += "</p>";
                             Ext.Msg.alert(item.record.get('project'), msg);
-                            console.log('project: ' + item.record.get('project'));
                         }
                     }
                     // interactions: [
