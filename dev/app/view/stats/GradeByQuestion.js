@@ -70,10 +70,14 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                                         if(current !== last){
                                             msg += "<br>-------------------------------";
                                         }
-                                        msg += "<br>" + store.getAt(i).get('judge').toString()
+                                        msg += "<br>" + store.getAt(i).get('judge').toString().split(" ")[0].charAt(0)
+                                            + ". "
+                                            + store.getAt(i).get('judge').toString().split(" ")[1]
+                                            + " "
+                                            + store.getAt(i).get('student')
                                             + " -- "
                                             + store.getAt(i).get('grade');
-                                        
+
                                         last = current;
                                     }
                                 }
