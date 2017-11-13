@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.view.settings.Terms', {
     extend: 'Ext.form.Panel',
-    //xtype: 'panel',
+    xtype: 'panel',
     alias: 'widget.terms',
     reference: 'termForm',
     modelValidation: true,
@@ -31,29 +31,40 @@ Ext.define('MobileJudge.view.settings.Terms', {
             text: 'New',
             iconCls: 'x-fa fa-edit',
             ui: 'action',
-	    //bind: {
-	    //	disabled: '{!status.canCreate}'	
-	    //},
-	    handler: 'onNewTermClick'
+           // bind: {
+           //     disabled: '{!status.canCreate}'
+           // },
+            handler: 'onNewTermClick'
         }, {
             xtype: 'button',
             text: 'Save',
             iconCls: 'x-fa fa-save',
             ui: 'confirm',
-	    //bind: {
-	    //	disabled: '{!status.canSave}'
-	    //},
-	    handler: 'onSaveTermClick'
+            //bind: {
+            //    disabled: '{!status.canSave}'
+            //},
+            handler: 'onSaveTermClick'
         }, {
             xtype: 'button',
             text: 'Delete',
             iconCls: 'x-fa fa-remove',
             ui: 'decline',
-	    //bind: {
-	    //	disabled: '{!status.canDelete}'
-	    //},
-	    handler: 'onDeleteTermClick'
-        }
+            //bind: {
+            //    disabled: '{!status.canDelete}'
+            //},
+            handler: 'onDeleteTermClick'
+        },
+            {
+                xtype: 'button',
+                text: 'Make Active',
+                ui: 'action',
+		iconCls: 'x-fa fa-calendar-check-o',
+                handler: 'onMakeActiveTerm',
+                bind: {
+                    hidden: '{selectedTerm.active}',
+                    disabled: '{status.canSave}'
+                }
+            }
 
         ]
     }, {
@@ -65,72 +76,20 @@ Ext.define('MobileJudge.view.settings.Terms', {
             labelWidth: 150,
             bind: '{selectedTerm.name}'
         }, {
-            xtype: 'fieldset',
-            layout: 'hbox',
-            border: false,
-            padding: 0,
-            margin: 0,
-            items: [
-                {
-                    xtype: 'checkboxfield',
-                    label: 'IsActive?',
-                    labelWidth: 150,
-                    bind: '{selectedTerm.active}'
-                },
-                {
-                    xtype: 'button',
-                    text: 'Make Active',
-                    border: false,
-                    docked: 'right',
-                    ui: 'action',
-		    handler: 'onMakeActiveTerm',
-                    bind: {
-                        hidden: '{selectedTerm.active}',
-                        disabled: '{status.canSave}'
-                    }
-                }]
+            xtype: 'checkboxfield',
+            label: 'IsActive?',
+            labelWidth: 150,
+            bind: '{selectedTerm.active}'
         }, {
-            xtype: 'fieldset',
-            layout: 'hbox',
-            border: false,
-            padding: 0,
-            margin: 0,
-            items: [
-                {
-                    xtype: 'checkboxfield',
-                    label: 'Judge Login?',
-                    labelWidth: 150,
-                    bind: '{selectedTerm.allowJudgeLogin}'
-                },
-		// So this button here is not supposed to be here, its being used to left align the checkbox, if you can find a way to left align
-		// the checkbox field above then remove this button
-                {
-                    xtype: 'button',
-                    border: false,
-		    hidden: true,
-                    docked: 'right'
-                }]
+            xtype: 'checkboxfield',
+            label: 'Judge Login?',
+            labelWidth: 150,
+            bind: '{selectedTerm.allowJudgeLogin}'
         }, {
-            xtype: 'fieldset',
-            layout: 'hbox',
-            border: false,
-            padding: 0,
-            margin: 0,
-            items: [
-                {
-                    xtype: 'checkboxfield',
-                    label: 'Stud. Grades?',
-                    labelWidth: 150,
-                    bind: '{selectedTerm.showGrades}'
-                },
-		// See comment above... 
-                {
-                    xtype: 'button',
-                    border: false,
-		    hidden: true,	
-                    docked: 'right'
-                }]
-
+            xtype: 'checkboxfield',
+            label: 'Stud. Grades?',
+            labelWidth: 150,
+            bind: '{selectedTerm.showGrades}'
         }, {
             xtype: 'numberfield',
             label: 'Stud. per Judge',
@@ -197,8 +156,16 @@ Ext.define('MobileJudge.view.settings.Terms', {
                 value: '{selectedTerm.confirmTemplate}'
             }
 
-        }, 
-        {
+        }, {
+            xtype: 'selectfield',
+            label: 'Confirm Acpt.',
+            displayField: 'name',
+            valueField: 'id',
+            bind: {
+                store: 'templates4Term',
+                value: '{selectedTerm.acceptanceConfirmation}'
+            }
+        }, {
             xtype: 'selectfield',
             label: 'Reject Template',
             displayField: 'name',
@@ -207,7 +174,16 @@ Ext.define('MobileJudge.view.settings.Terms', {
                 store: 'templates4Term',
                 value: '{selectedTerm.rejectInviteTemplate}'
             }
-        
+        }, {
+            xtype: 'selectfield',
+            label: 'Acpt. Template',
+            displayField: 'name',
+            valueField: 'id',
+            bind: {
+                store: 'templates4Term',
+                value: '{selectedTerm.acceptInviteTemplate}'
+            }
+
         }, {
             xtype: 'selectfield',
             label: 'Remv. Template',
