@@ -62,8 +62,8 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                     label: {
                         field: 'average',
                         display: 'insideEnd',
-                        rotate: {
-                            degrees: 90
+                        renderer: function (text) {
+                            return Ext.Number.toFixed(parseFloat(text), 2);
                         }
                     },
                     listeners: {
