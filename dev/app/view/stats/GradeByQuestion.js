@@ -38,7 +38,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                     position: 'bottom',
                     label: {
                         rotate: {
-                            degrees: 0
+                            degrees: -40
                         }
                     }
                 }],
@@ -54,7 +54,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                         saturationFactor: 1.5
                     },
                     label: {
-                        field: 'question',
+                        field: 'average',
                         display: 'insideStart'
                     }
                 }]
