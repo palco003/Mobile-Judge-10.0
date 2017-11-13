@@ -23,7 +23,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     right: 40
                 },
                 legend: {
-                    position: "top"
+                    docked: "top"
                 },
                 axes: [{
                     type: 'numeric3d',
