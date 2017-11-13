@@ -63,7 +63,10 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     },
                     label: {
                         field: ['avgGrade', 'rawGrade'],
-                        display: 'insideEnd'
+                        display: 'insideEnd',
+                        renderer: function (text) {
+                            return Ext.Number.toFixed(parseFloat(text), 2);
+                        }
                     },
                     // highlight: {
                     //     fillStyle: ['#5DBCD2']
