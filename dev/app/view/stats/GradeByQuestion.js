@@ -71,13 +71,14 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                             for (var i = 0; i < store.getCount(); i++) {
                                 if(item.record.get('question') === store.getAt(i).get('question')){
                                     if(store.getAt(i).get('comment') !== null){
+                                        var split = store.getAt(i).get('judge').toString().split(" ");
                                         var current = store.getAt(i).get('judge').toString();
                                         if(current !== last){
                                             msg += "<br>-------------------------------";
                                         }
-                                        msg += "<br>" + store.getAt(i).get('judge').toString().split(" ")[0].charAt(0)
+                                        msg += "<br>" + split[0].charAt(0)
                                             + ". "
-                                            + store.getAt(i).get('judge').toString().split(" ")[1]
+                                            + split[1]
                                             + " ("
                                             + store.getAt(i).get('student')
                                             + ") -- "
