@@ -45,7 +45,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     label: {
                         fontSize: 10,
                         rotate: {
-                            degrees: -40
+                            degrees: -60
                         }
                     }
                 }],

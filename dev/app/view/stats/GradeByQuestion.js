@@ -24,6 +24,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                 axes: [{
                     type: 'numeric3d',
                     position: 'left',
+                    maximum: 10,
                     grid: true,
                     title: {
                         text: 'Average Grade',
