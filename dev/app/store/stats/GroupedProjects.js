@@ -975,7 +975,6 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
     data: (function () {
         var data = [];
         var store = Ext.createByAlias('store.projectGrades');
-        // var store = Ext.getStore('projectGrades').data.items;
         store.group('project');
         var groups = store.getGroups();
         groups.each(function (group) {
