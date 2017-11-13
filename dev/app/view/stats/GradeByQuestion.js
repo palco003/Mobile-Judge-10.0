@@ -63,14 +63,13 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                             var store = Ext.createByAlias('store.questionGrades');
                             var msg = "<p style=\"text-align: center;\">";
 
-                            msg += "<br>-------------------------------";
-
                             for (var i = 0; i < store.getCount(); i++) {
                                 if(item.record.get('question') === store.getAt(i).get('question')){
                                     if(store.getAt(i).get('comment') !== null){
                                         msg += "<br>" + store.getAt(i).get('judge').toString()
                                             + " -- "
-                                            + store.getAt(i).get('grade');
+                                            + store.getAt(i).get('grade')
+                                            + "<br>-------------------------------";
                                     }
                                 }
                             }
