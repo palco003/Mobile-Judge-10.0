@@ -46,6 +46,7 @@ module.exports = function(server, db) {
 			db.student.findOne({ where: search }),
 			db.judge.findOne({ where: search }),
 			db.user.scope('admins').findOne({ where: search }),
+			db.user.scope('unregs').findOne({ where: search }),
 			db.term.getActiveTerm()
 		])
 		.then(function(arr){
