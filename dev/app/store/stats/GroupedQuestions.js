@@ -1276,14 +1276,17 @@ Ext.define('MobileJudge.store.stats.QuestionAverage', {
     model: 'MobileJudge.model.stats.QuestionAverage',
     data: (function () {
         var data = [];
-        var expense = Ext.createByAlias('store.questionGrades');
-        console.log(expense);
-        expense.group('questionId');
-        var groups = expense.getGroups();
+        var store = Ext.createByAlias('store.questionGrades');
+        console.log(store);
+        store.group('question');
+        var groups = store.getGroups();
         console.log(groups);
         groups.each(function (group) {
             console.log(group);
-            data.push({ questionId: group.config.groupKey, question: group.get('question'), average: group.average('grade') });
+            data.push({
+                question: group.config.groupKey,
+                average: group.average('grade')
+            });
         });
         return data;
     })()
