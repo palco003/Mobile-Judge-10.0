@@ -20,7 +20,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     top: 20,
                     bottom: 20,
                     left: 20,
-                    right: 40
+                    right: 20
                 },
                 legend: {
                     docked: "top",
@@ -57,6 +57,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     type: 'bar3d',
                     xField: 'project',
                     yField: ['avgGrade', 'rawGrade'],
+                    title: ['Approved Grade', 'Raw Grade'],
                     stacked: false,
                     showInLegend: true,
                     style: {
@@ -90,8 +91,8 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                                         + store.getAt(i).get('rawGrade');
                                 }
                             }
-
                             msg += "</p>";
+
                             Ext.Msg.alert(item.record.get('project'), msg);
                         }
                     }
