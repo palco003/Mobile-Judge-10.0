@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.store.grade.Students', {
     extend: 'Ext.data.Store',
-    alias: 'store.studentsGrades',
+    alias: 'store.studentsStats',
 
     requires: [
         'MobileJudge.proxy.API'
