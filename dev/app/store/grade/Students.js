@@ -1,6 +1,6 @@
 Ext.define('MobileJudge.store.grade.Students', {
     extend: 'Ext.data.Store',
-    alias: 'store.students',
+    alias: 'store.studentsGrades',
 
     model: 'MobileJudge.model.grade.Student',
 

@@ -974,7 +974,7 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
     model: 'MobileJudge.model.stats.GradeAverage',
     data: (function () {
         var data = [];
-        var store = Ext.createByAlias('store.students');
+        var store = Ext.createByAlias('store.studentsGrades');
         var jsonStore = Ext.createByAlias('store.projectGrades');
 
         console.log('store.students');
