@@ -2,6 +2,11 @@ Ext.define('MobileJudge.store.grade.Students', {
     extend: 'Ext.data.Store',
     alias: 'store.studentsGrades',
 
+    requires: [
+        'MobileJudge.model.grade.Student',
+        'MobileJudge.proxy.API'
+    ],
+
     model: 'MobileJudge.model.grade.Student',
 
     proxy: {
@@ -14,6 +19,5 @@ Ext.define('MobileJudge.store.grade.Students', {
 
     remoteSort: true,
     remoteFilter: true,
-    autoLoad: true,
     pageSize: 999
 });
