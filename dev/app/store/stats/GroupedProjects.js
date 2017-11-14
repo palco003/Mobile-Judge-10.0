@@ -1001,7 +1001,7 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         console.log('===');
         console.log(groups === jsonStoreGroups);
 
-        jsonStoreGroups.each(function (group) {
+        groups.each(function (group) {
             console.log(group.config.groupKey);
             console.log(group);
             data.push({
