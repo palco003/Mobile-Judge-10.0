@@ -987,7 +987,7 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         // var groups = store.getGroups();
 
         jsonStore.group('project');
-        var jsonStoreGroups = store.getGroups();
+        var jsonStoreGroups = jsonStore.getGroups();
 
         // console.log('groups');
         // console.log(groups);
