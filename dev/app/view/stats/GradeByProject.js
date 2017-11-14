@@ -17,7 +17,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     type: 'gradeAverage'
                 },
                 insetPadding: {
-                    top: 60,
+                    top: 20,
                     bottom: 20,
                     left: 20,
                     right: 40
