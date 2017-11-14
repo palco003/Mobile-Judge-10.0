@@ -996,9 +996,11 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         store.group('project');
         var groups = store.getGroups();
 
+        console.log('groups');
         console.log(groups);
 
         groups.each(function (group) {
+            console.log(group.config.groupKey);
             console.log(group);
             data.push({
                 project: group.config.groupKey, // each group is a project
