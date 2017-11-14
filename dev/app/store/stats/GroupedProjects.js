@@ -980,15 +980,15 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         console.log('store.students');
         console.log(store);
 
-        var getRange = store.getRange();
-
-        console.log('students store getRange');
-        console.log(getRange);
-
-        var jsonified = store.getRange().json;
-
-        console.log('students store jsonified');
-        console.log(jsonified);
+        // var getRange = store.getRange();
+        //
+        // console.log('students store getRange');
+        // console.log(getRange);
+        //
+        // var jsonified = store.getRange().json;
+        //
+        // console.log('students store jsonified');
+        // console.log(jsonified);
 
         console.log('jsonStore - project grades');
         console.log(jsonStore);
