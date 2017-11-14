@@ -980,7 +980,8 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         console.log('store.students');
         console.log(store);
 
-        var jsonified = store.toJSON();
+        var jsonified = Ext.util.JSON.encode(store);
+
         console.log('students store jsonified');
         console.log(jsonified);
 
