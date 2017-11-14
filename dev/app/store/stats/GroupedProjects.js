@@ -980,16 +980,6 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
         console.log('store.students');
         console.log(store);
 
-        // var getRange = store.getRange();
-        //
-        // console.log('students store getRange');
-        // console.log(getRange);
-        //
-        // var jsonified = store.getRange().json;
-        //
-        // console.log('students store jsonified');
-        // console.log(jsonified);
-
         console.log('jsonStore - project grades');
         console.log(jsonStore);
 
@@ -1004,6 +994,12 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
 
         console.log('jsonStoreGroups');
         console.log(jsonStoreGroups);
+
+        console.log('equality');
+        console.log('==');
+        console.log(groups == jsonStoreGroups);
+        console.log('===');
+        console.log(groups === jsonStoreGroups);
 
         groups.each(function (group) {
             console.log(group.config.groupKey);
