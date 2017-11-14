@@ -5,7 +5,10 @@ Ext.define('MobileJudge.store.grade.Students', {
     model: 'MobileJudge.model.grade.Student',
 
     proxy: {
-        type: 'json',
+        type: 'api',
+        reader: {
+            type: 'json',
+        },
         url: '/api/students'
     },
 
