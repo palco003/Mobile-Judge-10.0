@@ -62,7 +62,7 @@ Ext.define('MobileJudge.view.settings.Terms', {
                 handler: 'onMakeActiveTerm',
                 bind: {
                     hidden: '{selectedTerm.active}',
-                    disabled: '{status.canSave}'
+                    //disabled: '{status.canSave}'
                 }
             }
 
