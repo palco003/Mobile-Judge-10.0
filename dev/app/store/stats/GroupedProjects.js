@@ -974,32 +974,32 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
     model: 'MobileJudge.model.stats.GradeAverage',
     data: (function () {
         var data = [];
-        // var store = Ext.createByAlias('store.students');
+        var store = Ext.createByAlias('store.students');
         var jsonStore = Ext.createByAlias('store.projectGrades');
-        //
-        // console.log('store.students');
-        // console.log(store);
-        //
-        // console.log('jsonStore - project grades');
-        // console.log(jsonStore);
 
-        // store.group('project');
-        // var groups = store.getGroups();
+        console.log('store.students');
+        console.log(store);
+
+        console.log('jsonStore - project grades');
+        console.log(jsonStore);
+
+        store.group('project');
+        var groups = store.getGroups();
 
         jsonStore.group('project');
         var jsonStoreGroups = jsonStore.getGroups();
 
-        // console.log('groups');
-        // console.log(groups);
-        //
-        // console.log('jsonStoreGroups');
-        // console.log(jsonStoreGroups);
-        //
-        // console.log('equality');
-        // console.log('==');
-        // console.log(groups == jsonStoreGroups);
-        // console.log('===');
-        // console.log(groups === jsonStoreGroups);
+        console.log('groups');
+        console.log(groups);
+
+        console.log('jsonStoreGroups');
+        console.log(jsonStoreGroups);
+
+        console.log('equality');
+        console.log('==');
+        console.log(groups == jsonStoreGroups);
+        console.log('===');
+        console.log(groups === jsonStoreGroups);
 
         jsonStoreGroups.each(function (group) {
             console.log(group.config.groupKey);
