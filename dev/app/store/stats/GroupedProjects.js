@@ -974,10 +974,17 @@ Ext.define('MobileJudge.store.stats.GradeAverage', {
     model: 'MobileJudge.model.stats.GradeAverage',
     data: (function () {
         var data = [];
-        var store = Ext.createByAlias('store.projectGrades');
+        var store = Ext.createByAlias('store.students');
+
+        console.log(store);
+
         store.group('project');
         var groups = store.getGroups();
+
+        console.log(groups);
+        
         groups.each(function (group) {
+            console.log(group);
             data.push({
                 project: group.config.groupKey, // each group is a project
                 avgGrade: group.average('grade'),
