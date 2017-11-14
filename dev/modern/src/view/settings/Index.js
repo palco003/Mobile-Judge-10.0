@@ -3,10 +3,10 @@ Ext.define('MobileJudge.view.settings.Index', {
     alias: 'widget.settings',
 
 
-    //controller: 'settings',
-    //viewModel: {
-    //	type: 'settings'
-    //},
+    controller: 'settings',
+    viewModel: {
+    	type: 'settings'
+    },
 
     cls: 'shadow',
     activeTab: 0,
