@@ -14,5 +14,6 @@ Ext.define('MobileJudge.store.grade.Students', {
 
     remoteSort: true,
     remoteFilter: true,
-    pageSize: 999,
+    autoLoad: true,
+    pageSize: 999
 });
