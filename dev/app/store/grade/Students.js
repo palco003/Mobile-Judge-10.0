@@ -5,10 +5,7 @@ Ext.define('MobileJudge.store.grade.Students', {
     model: 'MobileJudge.model.grade.Student',
 
     proxy: {
-        reader: {
-            type: 'json',
-            rootProperty: 'items'
-        },
+        type: 'json',
         url: '/api/students'
     },
 
