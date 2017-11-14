@@ -3,6 +3,5 @@ oauthd/
 api/node_modules/
 oauthd/node_modules/
 oauth/plugins/
-dev/
 dev/build/
 .idea/
