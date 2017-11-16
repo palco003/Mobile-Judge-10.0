@@ -122,12 +122,38 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                             }
 
                             msg += "</p>";
-                            Ext.Msg.alert(item.record.get('question'), msg);
-                            // Ext.Msg.show({
-                            //     title: item.record.get('question'),
-                            //     items: myGrid,
-                            //     layout: 'fit'
-                            // });
+                            // Ext.Msg.alert(item.record.get('question'), msg);
+                            Ext.Msg.show({
+                                title: item.record.get('question'),
+                                items: {
+                                    xtype: grid,
+                                    store: store,
+                                    width: 400,
+                                    height: 200,
+                                    title: 'Grades',
+                                    columns: [
+                                        {
+                                            text: 'Judge',
+                                            width: 100,
+                                            sortable: false,
+                                            hideable: false,
+                                            dataIndex: 'judge'
+                                        },
+                                        {
+                                            text: 'Student',
+                                            width: 150,
+                                            dataIndex: 'student',
+                                            hidden: true
+                                        },
+                                        {
+                                            text: 'Grade',
+                                            flex: 1,
+                                            dataIndex: 'grade'
+                                        }
+                                    ]
+                                },
+                                layout: 'fit'
+                            })
                         }
                     }
                 }],
