@@ -69,6 +69,36 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                     listeners: {
                         itemclick: function(chart, item) {
                             var store = Ext.createByAlias('store.questionGrades');
+
+
+                            var grid = Ext.create('Ext.grid.Panel', {
+                                renderTo: document.body,
+                                store: store,
+                                width: 400,
+                                height: 200,
+                                title: 'Grades',
+                                columns: [
+                                    {
+                                        text: 'Judge',
+                                        width: 100,
+                                        sortable: false,
+                                        hideable: false,
+                                        dataIndex: 'judge'
+                                    },
+                                    {
+                                        text: 'Student',
+                                        width: 150,
+                                        dataIndex: 'student',
+                                        hidden: true
+                                    },
+                                    {
+                                        text: 'Grade',
+                                        flex: 1,
+                                        dataIndex: 'grade'
+                                    }
+                                ]
+                            });
+
                             var msg = "<p style=\"text-align: center;\">";
                             var last = '';
                             for (var i = 0; i < store.getCount(); i++) {
@@ -93,7 +123,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                             }
 
                             msg += "</p>";
-                            Ext.Msg.alert(item.record.get('question'), msg);
+                            Ext.Msg.alert(item.record.get('question'), grid);
                         }
                     }
                 }],
