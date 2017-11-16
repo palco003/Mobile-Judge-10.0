@@ -123,11 +123,11 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
 
                             msg += "</p>";
                             Ext.Msg.alert(item.record.get('question'), msg);
-                            Ext.Msg.show({
-                                title: item.record.get('question'),
-                                items: myGrid,
-                                layout: 'fit'
-                            });
+                            // Ext.Msg.show({
+                            //     title: item.record.get('question'),
+                            //     items: myGrid,
+                            //     layout: 'fit'
+                            // });
                         }
                     }
                 }],
