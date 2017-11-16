@@ -71,7 +71,7 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                             var store = Ext.createByAlias('store.questionGrades');
 
 
-                            var grid = Ext.create('Ext.grid.Panel', {
+                            var myGrid = Ext.create('Ext.grid.Panel', {
                                 store: store,
                                 width: 400,
                                 height: 200,
@@ -122,7 +122,12 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                             }
 
                             msg += "</p>";
-                            Ext.Msg.alert(item.record.get('question'), grid);
+                            Ext.Msg.alert(item.record.get('question'), msg);
+                            Ext.Msg.show({
+                                title: item.record.get('question'),
+                                items: myGrid,
+                                layout: 'fit'
+                            });
                         }
                     }
                 }],
