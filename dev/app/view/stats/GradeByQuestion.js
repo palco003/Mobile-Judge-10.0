@@ -72,7 +72,6 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
 
 
                             var grid = Ext.create('Ext.grid.Panel', {
-                                renderTo: document.body,
                                 store: store,
                                 width: 400,
                                 height: 200,
