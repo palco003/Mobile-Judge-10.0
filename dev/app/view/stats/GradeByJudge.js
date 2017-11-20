@@ -21,7 +21,6 @@ Ext.define('MobileJudge.view.stats.GradeByJudge', {
                     left: 20,
                     right: 40
                 },
-                // store: store,
                 axes: [{
                     type: 'numeric3d',
                     position: 'left',
