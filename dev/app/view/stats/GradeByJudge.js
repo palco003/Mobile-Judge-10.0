@@ -49,11 +49,13 @@ Ext.define('MobileJudge.view.stats.GradeByJudge', {
                 }],
                 series: [{
                     type: 'bar3d',
-                    highlight: true,
                     xField: 'judge',
                     yField: ['average'],
                     style: {
                         minGapWidth: 10
+                    },
+                    highlight: {
+                        fillStyle: ['#5DBCD2']
                     },
                     highlightCfg: {
                         saturationFactor: 1.5
@@ -74,7 +76,6 @@ Ext.define('MobileJudge.view.stats.GradeByJudge', {
                             for (var i = 0; i < store.getCount(); i++) {
                                 if(item.record.get('judge') === store.getAt(i).get('judge')){
                                     if(store.getAt(i).get('comment') !== null){
-                                        var split = store.getAt(i).get('judge').toString().split(" ");
                                         var current = store.getAt(i).get('student').toString();
                                         if(current !== last){
                                             msg += "<br>-------------------------------";

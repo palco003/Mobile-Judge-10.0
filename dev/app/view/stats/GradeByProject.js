@@ -73,9 +73,9 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                             return Ext.Number.toFixed(parseFloat(text), 2);
                         }
                     },
-                    // highlight: {
-                    //     fillStyle: ['#5DBCD2']
-                    // },
+                    highlight: {
+                        fillStyle: ['#5DBCD2']
+                    },
                     listeners: {
                         itemclick: function(chart, item) {
                             var store = Ext.createByAlias('store.projectGrades');

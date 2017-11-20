@@ -49,11 +49,13 @@ Ext.define('MobileJudge.view.stats.GradeByQuestion', {
                 }],
                 series: [{
                     type: 'bar3d',
-                    highlight: true,
                     xField: 'question',
                     yField: ['average'],
                     style: {
                         minGapWidth: 10
+                    },
+                    highlight: {
+                        fillStyle: ['#5DBCD2']
                     },
                     highlightCfg: {
                         saturationFactor: 1.5
