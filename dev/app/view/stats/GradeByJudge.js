@@ -72,7 +72,7 @@ Ext.define('MobileJudge.view.stats.GradeByJudge', {
                             var msg = "<p style=\"text-align: center;\">";
                             var last = '';
                             for (var i = 0; i < store.getCount(); i++) {
-                                if(item.record.get('question') === store.getAt(i).get('question')){
+                                if(item.record.get('judge') === store.getAt(i).get('judge')){
                                     if(store.getAt(i).get('comment') !== null){
                                         var split = store.getAt(i).get('judge').toString().split(" ");
                                         var current = store.getAt(i).get('judge').toString();
@@ -93,7 +93,7 @@ Ext.define('MobileJudge.view.stats.GradeByJudge', {
                             }
 
                             msg += "</p>";
-                            Ext.Msg.alert(item.record.get('question'), msg);
+                            Ext.Msg.alert(item.record.get('judge'), msg);
                         }
                     }
                 }],

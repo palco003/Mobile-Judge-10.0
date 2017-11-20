@@ -7101,7 +7101,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jose Casanova",
                 "question": "How significant is the problem?",
                 "questionId": 16,
@@ -7112,7 +7112,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jose Casanova",
                 "question": "How significant is the solution?",
                 "questionId": 17,
@@ -7123,7 +7123,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jose Casanova",
                 "question": "How impressive is the demo?",
                 "questionId": 18,
@@ -7134,7 +7134,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jose Casanova",
                 "question": "How well prepared is the student?",
                 "questionId": 19,
@@ -7145,7 +7145,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jose Casanova",
                 "question": "How expressive and self-sustained is the poster?",
                 "questionId": 20,
@@ -7156,7 +7156,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "David Schiumerini",
                 "question": "How significant is the problem?",
                 "questionId": 16,
@@ -7167,7 +7167,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "David Schiumerini",
                 "question": "How significant is the solution?",
                 "questionId": 17,
@@ -7178,7 +7178,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "David Schiumerini",
                 "question": "How impressive is the demo?",
                 "questionId": 18,
@@ -7189,7 +7189,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "David Schiumerini",
                 "question": "How well prepared is the student?",
                 "questionId": 19,
@@ -7200,7 +7200,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "David Schiumerini",
                 "question": "How expressive and self-sustained is the poster?",
                 "questionId": 20,
@@ -7211,7 +7211,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Nickolas Morales",
                 "question": "How significant is the problem?",
                 "questionId": 16,
@@ -7222,7 +7222,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Nickolas Morales",
                 "question": "How significant is the solution?",
                 "questionId": 17,
@@ -7233,7 +7233,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Nickolas Morales",
                 "question": "How impressive is the demo?",
                 "questionId": 18,
@@ -7244,7 +7244,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Nickolas Morales",
                 "question": "How well prepared is the student?",
                 "questionId": 19,
@@ -7255,7 +7255,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Nickolas Morales",
                 "question": "How expressive and self-sustained is the poster?",
                 "questionId": 20,
@@ -7266,43 +7266,10 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Daniel Khawand",
                 "question": "How significant is the problem?",
                 "questionId": 16,
-                "grade": 10,
-                "projectName": "WEB-VR: Towards Virtual and Augmented Reality for the WEB 1.0",
-                "studentId": 4808229,
-                "judgeId": 8537,
-                "comment": "",
-                "accepted": "Accepted"
-            }, {
-                "judge": " Ren�",
-                "student": "Daniel Khawand",
-                "question": "How significant is the solution?",
-                "questionId": 17,
-                "grade": 6,
-                "projectName": "WEB-VR: Towards Virtual and Augmented Reality for the WEB 1.0",
-                "studentId": 4808229,
-                "judgeId": 8537,
-                "comment": "",
-                "accepted": "Accepted"
-            }, {
-                "judge": " Ren�",
-                "student": "Daniel Khawand",
-                "question": "How impressive is the demo?",
-                "questionId": 18,
-                "grade": 9,
-                "projectName": "WEB-VR: Towards Virtual and Augmented Reality for the WEB 1.0",
-                "studentId": 4808229,
-                "judgeId": 8537,
-                "comment": "",
-                "accepted": "Accepted"
-            }, {
-                "judge": " Ren�",
-                "student": "Daniel Khawand",
-                "question": "How well prepared is the student?",
-                "questionId": 19,
                 "grade": 10,
                 "projectName": "WEB-VR: Towards Virtual and Augmented Reality for the WEB 1.0",
                 "studentId": 4808229,
@@ -7310,7 +7277,40 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
+                "student": "Daniel Khawand",
+                "question": "How significant is the solution?",
+                "questionId": 17,
+                "grade": 6,
+                "projectName": "WEB-VR: Towards Virtual and Augmented Reality for the WEB 1.0",
+                "studentId": 4808229,
+                "judgeId": 8537,
+                "comment": "",
+                "accepted": "Accepted"
+            }, {
+                "judge": "Rene Price",
+                "student": "Daniel Khawand",
+                "question": "How impressive is the demo?",
+                "questionId": 18,
+                "grade": 9,
+                "projectName": "WEB-VR: Towards Virtual and Augmented Reality for the WEB 1.0",
+                "studentId": 4808229,
+                "judgeId": 8537,
+                "comment": "",
+                "accepted": "Accepted"
+            }, {
+                "judge": "Rene Price",
+                "student": "Daniel Khawand",
+                "question": "How well prepared is the student?",
+                "questionId": 19,
+                "grade": 10,
+                "projectName": "WEB-VR: Towards Virtual and Augmented Reality for the WEB 1.0",
+                "studentId": 4808229,
+                "judgeId": 8537,
+                "comment": "",
+                "accepted": "Accepted"
+            }, {
+                "judge": "Rene Price",
                 "student": "Daniel Khawand",
                 "question": "How expressive and self-sustained is the poster?",
                 "questionId": 20,
@@ -7321,7 +7321,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jake Lopez",
                 "question": "How significant is the problem?",
                 "questionId": 16,
@@ -7332,7 +7332,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jake Lopez",
                 "question": "How significant is the solution?",
                 "questionId": 17,
@@ -7343,7 +7343,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jake Lopez",
                 "question": "How impressive is the demo?",
                 "questionId": 18,
@@ -7354,7 +7354,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jake Lopez",
                 "question": "How well prepared is the student?",
                 "questionId": 19,
@@ -7365,7 +7365,7 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "comment": "",
                 "accepted": "Accepted"
             }, {
-                "judge": " Ren�",
+                "judge": "Rene Price",
                 "student": "Jake Lopez",
                 "question": "How expressive and self-sustained is the poster?",
                 "questionId": 20,
@@ -9188,61 +9188,6 @@ Ext.define('MobileJudge.store.stats.QuestionGrades', {
                 "projectName": "Life Management Platform 1.0",
                 "studentId": 4636102,
                 "judgeId": 9010,
-                "comment": "",
-                "accepted": "Accepted"
-            }, {
-                "judge": "mario fidalgo",
-                "student": "Alberto Castillo",
-                "question": "How significant is the problem?",
-                "questionId": 16,
-                "grade": 0,
-                "projectName": "IT Hands-on Non-profit Associations Reconstructions 1.0",
-                "studentId": 3966932,
-                "judgeId": 9012,
-                "comment": "",
-                "accepted": "Accepted"
-            }, {
-                "judge": "mario fidalgo",
-                "student": "Alberto Castillo",
-                "question": "How significant is the solution?",
-                "questionId": 17,
-                "grade": 0,
-                "projectName": "IT Hands-on Non-profit Associations Reconstructions 1.0",
-                "studentId": 3966932,
-                "judgeId": 9012,
-                "comment": "",
-                "accepted": "Accepted"
-            }, {
-                "judge": "mario fidalgo",
-                "student": "Alberto Castillo",
-                "question": "How impressive is the demo?",
-                "questionId": 18,
-                "grade": 4,
-                "projectName": "IT Hands-on Non-profit Associations Reconstructions 1.0",
-                "studentId": 3966932,
-                "judgeId": 9012,
-                "comment": "",
-                "accepted": "Accepted"
-            }, {
-                "judge": "mario fidalgo",
-                "student": "Alberto Castillo",
-                "question": "How well prepared is the student?",
-                "questionId": 19,
-                "grade": 0,
-                "projectName": "IT Hands-on Non-profit Associations Reconstructions 1.0",
-                "studentId": 3966932,
-                "judgeId": 9012,
-                "comment": "",
-                "accepted": "Accepted"
-            }, {
-                "judge": "mario fidalgo",
-                "student": "Alberto Castillo",
-                "question": "How expressive and self-sustained is the poster?",
-                "questionId": 20,
-                "grade": 0,
-                "projectName": "IT Hands-on Non-profit Associations Reconstructions 1.0",
-                "studentId": 3966932,
-                "judgeId": 9012,
                 "comment": "",
                 "accepted": "Accepted"
             }]
