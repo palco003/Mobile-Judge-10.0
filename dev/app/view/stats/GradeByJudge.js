@@ -70,22 +70,24 @@ Ext.define('MobileJudge.view.stats.GradeByJudge', {
                             var store = Ext.createByAlias('store.questionGrades');
                             var msg = "<p style=\"text-align: center;\">";
                             var last = '';
+                            var counter = 1;
                             for (var i = 0; i < store.getCount(); i++) {
                                 if(item.record.get('judge') === store.getAt(i).get('judge')){
                                     if(store.getAt(i).get('comment') !== null){
                                         var split = store.getAt(i).get('judge').toString().split(" ");
-                                        var current = store.getAt(i).get('judge').toString();
+                                        var current = store.getAt(i).get('student').toString();
                                         if(current !== last){
                                             msg += "<br>-------------------------------";
+                                            counter = 1;
                                         }
-                                        msg += "<br>" + store.getAt(i).get('questionId')
+                                        msg += "<br>" + counter
                                             + ". "
-                                            + " ("
                                             + store.getAt(i).get('student')
-                                            + ") -- "
+                                            + " -- "
                                             + store.getAt(i).get('grade');
 
                                         last = current;
+                                        counter++;
                                     }
                                 }
                             }
