@@ -78,9 +78,8 @@ Ext.define('MobileJudge.view.stats.GradeByJudge', {
                                         if(current !== last){
                                             msg += "<br>-------------------------------";
                                         }
-                                        msg += "<br>" + split[0].charAt(0)
+                                        msg += "<br>" + store.getAt(i).get('questionId')
                                             + ". "
-                                            + split[1]
                                             + " ("
                                             + store.getAt(i).get('student')
                                             + ") -- "
