@@ -20,7 +20,7 @@ Ext.define('MobileJudge.view.stats.GradeByProject', {
                     top: 20,
                     bottom: 20,
                     left: 20,
-                    right: 20
+                    right: 40
                 },
                 legend: {
                     docked: "top",
