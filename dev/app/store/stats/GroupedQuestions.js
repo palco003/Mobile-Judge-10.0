@@ -9282,3 +9282,27 @@ Ext.define('MobileJudge.store.stats.QuestionAverage', {
     })()
 });
 
+Ext.define('MobileJudge.model.stats.JudgeAverage', {
+    extend: 'Ext.data.Model',
+    fields: ['judgeId', 'judge', 'average']
+});
+
+
+Ext.define('MobileJudge.store.stats.JudgeAverage', {
+    extend: 'Ext.data.Store',
+    alias: 'store.judgeAverage',
+    model: 'MobileJudge.model.stats.JudgeAverage',
+    data: (function () {
+        var data = [];
+        var store = Ext.createByAlias('store.questionGrades');
+        store.group('judge');
+        var groups = store.getGroups();
+        groups.each(function (group) {
+            data.push({
+                judge: group.config.groupKey,
+                average: group.average('grade')
+            });
+        });
+        return data;
+    })()
+});
