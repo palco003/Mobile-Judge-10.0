@@ -3,14 +3,14 @@ Ext.define('MobileJudge.view.stats.StudentStats', {
     xtype: 'student_stats',
 
     requires: [
-        'Ext.ux.layout.ResponsiveColumn'
+        // 'Ext.ux.layout.ResponsiveColumn'
     ],
 
     controller: 'charts',
     viewModel: {
         type: 'charts'
     },
-    layout: 'responsivecolumn',
+    // layout: 'responsivecolumn',
 
     defaultType: 'basepie',
     defaults: {
