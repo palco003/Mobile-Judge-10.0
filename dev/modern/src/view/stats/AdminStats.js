@@ -3,7 +3,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
     xtype: 'admin_stats',
 
     requires: [
-        'Ext.ux.layout.ResponsiveColumn',
+        // 'Ext.ux.layout.ResponsiveColumn',
         'MobileJudge.view.charts.ChartsModel',
         'MobileJudge.view.charts.Controller',
         'MobileJudge.view.stats.*'
