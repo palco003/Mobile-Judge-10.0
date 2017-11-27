@@ -13,7 +13,7 @@ Ext.define('MobileJudge.view.stats.AdminStats', {
     viewModel: {
         type: 'charts'
     },
-    layout: 'responsivecolumn',
+    // layout: 'responsivecolumn',
 
     defaultType: 'basechart',
     defaults: {
