@@ -21,10 +21,6 @@ Ext.define('MobileJudge.view.stats.TestingCharts', {
                     left: 20,
                     right: 40
                 },
-                legend: {
-                    docked: "top",
-                    centered: true
-                },
                 axes: [{
                     type: 'numeric3d',
                     position: 'left',
