@@ -54,9 +54,9 @@ Ext.define('MobileJudge.view.stats.GradeByJudge', {
                     style: {
                         minGapWidth: 10
                     },
-                    highlight: {
-                        fillStyle: ['#5DBCD2']
-                    },
+                    // highlight: {
+                    //     fillStyle: ['#5DBCD2']
+                    // },
                     highlightCfg: {
                         saturationFactor: 1.5
                     },
