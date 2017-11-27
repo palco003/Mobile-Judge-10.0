@@ -56,14 +56,7 @@ Ext.define('MobileJudge.view.stats.TestingCharts', {
                     type: 'bar3d',
                     xField: 'fullName',
                     yField: ['grade'],
-                    title: ['Grade'],
-                    stacked: false,
-                    style: {
-                        minGapWidth: 10
-                    },
-                    highlightCfg: {
-                        saturationFactor: 1.5
-                    },
+                    title: ['grade'],
                     label: {
                         field: ['grade'],
                         display: 'insideEnd',
