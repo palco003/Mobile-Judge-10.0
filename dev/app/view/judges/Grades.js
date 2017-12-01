@@ -7,9 +7,7 @@ Ext.define('MobileJudge.view.judges.Grades', {
         'MobileJudge.store.stats.QuestionAverage'
     ],
 
-    bind: {
-        title: 'Average Grade by Question for {judge}'
-    },
+    title: 'Average Grade Given by Question',
 
     platformConfig: {
         classic: {
