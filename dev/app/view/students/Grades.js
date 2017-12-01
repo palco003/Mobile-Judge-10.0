@@ -20,7 +20,6 @@ Ext.define('MobileJudge.view.student.Grades', {
         classic: {
             items: [
                 {
-                    xtype: 'component',
                     bind: {
                         title: '{showTitle}'
                     }
