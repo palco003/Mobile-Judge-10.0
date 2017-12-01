@@ -2,8 +2,12 @@ Ext.create('Ext.data.Store', {
     alias: 'store.judgeGradesGiven',
     storeId: 'judgeGradesGiven',
     listeners:{
-        load : function() {
+        load : function(store, records, success) {
             console.log("on load");
+            console.log(store);
+            console.log(records);
+            console.log(success);
+            console.log("end on load");
         }
     },
     fields:['judgeId', 'studentId', 'question', 'grade'],
