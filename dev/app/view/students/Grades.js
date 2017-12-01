@@ -15,11 +15,6 @@ Ext.define('MobileJudge.view.student.Grades', {
         classic: {
             items: [
                 {
-                    bind: {
-                        title: 'Average Grade by Question for {fullName}'
-                    }
-                },
-                {
                 xtype: 'chart',
                 store: {
                     type: 'questionAverage'
@@ -63,9 +58,6 @@ Ext.define('MobileJudge.view.student.Grades', {
                     style: {
                         minGapWidth: 10
                     },
-                    // highlight: {
-                    //     fillStyle: ['#5DBCD2']
-                    // },
                     highlightCfg: {
                         saturationFactor: 1.5
                     },
