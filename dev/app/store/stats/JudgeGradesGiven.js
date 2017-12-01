@@ -29,6 +29,10 @@ Ext.define('MobileJudge.store.stats.JudgeQuestionAverage', {
         console.log('=========== groups');
         var groups = store.getGroups();
         console.log(groups);
+        for (var i = 0; i < groups.length; i++) {
+            console.log("in for loops");
+            console.log(groups.items.config.groupKey);
+        }
         groups.each(function (group) {
             console.log('=========== group');
             console.log(group);
