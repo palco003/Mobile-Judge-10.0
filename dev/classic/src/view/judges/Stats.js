@@ -10,7 +10,7 @@ Ext.define('MobileJudge.view.judges.Stats', {
     ],
 
     layout: 'responsivecolumn',
-    controller: 'stats',
+    controller: 'judge',
     viewModel: {
         data: {
         }
