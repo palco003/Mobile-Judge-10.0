@@ -4,7 +4,7 @@ Ext.define('MobileJudge.store.stats.JudgeGradesGiven', {
     alias: 'store.judgeGradesGiven',
     storeId: 'judgeGradesGiven',
     listeners:{
-        load: 'onStoreLoaded'
+        // load: 'onStoreLoaded'
             // function(store, records, success) {
             // console.log("on load");
             // console.log(store);
