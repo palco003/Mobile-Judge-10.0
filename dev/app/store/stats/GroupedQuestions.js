@@ -9251,3 +9251,22 @@ Ext.define('MobileJudge.store.stats.JudgeAverage', {
         return data;
     })()
 });
+
+Ext.define('MobileJudge.store.stats.JudgeAverageQuestion', {
+    extend: 'Ext.data.Store',
+    alias: 'store.judgeAverageQuestion',
+    model: 'MobileJudge.model.stats.JudgeAverageQuestion',
+    data: (function () {
+        var data = [];
+        var store = Ext.getStore('MobileJudge.store.stats.Grades');
+        store.group('question');
+        var groups = store.getGroups();
+        groups.each(function (group) {
+            data.push({
+                question: group.config.groupKey,
+                average: group.average('grade')
+            });
+        });
+        return data;
+    })()
+});
