@@ -34,6 +34,10 @@ Ext.define('MobileJudge.view.stats.Controller', {
         });
     },
 
+    onStoreLoaded: function (){
+
+    },
+
     loadAverageinStore: function (data) {
         Ext.Ajax.request({
             url: '/api/load_average_stores',

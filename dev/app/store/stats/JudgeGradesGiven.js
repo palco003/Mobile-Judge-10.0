@@ -1,14 +1,17 @@
-Ext.create('Ext.data.Store', {
+// Ext.create('Ext.data.Store', {
+Ext.define('MobileJudge.store.stats.JudgeGradesGiven', {
+    extend: 'Ext.data.Store',
     alias: 'store.judgeGradesGiven',
     storeId: 'judgeGradesGiven',
     listeners:{
-        load : function(store, records, success) {
-            console.log("on load");
-            console.log(store);
-            console.log(records);
-            console.log(success);
-            console.log("end on load");
-        }
+        load: 'onStoreLoaded'
+            // function(store, records, success) {
+            // console.log("on load");
+            // console.log(store);
+            // console.log(records);
+            // console.log(success);
+            // console.log("end on load");
+        // }
     },
     fields:['judgeId', 'studentId', 'question', 'grade'],
     data:[]
@@ -34,7 +37,7 @@ Ext.define('MobileJudge.store.stats.JudgeQuestionAverage', {
     },
     data: (function () {
         var data = [];
-        var store = Ext.getStore('judgeGradesGiven');
+        var store = Ext.createByAlias('store.judgeGradesGiven');
         store.reload();
         var items = store.data.items;
         items.forEach(function (item) {
