@@ -20,35 +20,13 @@ Ext.define('MobileJudge.view.stats.Controller', {
                 data = JSON.parse(response.responseText);
                 console.log("=============== data");
                 console.log(data);
-                store = Ext.create('MobileJudge.store.stats.Grades').setData(data);
+                store = Ext.getStore('judgeGradesGiven').loadData(data);
                 console.log(store);
             },
             failure: this.updateError,
             jsonData: data,
             disableCaching: true,
             method: 'GET'
-        });
-        Ext.define('MobileJudge.model.stats.JudgeAverageQuestion', {
-            extend: 'Ext.data.Model',
-            fields: ['questionId', 'question', 'average']
-        });
-        Ext.define('MobileJudge.store.stats.JudgeAverageQuestion', {
-            extend: 'Ext.data.Store',
-            alias: 'store.judgeAverageQuestion',
-            model: 'MobileJudge.model.stats.JudgeAverageQuestion',
-            data: (function () {
-                var data = [];
-                // var store = Ext.create('MobileJudge.store.stats.Grades');
-                store.group('question');
-                var groups = store.getGroups();
-                groups.each(function (group) {
-                    data.push({
-                        question: group.config.groupKey,
-                        average: group.average('grade')
-                    });
-                });
-                return data;
-            })()
         });
     }
 });
