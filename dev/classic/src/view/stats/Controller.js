@@ -28,6 +28,10 @@ Ext.define('MobileJudge.view.stats.Controller', {
             disableCaching: true,
             method: 'GET'
         });
+        Ext.define('MobileJudge.model.stats.JudgeAverageQuestion', {
+            extend: 'Ext.data.Model',
+            fields: ['questionId', 'question', 'average']
+        });
         Ext.define('MobileJudge.store.stats.JudgeAverageQuestion', {
             extend: 'Ext.data.Store',
             alias: 'store.judgeAverageQuestion',
