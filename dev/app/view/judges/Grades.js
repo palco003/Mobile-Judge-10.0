@@ -8,7 +8,6 @@ Ext.define('MobileJudge.view.judges.Grades', {
     ],
 
     title: 'Average Grade Given by Question',
-    // bind: '{avgQuestionGrades}',
     platformConfig: {
         classic: {
             items: [
@@ -39,10 +38,10 @@ Ext.define('MobileJudge.view.judges.Grades', {
                             fontSize: 16
                         },
                         position: 'bottom',
-                        // renderer: function (axis, v) {
-                        //     v = Ext.util.Format.ellipsis(v, 50);
-                        //     return v.replace(/((?:\w+ ){3})/gi, "$1\n");
-                        // },
+                        renderer: function (axis, v) {
+                            v = Ext.util.Format.ellipsis(v, 50);
+                            return v.replace(/((?:\w+ ){3})/gi, "$1\n");
+                        },
                         label: {
                             rotate: {
                                 degrees: -50
@@ -59,43 +58,43 @@ Ext.define('MobileJudge.view.judges.Grades', {
                         highlightCfg: {
                             saturationFactor: 1.5
                         },
-                        // label: {
-                        //     field: 'average',
-                        //     display: 'insideEnd',
-                        //     renderer: function (text) {
-                        //         return Ext.Number.toFixed(parseFloat(text), 2);
-                        //     }
-                        // },
-                        // listeners: {
-                        //     itemclick: function (chart, item) {
-                        //         var store = Ext.createByAlias('store.questionGrades');
-                        //         var msg = "<p style=\"text-align: center;\">";
-                        //         var last = '';
-                        //         for (var i = 0; i < store.getCount(); i++) {
-                        //             if (item.record.get('question') === store.getAt(i).get('question')) {
-                        //                 if (store.getAt(i).get('comment') !== null) {
-                        //                     var split = store.getAt(i).get('judge').toString().split(" ");
-                        //                     var current = store.getAt(i).get('judge').toString();
-                        //                     if (current !== last) {
-                        //                         msg += "<br>-------------------------------";
-                        //                     }
-                        //                     msg += "<br>" + split[0].charAt(0)
-                        //                         + ". "
-                        //                         + split[1]
-                        //                         + " ("
-                        //                         + store.getAt(i).get('student')
-                        //                         + ") -- "
-                        //                         + store.getAt(i).get('grade');
-                        //
-                        //                     last = current;
-                        //                 }
-                        //             }
-                        //         }
-                        //
-                        //         msg += "</p>";
-                        //         Ext.Msg.alert(item.record.get('question'), msg);
-                        //     }
-                        // }
+                        label: {
+                            field: 'average',
+                            display: 'insideEnd',
+                            renderer: function (text) {
+                                return Ext.Number.toFixed(parseFloat(text), 2);
+                            }
+                        },
+                        listeners: {
+                            itemclick: function (chart, item) {
+                                var store = Ext.createByAlias('store.questionGrades');
+                                var msg = "<p style=\"text-align: center;\">";
+                                var last = '';
+                                for (var i = 0; i < store.getCount(); i++) {
+                                    if (item.record.get('question') === store.getAt(i).get('question')) {
+                                        if (store.getAt(i).get('comment') !== null) {
+                                            var split = store.getAt(i).get('judge').toString().split(" ");
+                                            var current = store.getAt(i).get('judge').toString();
+                                            if (current !== last) {
+                                                msg += "<br>-------------------------------";
+                                            }
+                                            msg += "<br>" + split[0].charAt(0)
+                                                + ". "
+                                                + split[1]
+                                                + " ("
+                                                + store.getAt(i).get('student')
+                                                + ") -- "
+                                                + store.getAt(i).get('grade');
+
+                                            last = current;
+                                        }
+                                    }
+                                }
+
+                                msg += "</p>";
+                                Ext.Msg.alert(item.record.get('question'), msg);
+                            }
+                        }
                     }],
                     plugins: {
                         ptype: 'chartitemevents',
