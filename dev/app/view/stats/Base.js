@@ -13,7 +13,7 @@ Ext.define('MobileJudge.view.stats.Base', {
 
     platformConfig: {
         classic: {
-            headerPosition: 'top'
+            // headerPosition: 'top'
         },
         modern: {
             header: {

@@ -12,7 +12,7 @@ Ext.define('MobileJudge.view.student.Grades', {
         classic: {
             items: [
                 {
-                    iconCls: 'x-fa fa-pie-chart',
+                    // iconCls: 'x-fa fa-pie-chart',
                     bind: {
                         title: 'Average Grade by Question for {fullName}'
                     }
