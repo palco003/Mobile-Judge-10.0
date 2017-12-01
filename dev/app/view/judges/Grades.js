@@ -52,7 +52,7 @@ Ext.define('MobileJudge.view.judges.Grades', {
                     series: [{
                         type: 'bar3d',
                         xField: 'question',
-                        yField: ['grade'],
+                        yField: ['average'],
                         style: {
                             minGapWidth: 10
                         },
