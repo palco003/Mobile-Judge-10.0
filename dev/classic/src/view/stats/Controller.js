@@ -19,7 +19,8 @@ Ext.define('MobileJudge.view.stats.Controller', {
                 data = JSON.parse(response.responseText);
                 console.log("=============== data");
                 console.log(data);
-                Ext.create('MobileJudge.store.stats.Grades').setData(data);
+                var store = Ext.create('MobileJudge.store.stats.Grades').setData(data);
+                console.log(store);
             },
             failure: this.updateError,
             jsonData: data,

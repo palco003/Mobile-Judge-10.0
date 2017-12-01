@@ -8,15 +8,15 @@ Ext.define('MobileJudge.view.judges.Grades', {
     ],
 
     title: 'Average Grade Given by Question',
-    bind: '{avgQuestionGrades}',
+    // bind: '{avgQuestionGrades}',
     platformConfig: {
         classic: {
             items: [
                 {
                     xtype: 'chart',
-                    // store: {
-                    //     type: 'questionAverage'
-                    // },
+                    store: {
+                        type: 'statsGrades'
+                    },
                     insetPadding: {
                         top: 60,
                         bottom: 20,
