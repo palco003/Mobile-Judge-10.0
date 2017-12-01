@@ -17,10 +17,11 @@ Ext.define('MobileJudge.view.stats.Controller', {
         Ext.Ajax.request({
             url: '/api/load_average_stores',
             success: function (response) {
-                data = JSON.parse(response.responseText);
+                var data = JSON.parse(response.responseText);
                 console.log("=============== data");
                 console.log(data); //TODO: create store?
-                store = Ext.getStore('judgeGradesGiven').loadData(data);
+                Ext.getStore('judgeGradesGiven').loadData(data);
+                var store = Ext.getStore('judgeGradesGiven');
                 console.log(store);
             },
             failure: this.updateError,
