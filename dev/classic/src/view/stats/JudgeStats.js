@@ -1,5 +1,5 @@
 Ext.create('Ext.data.Store', {
-    storeId:'judgeGradesGiven',
+    alias:'judgeGradesGiven',
     fields:['judgeId', 'studentId', 'question', 'grade'],
     data:[]
 });
