@@ -1,11 +1,11 @@
 Ext.create('Ext.data.Store', {
     alias: 'store.judgeGradesGiven',
     storeId: 'judgeGradesGiven',
-    // listeners:{
-    //     load : function() {
-    //         var chart = Ext.getCmp("JudgeGradesChart");
-    //     }
-    // },
+    listeners:{
+        load : function() {
+            console.log("on load");
+        }
+    },
     fields:['judgeId', 'studentId', 'question', 'grade'],
     data:[]
 });
