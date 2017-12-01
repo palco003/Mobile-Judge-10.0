@@ -20,8 +20,8 @@ Ext.define('MobileJudge.view.stats.Controller', {
                 console.log("=============== data");
                 console.log(data); //TODO: create store?
                 Ext.getStore('judgeGradesGiven').loadData(data);
-                var store = Ext.getStore('judgeGradesGiven');
-                console.log(store);
+                // var store = Ext.getStore('judgeGradesGiven');
+                // console.log(store);
                 // var items = store.data.items;
                 // items.forEach(function (item) {
                 //     console.log(item);
