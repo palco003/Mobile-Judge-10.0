@@ -1,11 +1,19 @@
 Ext.define('MobileJudge.view.student.Grades', {
     extend: 'MobileJudge.view.charts.Base',
-    xtype: 'student_grades', //'chartjudges',
+    xtype: 'student_grades',
 
     requires: [
         'Ext.util.Format',
+        'Ext.app.bind.Formula',
         'MobileJudge.store.stats.QuestionAverage'
     ],
+
+    formulas: {
+        showTitle: function(get) {
+            var fullName = get('fullName');
+            return "Average Grade by Question for " + fullName;
+        }
+    },
 
     // title: 'Average Grade by Question for One Student',
     platformConfig: {
@@ -14,7 +22,7 @@ Ext.define('MobileJudge.view.student.Grades', {
                 {
                     xtype: 'component',
                     bind: {
-                        title: 'Average Grade by Question for {fullName}'
+                        title: '{showTitle}'
                     }
                 },
                 {
