@@ -13,13 +13,33 @@ Ext.define('MobileJudge.view.stats.Controller', {
     },
 
     loadJSONinStore: function (data) {
+        var me = this;
         Ext.Ajax.request({
             url: '/api/load_average_stores',
             success: function (response) {
                 var data = JSON.parse(response.responseText);
-                console.log("=============== data");
-                console.log(data); //TODO: create store?
                 Ext.getStore('judgeGradesGiven').loadData(data);
+                // var store = Ext.getStore('judgeGradesGiven');
+                // console.log(store);
+                // var items = store.data.items;
+                // items.forEach(function (item) {
+                //     console.log(item);
+                // })
+                // me.loadAverageinStore(data);
+            },
+            failure: this.updateError,
+            jsonData: data,
+            disableCaching: true,
+            method: 'GET'
+        });
+    },
+
+    loadAverageinStore: function (data) {
+        Ext.Ajax.request({
+            url: '/api/load_average_stores',
+            success: function (response) {
+                var data = JSON.parse(response.responseText);
+                // Ext.getStore('judgeGradesGiven').loadData(data);
                 // var store = Ext.getStore('judgeGradesGiven');
                 // console.log(store);
                 // var items = store.data.items;
@@ -30,11 +50,7 @@ Ext.define('MobileJudge.view.stats.Controller', {
             failure: this.updateError,
             jsonData: data,
             disableCaching: true,
-            method: 'GET'
+            method: 'PUT'
         });
-    },
-
-    getAverage: function (data) {
-
     }
 });

@@ -20,9 +20,18 @@ Ext.define('MobileJudge.store.stats.JudgeQuestionAverage', {
     extend: 'Ext.data.Store',
     alias: 'store.judgeQuestionAverage',
     model: 'MobileJudge.model.stats.JudgeQuestionAverage',
+    listeners:{
+        load : function(store, records, success) {
+            var myStore = Ext.getStore('judgeGradesGiven');
+            myStore.load(records, true);
+            console.log("in load");
+            console.log(store);
+        }
+    },
     data: (function () {
         var data = [];
         var store = Ext.getStore('judgeGradesGiven');
+        store.reload();
         var items = store.data.items;
         items.forEach(function (item) {
             console.log(item);
