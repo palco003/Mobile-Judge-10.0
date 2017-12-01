@@ -23,6 +23,11 @@ Ext.define('MobileJudge.store.stats.JudgeQuestionAverage', {
     data: (function () {
         var data = [];
         var store = Ext.getStore('judgeGradesGiven');
+        var items = store.data.items;
+        items.forEach(function (item) {
+            console.log(item);
+        });
+
         console.log('=========== store');
         console.log(store);
         store.group('question');
