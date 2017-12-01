@@ -4,26 +4,26 @@ fetch.Promise = require('bluebird');
 var _ = require('lodash');
 
 module.exports = function(server, db) {
-	var trim = /^\/|\/$/g;
+    var trim = /^\/|\/$/g;
 
-server.post(apiPrefix + '/third_view', function(req, res, next) {
-        
+    server.post(apiPrefix + '/third_view', function(req, res, next) {
+
         db.judges_grade.findAll({
             where: {
                 studentId: req.params.studentId,
                 judgeId: req.params.judgeId
             }
         }).then(function(judge_grades){
-                res.json(judge_grades);
-            })
+            res.json(judge_grades);
+        });
         next();
-	});   
-       
+    });
+
     server.put(apiPrefix + '/third_view_save', function(req, res, next) {
         var stateId = 0;
         var count = 0;
         var data = req.params.data;
-        
+
         if(req.params.state == "Accepted"){
             stateId = 1;
         }
@@ -34,7 +34,7 @@ server.post(apiPrefix + '/third_view', function(req, res, next) {
         {
             stateId = 0;
         }
-        
+
         data.forEach(function(obj){
             fetch.Promise.all([
                 db.grade.update({state: stateId}, {
@@ -45,15 +45,15 @@ server.post(apiPrefix + '/third_view', function(req, res, next) {
                     }
                 }),
             ]).then(function(arr){
-                    count++;
-                    if(count === data.length)
-                    {
-                        res.json({result: true});
-                    }
-                })
+                count++;
+                if(count === data.length)
+                {
+                    res.json({result: true});
+                }
+            })
         });
-	});
-    
+    });
+
     server.post(apiPrefix + '/third_view_save_edited', function(req, res, next) {
         var data = req.params;
         var count = 0;
@@ -67,18 +67,18 @@ server.post(apiPrefix + '/third_view', function(req, res, next) {
                     }
                 }),
             ]).then(function(arr){
-                    count++;
-                    if(count === data.length)
-                    {
-                        res.json({result: true, data: data});
-                    }
-                })
+                count++;
+                if(count === data.length)
+                {
+                    res.json({result: true, data: data});
+                }
+            })
         });
         next();
-	});
-    
-	return epilogue.resource({
-		model: db.judges_grade,
+    });
+
+    return epilogue.resource({
+        model: db.judges_grade,
         endpoints: [apiPrefix + '/third_view']
-	});
+    });
 };

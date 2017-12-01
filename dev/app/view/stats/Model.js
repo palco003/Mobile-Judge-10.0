@@ -9,20 +9,12 @@ Ext.define('MobileJudge.view.stats.StatsModel', {
     ],
 
     stores: {
-        avgProjectGrades: {
-            type: 'gradeAverage',
-            storeId: 'statsProjectGrades',
-            proxy: {
-                type: 'api',
-                url: '/api/stats/project_grades'
-            }
-        },
         avgQuestionGrades: {
-            type: 'questionAverage',
+            type: 'statJudgeGrades',
             storeId: 'statsQuestionGrades',
             proxy: {
                 type: 'api',
-                url: '/api/stats/question_grades'
+                url: '/api/stats/grades_given'
             }
         }
     }
