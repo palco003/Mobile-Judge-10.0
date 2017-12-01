@@ -8,6 +8,7 @@ Ext.define('MobileJudge.store.stats.Grades', {
     },
 
     autoLoad: true,
+    autoSync: true,
     pageSize: 0,
 
     fields: [
