@@ -22,15 +22,19 @@ Ext.define('MobileJudge.view.stats.Controller', {
                 Ext.getStore('judgeGradesGiven').loadData(data);
                 var store = Ext.getStore('judgeGradesGiven');
                 console.log(store);
-                // var items = store.data.items;
-                // items.forEach(function (item) {
-                //     console.log(item);
-                // })
+                var items = store.data.items;
+                items.forEach(function (item) {
+                    console.log(item);
+                })
             },
             failure: this.updateError,
             jsonData: data,
             disableCaching: true,
             method: 'GET'
         });
+    },
+
+    getAverage: function (data) {
+
     }
 });
