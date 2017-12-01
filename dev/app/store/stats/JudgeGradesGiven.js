@@ -32,7 +32,7 @@ Ext.define('MobileJudge.store.stats.JudgeQuestionAverage', {
         console.log(store);
         store.group('question');
         console.log('=========== groups');
-        var groups = store.getGroups().getRange();
+        var groups = store.getGroups();
         console.log(groups);
         console.log(groups.length);
         for (var i = 0; i < groups.length; i++) {
