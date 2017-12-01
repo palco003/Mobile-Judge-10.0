@@ -26,6 +26,7 @@ Ext.define('MobileJudge.store.stats.JudgeQuestionAverage', {
         store.group('question');
         var groups = store.getGroups();
         groups.each(function (group) {
+            console.log(group);
             data.push({
                 question: group.config.groupKey,
                 average: group.average('grade')
