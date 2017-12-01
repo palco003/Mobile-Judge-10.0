@@ -14,7 +14,7 @@ Ext.define('MobileJudge.view.stats.Controller', {
 
     loadJSONinStore: function (data) {
         Ext.Ajax.request({
-            url: '/api/third_view',
+            url: '/api/load_average_stores',
             success: function (response) {
                 data = JSON.parse(response.responseText);
                 console.log("=============== data");
