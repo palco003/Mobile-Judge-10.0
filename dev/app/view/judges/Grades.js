@@ -39,9 +39,9 @@ Ext.define('MobileJudge.view.judges.Grades', {
                             fontSize: 16
                         },
                         position: 'bottom',
-                        renderer: function (axis, v) {
-                            v = Ext.util.Format.ellipsis(v, 50);
-                            return v.replace(/((?:\w+ ){3})/gi, "$1\n");
+                        // renderer: function (axis, v) {
+                        //     v = Ext.util.Format.ellipsis(v, 50);
+                        //     return v.replace(/((?:\w+ ){3})/gi, "$1\n");
                         },
                         label: {
                             rotate: {
