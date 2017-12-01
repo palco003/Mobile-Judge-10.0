@@ -9240,8 +9240,15 @@ Ext.define('MobileJudge.store.stats.JudgeAverage', {
     data: (function () {
         var data = [];
         var store = Ext.createByAlias('store.questionGrades');
+
+        console.log('****** store');
+        console.log(store);
+
         store.group('judge');
         var groups = store.getGroups();
+
+        console.log('****** groups');
+        console.log(groups);
         groups.each(function (group) {
             data.push({
                 judge: group.config.groupKey,
