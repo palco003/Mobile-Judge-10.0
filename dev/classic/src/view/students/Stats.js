@@ -17,7 +17,6 @@ Ext.define('MobileJudge.view.students.Stats', {
     },
     defaultType: 'basechart',
     defaults: {
-        iconCls: 'x-fa fa-pie-chart',
         userCls: 'big-33 small-100',
         height: 750,
         defaults: {
