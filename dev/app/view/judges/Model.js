@@ -1,11 +1,12 @@
 Ext.define('MobileJudge.view.judges.Model', {
 	extend: 'Ext.app.ViewModel',
 	alias: 'viewmodel.judge',
-
 	data: {
 		questions: [],
 
 		index: 0,
+		agg: 0,
+		countStudents: 0,
 		student: {}
 	},
 
@@ -101,6 +102,42 @@ Ext.define('MobileJudge.view.judges.Model', {
 			get: function(grade) {
 				return grade && grade.isModel && grade.get('state') == 1;
 			}
-		}
+		},
+		// studentAverage: {
+		// 	bind: {
+         //        total: '{student.total}'
+		// 	},
+         //    get: function(data) {
+         //        return data.total / 5;
+         //    }
+		// },
+		// questionAverage: {
+         //    bind: {
+         //        atEnd: '{atEnd}',
+         //        grade: '{grades.value}',
+         //        agg: '{agg}',
+		// 		count: '{gradedStudent}'
+         //    },
+         //    get: function(data) {
+         //        if(!data.atEnd){
+         //            data.agg += data.grade;
+         //        } else {
+         //            return data.agg / data.count;
+         //        }
+        //
+         //    }
+        // },
+        // gradedStudents: {
+         //    bind: {
+         //        atEnd: '{atEnd}',
+		// 		count: '{countStudents}'
+         //    },
+         //    get: function(data) {
+         //        if(data.atEnd){
+         //        	data.count += 1;
+         //        	return data.count;
+         //        }
+         //    }
+        // }
 	}
 });

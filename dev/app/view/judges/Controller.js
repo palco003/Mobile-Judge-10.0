@@ -28,6 +28,8 @@ Ext.define('MobileJudge.view.judges.Controller', {
 		this.model.getStore('questions').reload();
 		this.model.getStore('students').reload();
 		this.model.getStore('grades').reload();
+		console.log("============== on refresh");
+        console.log(this.model);
 	},
 
 	onGrade: function(grid, rowIndex, colIndex, item, e, record) {
