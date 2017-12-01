@@ -23,7 +23,7 @@ module.exports = function(server, db) {
                             text: 'Stats',
                             iconCls: 'x-fa fa-bar-chart',
                             rowCls: 'nav-tree-badge nav-tree-badge-new',
-                            viewType: 'student_stats',
+                            viewType: 'studentStats',
                             routeId: 'stats',
                             leaf: true
                         }

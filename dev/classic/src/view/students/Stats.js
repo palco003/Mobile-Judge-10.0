@@ -18,7 +18,7 @@ Ext.define('MobileJudge.view.students.Stats', {
     items: [
         {
             // Always 100% of container
-            xtype: 'profile',
+            xtype: 'student_grades',
             userCls: 'big-100 small-100 shadow'
         }
     ]
