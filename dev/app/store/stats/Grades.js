@@ -12,7 +12,7 @@ Ext.define('MobileJudge.store.stats.Grades', {
     pageSize: 0,
 
     fields: [
-        { name: 'questionId', type: 'int', convert: null },
+        { name: 'question', type: 'string', convert: null },
         { name: 'studentId', type: 'int', convert: null },
         { name: 'judgeId', type: 'int', convert: null },
         {

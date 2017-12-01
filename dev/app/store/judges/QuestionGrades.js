@@ -11,11 +11,11 @@ Ext.define('MobileJudge.store.judges.QuestionGrades', {
     pageSize: 0,
 
     fields: [
-        { name: 'id',      type: 'string', convert: null },
-        { name: 'state',   type: 'int',    convert: null },
-        { name: 'comment', type: 'string', convert: null },
+        { name: 'studentId', type: 'int', convert: null },
+        { name: 'judgeId', type: 'int', convert: null },
+        { name: 'question', type: 'string', convert: null },
         {
-            name: 'value',
+            name: 'grade',
             type: 'int',
             convert: function(v) {
                 return (v && Ext.isArray(v)) ? v[0] : v;
