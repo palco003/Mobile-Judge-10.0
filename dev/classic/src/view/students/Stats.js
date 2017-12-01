@@ -3,15 +3,25 @@ Ext.define('MobileJudge.view.students.Stats', {
     xtype: 'studentStats',
 
     requires: [
-        'Ext.ux.layout.ResponsiveColumn'
+        'Ext.ux.layout.ResponsiveColumn',
+        'MobileJudge.view.charts.ChartsModel',
+        'MobileJudge.view.charts.Controller',
+        'MobileJudge.view.stats.*'
     ],
 
     layout: 'responsivecolumn',
-    cls: 'userProfile-container',
-
     controller: 'student',
     viewModel: {
         data: {
+        }
+    },
+    defaultType: 'basechart',
+    defaults: {
+        iconCls: 'x-fa fa-pie-chart',
+        userCls: 'big-33 small-100',
+        height: 750,
+        defaults: {
+            animation : !Ext.isIE9m && Ext.os.is.Desktop
         }
     },
 
@@ -19,7 +29,7 @@ Ext.define('MobileJudge.view.students.Stats', {
         {
             // Always 100% of container
             xtype: 'student_grades',
-            userCls: 'big-100 small-100 shadow'
+            userCls: 'big-100 small-100'
         }
     ]
 
