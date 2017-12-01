@@ -42,7 +42,7 @@ Ext.define('MobileJudge.view.judges.Grades', {
                         // renderer: function (axis, v) {
                         //     v = Ext.util.Format.ellipsis(v, 50);
                         //     return v.replace(/((?:\w+ ){3})/gi, "$1\n");
-                        },
+                        // },
                         label: {
                             rotate: {
                                 degrees: -50
