@@ -6,6 +6,8 @@ Ext.define('MobileJudge.view.students.Controller', {
 
 	init: function(view) {
 		this.model = view.getViewModel();
+		console.log('the view model for student controller:\n');
+		console.log(this.model);
 		this.loadProfile();
 	},
 
