@@ -6,6 +6,8 @@ Ext.define('MobileJudge.view.judges.Controller', {
 
 	init: function(view) {
 		this.model = view.getViewModel();
+		console.log('============== judge view model');
+		console.log(this.model);
 	},
 
 	onQuestionsLoaded: function(store, records) {
