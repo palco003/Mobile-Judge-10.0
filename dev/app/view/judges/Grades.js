@@ -14,7 +14,7 @@ Ext.define('MobileJudge.view.judges.Grades', {
                 {
                     xtype: 'chart',
                     store: {
-                        type: 'judgeAverage'
+                        type: 'questionAverage'
                     },
                     insetPadding: {
                         top: 60,
