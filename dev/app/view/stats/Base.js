@@ -11,24 +11,24 @@ Ext.define('MobileJudge.view.stats.Base', {
     ui: 'light',
     layout: 'fit',
 
-    // platformConfig: {
-    //     classic: {
-    //         headerPosition: 'top'
-    //     },
-    //     modern: {
-    //         header: {
-    //             docked: 'top'
-    //         }
-    //     }
-    // },
+    platformConfig: {
+        classic: {
+            headerPosition: 'top'
+        },
+        modern: {
+            header: {
+                docked: 'top'
+            }
+        }
+    },
 
-    // tools: [
-    //     {
-    //         type: 'refresh',
-    //         tooltip: 'Refresh'
-    //         // callback: 'onRefreshChart'
-    //     }
-    // ],
+    tools: [
+        {
+            type: 'refresh',
+            tooltip: 'Refresh'
+            // callback: 'onRefreshChart'
+        }
+    ],
 
     defaults: {
         width: '100%'

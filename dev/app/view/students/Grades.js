@@ -7,12 +7,14 @@ Ext.define('MobileJudge.view.student.Grades', {
         'MobileJudge.store.stats.QuestionAverage'
     ],
 
-    // title: 'Average Grade by Question for One Student',
+    bind: {
+        title: 'Average Grade by Question for {fullName}'
+    },
+
     platformConfig: {
         classic: {
             items: [
                 {
-                    // iconCls: 'x-fa fa-pie-chart',
                     bind: {
                         title: 'Average Grade by Question for {fullName}'
                     }
