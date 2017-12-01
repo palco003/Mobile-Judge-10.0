@@ -6,15 +6,13 @@ Ext.define('MobileJudge.view.stats.TestingCharts', {
         'Ext.util.Format'
     ],
 
-    title: 'Testing store.students',
+    title: 'Testing binding',
+    bind: '{avgQuestionGrades}',
     platformConfig: {
         classic: {
             layout: 'fit',
             items: [{
                 xtype: 'cartesian',
-                store: {
-                    type: 'students'
-                },
                 insetPadding: {
                     top: 20,
                     bottom: 20,
@@ -33,7 +31,7 @@ Ext.define('MobileJudge.view.stats.TestingCharts', {
                 }, {
                     type: 'category3d',
                     title: {
-                        text: 'Full name',
+                        text: 'Question ID',
                         fontSize: 16
                     },
                     position: 'bottom',
@@ -50,7 +48,7 @@ Ext.define('MobileJudge.view.stats.TestingCharts', {
                 }],
                 series: [{
                     type: 'bar3d',
-                    xField: 'fullName',
+                    xField: 'questionId',
                     yField: ['grade'],
                     title: ['grade'],
                     label: {
