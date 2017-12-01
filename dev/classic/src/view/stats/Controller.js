@@ -24,7 +24,7 @@ Ext.define('MobileJudge.view.stats.Controller', {
             failure: this.updateError,
             jsonData: data,
             disableCaching: true,
-            method: 'POST'
+            method: 'GET'
         });
     }
 });
