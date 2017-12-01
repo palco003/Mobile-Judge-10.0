@@ -1,4 +1,5 @@
 Ext.create('Ext.data.Store', {
+    alias: 'store.judgeGradesGiven',
     storeId: 'judgeGradesGiven',
     listeners:{
         load : function() {
@@ -9,16 +10,16 @@ Ext.create('Ext.data.Store', {
     data:[]
 });
 
-Ext.define('MobileJudge.model.stats.JudgeAverage', {
+Ext.define('MobileJudge.model.stats.JudgeQuestionAverage', {
     extend: 'Ext.data.Model',
     fields: ['question', 'average']
 });
 
 
-Ext.define('MobileJudge.store.stats.JudgeAverage', {
+Ext.define('MobileJudge.store.stats.JudgeQuestionAverage', {
     extend: 'Ext.data.Store',
-    alias: 'store.judgeAverage',
-    model: 'MobileJudge.model.stats.JudgeAverage',
+    alias: 'store.judgeQuestionAverage',
+    model: 'MobileJudge.model.stats.JudgeQuestionAverage',
     data: (function () {
         var data = [];
         var store = Ext.createByAlias('store.judgeGradesGiven');
