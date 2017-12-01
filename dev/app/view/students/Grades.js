@@ -11,6 +11,8 @@ Ext.define('MobileJudge.view.student.Grades', {
     formulas: {
         showTitle: function(get) {
             var fullName = get('fullName');
+            console.log('============================ FULLNAME');
+            console.log(fullName);
             return "Average Grade by Question for " + fullName;
         }
     },
