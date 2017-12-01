@@ -1,12 +1,3 @@
-Ext.create('Ext.data.Store', {
-    alias:'judgeGradesGiven',
-    storeId: 'judgeGradesGiven',
-    fields:['judgeId', 'studentId', 'question', 'grade'],
-    data:[]
-});
-
-
-
 Ext.define('MobileJudge.view.stats.Controller', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.stats',
