@@ -22,13 +22,13 @@ Ext.define('MobileJudge.view.stats.Base', {
         }
     },
 
-    tools: [
-        {
-            type: 'refresh',
-            tooltip: 'Refresh'
-            // callback: 'onRefreshChart'
-        }
-    ],
+    // tools: [
+    //     {
+    //         type: 'refresh',
+    //         tooltip: 'Refresh'
+    //         // callback: 'onRefreshChart'
+    //     }
+    // ],
 
     defaults: {
         width: '100%'
