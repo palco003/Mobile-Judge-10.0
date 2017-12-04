@@ -1,5 +1,5 @@
 Ext.define('MobileJudge.view.judges.Grades', {
-    extend: 'MobileJudge.view.charts.Base',
+    extend: 'MobileJudge.view.stats.Base',
     xtype: 'judge_grades',
 
     requires: [
