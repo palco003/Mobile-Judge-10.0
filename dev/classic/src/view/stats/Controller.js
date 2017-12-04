@@ -16,7 +16,7 @@ Ext.define('MobileJudge.view.stats.Controller', {
             success: function (response) {
                 var data = JSON.parse(response.responseText);
                 Ext.getStore('statsGrades').loadData(data); // judgeGradesGiven
-                var store = Ext.getStore('statsGrades'); // judgeGradesGiven
+                var store = Ext.getStore('statsGrades');    // judgeGradesGiven
                 console.log('######### in controller');
                 console.log(store);
                 // var items = store.data.items;
