@@ -13,9 +13,10 @@ Ext.define('MobileJudge.view.judges.Grades', {
             items: [
                 {
                     xtype: 'chart',
-                    store: {
-                        type: 'questionAverage'
-                    },
+                    bind: '{avgQuestionGrades}',
+                    // store: {
+                    //     type: 'questionAverage' // questionAverage
+                    // },
                     insetPadding: {
                         top: 60,
                         bottom: 20,
@@ -51,7 +52,7 @@ Ext.define('MobileJudge.view.judges.Grades', {
                     series: [{
                         type: 'bar3d',
                         xField: 'question',
-                        yField: ['average'],
+                        yField: ['grade'],
                         style: {
                             minGapWidth: 10
                         },
@@ -59,42 +60,42 @@ Ext.define('MobileJudge.view.judges.Grades', {
                             saturationFactor: 1.5
                         },
                         label: {
-                            field: 'average',
+                            field: 'grade',
                             display: 'insideEnd',
                             renderer: function (text) {
                                 return Ext.Number.toFixed(parseFloat(text), 2);
                             }
                         },
-                        listeners: {
-                            itemclick: function (chart, item) {
-                                var store = Ext.createByAlias('store.questionGrades');
-                                var msg = "<p style=\"text-align: center;\">";
-                                var last = '';
-                                for (var i = 0; i < store.getCount(); i++) {
-                                    if (item.record.get('question') === store.getAt(i).get('question')) {
-                                        if (store.getAt(i).get('comment') !== null) {
-                                            var split = store.getAt(i).get('judge').toString().split(" ");
-                                            var current = store.getAt(i).get('judge').toString();
-                                            if (current !== last) {
-                                                msg += "<br>-------------------------------";
-                                            }
-                                            msg += "<br>" + split[0].charAt(0)
-                                                + ". "
-                                                + split[1]
-                                                + " ("
-                                                + store.getAt(i).get('student')
-                                                + ") -- "
-                                                + store.getAt(i).get('grade');
-
-                                            last = current;
-                                        }
-                                    }
-                                }
-
-                                msg += "</p>";
-                                Ext.Msg.alert(item.record.get('question'), msg);
-                            }
-                        }
+                        // listeners: {
+                        //     itemclick: function (chart, item) {
+                        //         var store = Ext.createByAlias('store.questionGrades');
+                        //         var msg = "<p style=\"text-align: center;\">";
+                        //         var last = '';
+                        //         for (var i = 0; i < store.getCount(); i++) {
+                        //             if (item.record.get('question') === store.getAt(i).get('question')) {
+                        //                 if (store.getAt(i).get('comment') !== null) {
+                        //                     var split = store.getAt(i).get('judge').toString().split(" ");
+                        //                     var current = store.getAt(i).get('judge').toString();
+                        //                     if (current !== last) {
+                        //                         msg += "<br>-------------------------------";
+                        //                     }
+                        //                     msg += "<br>" + split[0].charAt(0)
+                        //                         + ". "
+                        //                         + split[1]
+                        //                         + " ("
+                        //                         + store.getAt(i).get('student')
+                        //                         + ") -- "
+                        //                         + store.getAt(i).get('grade');
+                        //
+                        //                     last = current;
+                        //                 }
+                        //             }
+                        //         }
+                        //
+                        //         msg += "</p>";
+                        //         Ext.Msg.alert(item.record.get('question'), msg);
+                        //     }
+                        // }
                     }],
                     plugins: {
                         ptype: 'chartitemevents',
