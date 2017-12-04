@@ -30,8 +30,12 @@ module.exports = function(server, db) {
                 return next(new forbidden('You don\'t have access to grades'));
         }
     });
-    return epilogue.resource({
-        model: db.judges_grade,
-        endpoints: [apiPrefix + '/load_average_stores'] //TODO: create a controller and change this
-    });
+    return {
+        averages: epilogue.resource({
+            model: db.judges_grade,
+            endpoints: [apiPrefix + '/load_average_stores'],
+            actions: ['list'],
+            pagination: false
+        })
+    }
 };

@@ -6,9 +6,6 @@ Ext.define('MobileJudge.view.stats.Controller', {
         var me = this;
         me.model = view.getViewModel();
         var data = null;
-        var text = 'Accept';
-        var dataArray = null;
-        var status = null;
         me.loadJSONinStore(data);
     },
 
