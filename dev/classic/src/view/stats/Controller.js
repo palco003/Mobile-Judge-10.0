@@ -15,8 +15,8 @@ Ext.define('MobileJudge.view.stats.Controller', {
             url: '/api/load_average_stores',
             success: function (response) {
                 var data = JSON.parse(response.responseText);
-                Ext.getStore('judgeGradesGiven').loadData(data);
-                var store = Ext.getStore('judgeGradesGiven');
+                Ext.getStore('statsGrades').loadData(data); // judgeGradesGiven
+                var store = Ext.getStore('statsGrades'); // judgeGradesGiven
                 console.log('######### in controller');
                 console.log(store);
                 // var items = store.data.items;
@@ -32,27 +32,27 @@ Ext.define('MobileJudge.view.stats.Controller', {
         });
     },
 
-    onStoreLoaded: function (){
-
-    },
-
-    loadAverageinStore: function (data) {
-        Ext.Ajax.request({
-            url: '/api/load_average_stores',
-            success: function (response) {
-                var data = JSON.parse(response.responseText);
-                // Ext.getStore('judgeGradesGiven').loadData(data);
-                // var store = Ext.getStore('judgeGradesGiven');
-                // console.log(store);
-                // var items = store.data.items;
-                // items.forEach(function (item) {
-                //     console.log(item);
-                // })
-            },
-            failure: this.updateError,
-            jsonData: data,
-            disableCaching: true,
-            method: 'PUT'
-        });
-    }
+    // onStoreLoaded: function (){
+    //
+    // },
+    //
+    // loadAverageinStore: function (data) {
+    //     Ext.Ajax.request({
+    //         url: '/api/load_average_stores',
+    //         success: function (response) {
+    //             var data = JSON.parse(response.responseText);
+    //             // Ext.getStore('judgeGradesGiven').loadData(data);
+    //             // var store = Ext.getStore('judgeGradesGiven');
+    //             // console.log(store);
+    //             // var items = store.data.items;
+    //             // items.forEach(function (item) {
+    //             //     console.log(item);
+    //             // })
+    //         },
+    //         failure: this.updateError,
+    //         jsonData: data,
+    //         disableCaching: true,
+    //         method: 'PUT'
+    //     });
+    // }
 });
