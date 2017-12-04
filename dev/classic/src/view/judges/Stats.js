@@ -10,12 +10,11 @@ Ext.define('MobileJudge.view.judges.Stats', {
     ],
 
     layout: 'responsivecolumn',
-    controller: 'judge',
+    controller: 'charts', //judge
     viewModel: {
-        data: {
-        }
+        type: 'charts'
     },
-    defaultType: 'basechart',
+    defaultType: 'basepie', //basechart
     defaults: {
         userCls: 'big-33 small-100',
         height: 750,
