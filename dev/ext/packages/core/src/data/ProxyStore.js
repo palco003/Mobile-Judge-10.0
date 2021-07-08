@@ -88,7 +88,7 @@ Ext.define('Ext.data.ProxyStore', {
          * @cfg {Boolean} autoSync
          * True to automatically sync the Store with its Proxy after every edit to one of its Records. Defaults to false.
          */
-        autoSync: false,
+        autoSync: true,
 
         /**
          * @cfg {String} batchUpdateMode
